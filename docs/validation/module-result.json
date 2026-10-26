@@ -1,0 +1,9 @@
+{
+  "exit_code": 0,
+  "seconds": 18,
+  "scope": "Current alpha.2 release AAR, release JVM tests, release lint and debug instrumentation APK build",
+  "release": "0.3.0-alpha.2",
+  "jvm_tests": 40,
+  "lint_errors": 0,
+  "lint_warnings": 5
+}

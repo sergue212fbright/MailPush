@@ -1,0 +1,7 @@
+device=phone code=http_410 action=discard
+device=phone code=http_429 action=retry
+device=phone code=http_307 action=discard
+----------------------------------------------------------------------
+Ran 47 tests in 17.931s
+
+OK

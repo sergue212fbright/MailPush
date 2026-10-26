@@ -1,0 +1,32 @@
+MAILPUSH 0.3.0-alpha.2 DEVICE VALIDATION SUMMARY
+This is a sanitized attempt summary, not a passing instrumentation transcript.
+
+Current test APK: compiled successfully; 11 test methods expected.
+Current execution: 0 test methods started; 0 test methods completed.
+Status: infrastructure_unavailable. All 11 device checks remain UNVERIFIED.
+Failures/errors/skips: not measured because no test method ran.
+
+Attempt 1 (buildenv/preview-device-tests-20261026T221615Z-2):
+  APK installation succeeded. Instrumentation invocation returned:
+  INSTRUMENTATION_RESULT: shortMsg=Process crashed.
+  INSTRUMENTATION_CODE: 0
+  No test-method start/result statuses were reported. ActivityManager reported
+  a test-process startup ANR amid other Android system startup ANRs.
+  The zero instrumentation command exit code is not a passing test result.
+
+Attempt 2 (buildenv/preview-device-tests-20261026T222700Z-2):
+  APK installation failed: package-service call Broken pipe (32).
+  Android system_server aborted in ART SuspendThreadByThreadId.
+  Instrumentation did not start.
+
+Attempt 3 (buildenv/preview-device-tests-20261026T223259Z-2):
+  After reducing virtual CPUs to one, APK installation still failed:
+  Can't find service: package.
+  Android framework failed before instrumentation. Lost network stack was
+  explicitly reported as a secondary symptom; the underlying cause remains
+  undetermined. Instrumentation did not start.
+
+No production code or Android ANR/security policy was changed for these runs.
+No further emulator retry was attempted. The synthetic emulators were stopped.
+The earlier alpha.1 eight-test passing transcript is retained under alpha1/;
+those prior results do not verify the current alpha.2 device checks.

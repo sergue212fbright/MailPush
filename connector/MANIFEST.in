@@ -1,0 +1,6 @@
+include config.example.toml Dockerfile requirements-lock.txt LICENSE THIRD_PARTY.md PROTOCOL.md VALIDATION.md CHANGELOG.md .dockerignore .gitignore
+recursive-include deploy *.md *.yaml *.service
+include deploy/Bridge.Dockerfile deploy/bridge-entrypoint.sh
+recursive-include tools *.py
+recursive-include tests *.py
+recursive-include .github *.yaml

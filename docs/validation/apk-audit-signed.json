@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "application_id": "ch.protonmail.android.mailpush",
+  "version_code": 1000002,
+  "apk_bytes": 168694857,
+  "apk_sha256": "28c9bca93f97fa796bc58b8a1c5320b5cf6981eee2c556df788bfae850312d6a",
+  "manifest_policy": "passed"
+}

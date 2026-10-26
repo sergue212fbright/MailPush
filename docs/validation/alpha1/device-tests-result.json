@@ -1,0 +1,214 @@
+{
+  "schema": 2,
+  "expected_tests": 8,
+  "status": "passed",
+  "emulator": "mailpush-api35",
+  "test_class": "app.mailpush.companion.DeviceSecurityTest",
+  "synthetic_data_only": true,
+  "metrics_disabled": true,
+  "boot_limit_seconds": 420,
+  "test_limit_seconds": 600,
+  "radios": [
+    {
+      "command": "svc wifi disable",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": "svc data disable",
+      "exit_code": 20,
+      "output": "cmd: Can't find service: phone\n"
+    },
+    {
+      "command": "cmd connectivity airplane-mode enable",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": "cmd bluetooth_manager disable",
+      "exit_code": 0,
+      "output": "BluetoothShellCommand: Exec disable\ndisable: Success\n"
+    }
+  ],
+  "ram_mb": 2048,
+  "virtual_cpus": 4,
+  "apk": "modules/mailpush/build/outputs/apk/androidTest/debug/mailpush-debug-androidTest.apk",
+  "package": "app.mailpush.companion.test",
+  "runner": "androidx.test.runner.AndroidJUnitRunner",
+  "boot_seconds": 196.4,
+  "radio_settings_observed": {
+    "airplane_mode_on": {
+      "exit_code": 0,
+      "value": "1"
+    },
+    "wifi_on": {
+      "exit_code": 0,
+      "value": "0"
+    },
+    "bluetooth_on": {
+      "exit_code": 0,
+      "value": "0"
+    }
+  },
+  "install_exit": 0,
+  "instrumentation_arguments": [
+    "shell",
+    "am",
+    "instrument",
+    "-w",
+    "-r",
+    "-e",
+    "class",
+    "app.mailpush.companion.DeviceSecurityTest",
+    "app.mailpush.companion.test/androidx.test.runner.AndroidJUnitRunner"
+  ],
+  "test_statuses": [
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "1",
+      "numtests": "8",
+      "test": "staleAuthorizationCannotRevealSettingsAfterAnotherResume",
+      "code": 1,
+      "elapsed_seconds": 50.7
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "1",
+      "numtests": "8",
+      "test": "staleAuthorizationCannotRevealSettingsAfterAnotherResume",
+      "code": 0,
+      "elapsed_seconds": 76.7
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "2",
+      "numtests": "8",
+      "test": "replayLedgerSurvivesReopenAndSeparatesProfiles",
+      "code": 1,
+      "elapsed_seconds": 79.7
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "2",
+      "numtests": "8",
+      "test": "replayLedgerSurvivesReopenAndSeparatesProfiles",
+      "code": 0,
+      "elapsed_seconds": 85.1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "3",
+      "numtests": "8",
+      "test": "signOutDeletesProfileAndRecipientKeysWithoutDistributor",
+      "code": 1,
+      "elapsed_seconds": 85.1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "3",
+      "numtests": "8",
+      "test": "signOutDeletesProfileAndRecipientKeysWithoutDistributor",
+      "code": 0,
+      "elapsed_seconds": 89.9
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "4",
+      "numtests": "8",
+      "test": "interruptedAtomicWriteRestoresExistingEncryptedBackup",
+      "code": 1,
+      "elapsed_seconds": 90.2
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "4",
+      "numtests": "8",
+      "test": "interruptedAtomicWriteRestoresExistingEncryptedBackup",
+      "code": 0,
+      "elapsed_seconds": 91.4
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "5",
+      "numtests": "8",
+      "test": "unifiedPushKeysSurviveManagerRecreationAndCanBeDeleted",
+      "code": 1,
+      "elapsed_seconds": 91.5
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "5",
+      "numtests": "8",
+      "test": "unifiedPushKeysSurviveManagerRecreationAndCanBeDeleted",
+      "code": 0,
+      "elapsed_seconds": 95.9
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "6",
+      "numtests": "8",
+      "test": "vaultTamperingFailsClosed",
+      "code": 1,
+      "elapsed_seconds": 96.0
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "6",
+      "numtests": "8",
+      "test": "vaultTamperingFailsClosed",
+      "code": 0,
+      "elapsed_seconds": 98.1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "7",
+      "numtests": "8",
+      "test": "vaultRoundtripUsesAndroidKeystoreAndHidesPlaintext",
+      "code": 1,
+      "elapsed_seconds": 98.2
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "7",
+      "numtests": "8",
+      "test": "vaultRoundtripUsesAndroidKeystoreAndHidesPlaintext",
+      "code": 0,
+      "elapsed_seconds": 99.9
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "8",
+      "numtests": "8",
+      "test": "queuedWorkIsEncryptedAndBoundToItsProfile",
+      "code": 1,
+      "elapsed_seconds": 99.9
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "8",
+      "numtests": "8",
+      "test": "queuedWorkIsEncryptedAndBoundToItsProfile",
+      "code": 0,
+      "elapsed_seconds": 102.2
+    }
+  ],
+  "adb_test_exit": 0,
+  "instrumentation_seconds": 103.1,
+  "tests_run": 8,
+  "diagnostics": {
+    "device-v2-crash.txt": {
+      "exit_code": 0
+    },
+    "device-v2-logcat-final.txt": {
+      "exit_code": 0
+    }
+  },
+  "graceful_shutdown_exit": 0,
+  "elapsed_seconds": 397.8,
+  "execution_environment": {
+    "android_api": 35,
+    "image": "AOSP default x86_64",
+    "cpu_acceleration": "software (TCG), no KVM",
+    "hardware_keystore_claim": false
+  }
+}

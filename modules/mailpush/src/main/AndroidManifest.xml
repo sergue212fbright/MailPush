@@ -1,0 +1,33 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- The host needs Internet for mail. This library creates no network client;
+         all alert transport remains IPC to the selected UnifiedPush distributor. -->
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION" tools:node="remove" />
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_TOPICS" tools:node="remove" />
+    <application android:allowBackup="false" android:usesCleartextTraffic="false"
+        android:fullBackupContent="@xml/mailpush_backup_rules"
+        android:dataExtractionRules="@xml/mailpush_extraction_rules">
+        <activity android:name="app.mailpush.companion.MainActivity"
+            android:label="Encrypted push" android:theme="@style/MailPushTheme"
+            android:exported="false" android:excludeFromRecents="true" />
+        <activity android:name="app.mailpush.companion.OpenMailActivity"
+            android:exported="false" android:excludeFromRecents="true" />
+        <service android:name="app.mailpush.companion.MailPushService" android:exported="false">
+            <intent-filter><action android:name="org.unifiedpush.android.connector.PUSH_EVENT" /></intent-filter>
+        </service>
+        <receiver android:name="app.mailpush.companion.BootReceiver" android:exported="false">
+            <intent-filter><action android:name="android.intent.action.BOOT_COMPLETED" /><action android:name="android.intent.action.MY_PACKAGE_REPLACED" /></intent-filter>
+        </receiver>
+        <profileable android:shell="false" tools:replace="android:shell" />
+        <!-- No Firebase initialization/receiver can create an implicit alternate
+             delivery path. These removals apply to the merged host manifest. -->
+        <!-- These classes intentionally do not exist in the standalone library
+             harness. Ignore MissingClass only for the removal markers. -->
+        <provider android:name="com.google.firebase.provider.FirebaseInitProvider" tools:node="remove" tools:ignore="MissingClass" />
+        <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" tools:node="remove" tools:ignore="MissingClass" />
+        <service android:name="com.google.firebase.messaging.FirebaseMessagingService" tools:node="remove" tools:ignore="MissingClass" />
+    </application>
+</manifest>

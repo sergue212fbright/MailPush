@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "repository": "https://github.com/ProtonMail/android-mail.git",
+  "track": "main",
+  "commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+  "application_id": "ch.protonmail.android.mailpush",
+  "base_version_code": 1000002
+}

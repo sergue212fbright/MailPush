@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="app.mailpush.companion.NotificationPreviewTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-10-26T22:06:24.373Z" time="0.007">
+  <properties />
+  <testcase name="controlsBidiAndUnicodeLineSeparatorsCannotInjectLines" classname="app.mailpush.companion.NotificationPreviewTest" time="0.002" />
+  <testcase name="senderOnlyHasNoSubjectFallback" classname="app.mailpush.companion.NotificationPreviewTest" time="0.0" />
+  <testcase name="existingProfilesDefaultToGenericEvenWhenPayloadHasPreview" classname="app.mailpush.companion.NotificationPreviewTest" time="0.0" />
+  <testcase name="onlyExplicitBooleanOptInEnablesPreview" classname="app.mailpush.companion.NotificationPreviewTest" time="0.0" />
+  <testcase name="localLabelAndPreviewBoundsDoNotSplitSupplementaryCharacters" classname="app.mailpush.companion.NotificationPreviewTest" time="0.002" />
+  <testcase name="unexpectedMetadataTypesAreNotStringifiedIntoPreview" classname="app.mailpush.companion.NotificationPreviewTest" time="0.0" />
+  <testcase name="optedInMailShowsSenderSubjectAndLocalAccountLabel" classname="app.mailpush.companion.NotificationPreviewTest" time="0.0" />
+  <testcase name="emptySanitizedMetadataFallsBackWithoutLeakingAccountLabel" classname="app.mailpush.companion.NotificationPreviewTest" time="0.0" />
+  <testcase name="subjectOnlyHasSafeAppTitle" classname="app.mailpush.companion.NotificationPreviewTest" time="0.0" />
+  <testcase name="markupIsKeptAsLiteralPlainText" classname="app.mailpush.companion.NotificationPreviewTest" time="0.0" />
+  <testcase name="testEventsRemainGenericEvenWithPreviewFieldsAndConsent" classname="app.mailpush.companion.NotificationPreviewTest" time="0.0" />
+  <system-out />
+  <system-err />
+</testsuite>

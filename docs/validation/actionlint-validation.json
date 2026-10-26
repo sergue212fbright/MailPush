@@ -1,0 +1,6 @@
+{
+  "actionlint": "1.7.12",
+  "workflow": "mailpush/.github/workflows/build.yml",
+  "exit_code": 0,
+  "findings": ""
+}

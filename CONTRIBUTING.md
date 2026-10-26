@@ -1,44 +1,25 @@
-# ProtonMail contributions guidelines
+# Contributing to MailPush
 
-Every contribution to the project needs to follow some rules.
+Start with the [README](README.md). The `main` branch contains the maintained
+module, adapter, patches, connector and documentation. `proton-upstream` preserves
+the original Proton starting point. Complete release source is attached to each
+APK release; do not copy a second Android snapshot into `main`.
 
-**Team decisions are tracked in form of ADRs in /docs folder**
+Please document the user-visible problem and validation for a change. Keep Proton
+integration patches small and strict. Do not add permissive patch fallbacks,
+disable certificate checks, bypass secret-file modes, or replace failed release
+gates with warnings. Keep real credentials/mail out of fixtures and reports.
 
-### Planning
+Run `python3 -m unittest discover -s tests -v` for release tooling, and the relevant
+connector/module/device checks in [BUILDING.md](docs/BUILDING.md) for changes to
+those components. Android device tests must all run without skips before an
+automated signed release. Functional owner reports have their own scope and do
+not replace automated security tests.
 
-Every significant change needs to be **discussed with the team** and go through a **planning process**; *this excludes minor contributions, simple bug fixes, or performance improvements that don't impact the app's behavior.*
+Pull requests do not receive signing or SMTP secrets. Do not add workflows that
+execute untrusted contribution code with release credentials. Changes to
+cryptography, the host-account boundary or publication need careful review.
 
-If the contribution is from a Proton member, the presence on the team daily standups is preferred.
-
-### Git best practices
-
-**Merge/Pull Requests must be of a reasonable size**, without exceeding the +**500 LOC**; more significant changes must be split on more separate Pull Requests or part of a feature branch.
-
-The **branch name** must include the **ticket(s) number** whenever possible, with the project prefix if not `MAILAND`, followed by a brief description of the change: e.g., `fix/123_crash-on-login` or `chore/L10N-234_capilalize-cancel-button`
-
-The **commit message** must be imperative and include a brief description if needed. The last line must include the whole ticket: e.g.
-
-```
-Fix crash on login
-
-A network request was being launched on the Main thread,
-now it has been moved inside a coroutine
-
-MAILAND-123
-```
-
-### Architecture
-
-Every change must follow the target **architecture of the project**.
-
-### Tests
-
-We expect any change to be accompanied with an **appropriate suite of automated tests**.
-
-### Code style
-
-**Code style** must be compliant with **Kotlin/Android conventions** and follow the **internal rules** agreed by the team.
-
-**Installing the Detekt plugin is a must** as it helps to follow the defined rules naturally.
-
-<u>Merge/Pull Requests that introduce new Detekt issues won't be accepted.</u>
+Use a GitHub no-reply commit email if you do not want a personal address exposed
+in public history. Report sensitive security issues privately using the
+repository's enabled private-reporting channel; see [SECURITY.md](SECURITY.md).

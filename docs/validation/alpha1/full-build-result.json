@@ -1,0 +1,9 @@
+{
+  "exit_code": 0,
+  "elapsed_seconds": 120,
+  "log": "Local full build log retained in workspace",
+  "task": ":app:assembleProdRelease",
+  "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+  "source_changes_for_successful_retry": false,
+  "tasks_skipped_by_command": false
+}

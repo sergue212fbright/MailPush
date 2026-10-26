@@ -1,0 +1,195 @@
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+index ce534fd..7064803 100644
+--- a/app/build.gradle.kts
++++ b/app/build.gradle.kts
+@@ -21,12 +21,12 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+ 
+ plugins {
+     id("com.android.application")
+-    id("com.google.gms.google-services")
++    // MailPush privacy build: no Google-services configuration or FCM registration.
+     kotlin("android")
+     kotlin("kapt")
+     id("com.google.devtools.ksp")
+     id("dagger.hilt.android.plugin")
+-    id("io.sentry.android.gradle")
++    // Build-time Sentry plugin removed: it can send telemetry independently of app DSNs.
+     id("org.jetbrains.kotlinx.kover")
+     id("org.jetbrains.kotlin.plugin.compose")
+     id("app-config-plugin")
+@@ -36,8 +36,9 @@ plugins {
+ /** Flavors that get the internal debug menu: its sources, resources and its dev-only dependencies. */
+ val debugMenuFlavors = listOf("dev", "alpha")
+ 
+-val accountSentryDSN: String = System.getenv("SENTRY_DSN_ACCOUNT") ?: ""
+-val sentryDSN: String = System.getenv("SENTRY_DSN_MAIL") ?: ""
++// Privacy build: external crash reporting is disabled even if CI has ambient DSN variables.
++val accountSentryDSN: String = ""
++val sentryDSN: String = ""
+ 
+ val gitHashProvider: Provider<String> = providers.exec {
+     commandLine("git", "rev-parse", "--short=7", "HEAD")
+@@ -92,7 +93,8 @@ android {
+ 
+     buildTypes {
+         // In UI Tests, we don't want the FCM service to be instantiated.
+-        val isFcmServiceEnabled = properties["enableFcmService"] ?: true
++        // UnifiedPush is the only delivery path in this privacy build.
++        val isFcmServiceEnabled = false
+ 
+         debug {
+             isDebuggable = true
+@@ -111,7 +113,8 @@ android {
+             )
+ 
+             manifestPlaceholders["isFcmServiceEnabled"] = isFcmServiceEnabled
+-            signingConfig = signingConfigs["debug"]
++            // Signing happens in an isolated job after all checks. Never ship the debug key.
++            signingConfig = null
+         }
+         create("benchmark") {
+             initWith(getByName("release"))
+@@ -212,6 +215,9 @@ configurations {
+ }
+ 
+ dependencies {
++    // Compile upstream crash interfaces without applying a build-time telemetry plugin.
++    implementation("io.sentry:sentry-android-core:${libs.versions.sentry.asProvider().get()}")
++    implementation("io.sentry:sentry-android-timber:${libs.versions.sentry.asProvider().get()}")
+     implementation(project(":shared:core:account:dagger"))
+     implementation(project(":shared:core:account-manager:dagger"))
+     implementation(project(":shared:core:account-manager:presentation"))
+@@ -254,6 +260,7 @@ dependencies {
+     implementation(project(":mail-mailbox"))
+     implementation(project(":mail-message"))
+     implementation(project(":mail-notifications"))
++    implementation(project(":mailpush"))
+     implementation(project(":mail-pagination"))
+     implementation(project(":mail-settings"))
+     implementation(project(":mail-pin-lock"))
+@@ -313,21 +320,7 @@ dependencies {
+     kspAndroidTest(project(":test:robot:ksp:processor"))
+ }
+ 
+-fun isSentryAutoUploadEnabled(): Boolean = gradle.startParameter.taskNames.any {
+-    it.contains("release", true)
+-}
+-
+-sentry {
+-    autoInstallation {
+-        sentryVersion = libs.versions.sentry.asProvider()
+-        autoUploadProguardMapping = isSentryAutoUploadEnabled()
+-        uploadNativeSymbols = isSentryAutoUploadEnabled()
+-    }
+-
+-    tracingInstrumentation {
+-        enabled = false
+-    }
+-}
++// No Sentry Gradle tasks, instrumentation or build telemetry are installed.
+ 
+ fun String?.toBuildConfigValue() = if (this != null) "\"$this\"" else "null"
+ 
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+index 091fc7d..e02bb38 100644
+--- a/app/src/main/AndroidManifest.xml
++++ b/app/src/main/AndroidManifest.xml
+@@ -52,7 +52,12 @@
+         android:taskAffinity=""
+         android:theme="@style/ProtonTheme.Mail.ET"
+         tools:replace="android:theme,android:supportsRtl">
+-        <profileable android:shell="true" />
++        <profileable android:shell="false" />
++        <!-- App-level removal wins over all direct/transitive library manifests. -->
++        <provider android:name="com.google.firebase.provider.FirebaseInitProvider" tools:node="remove" />
++        <receiver android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" tools:node="remove" />
++        <service android:name="com.google.firebase.messaging.FirebaseMessagingService" tools:node="remove" />
++        <provider android:name="io.sentry.android.core.SentryPerformanceProvider" tools:node="remove" />
+ 
+         <meta-data
+             android:name="asset_statements"
+diff --git a/app/src/main/kotlin/ch/protonmail/android/App.kt b/app/src/main/kotlin/ch/protonmail/android/App.kt
+index bc11c76..68a3f5e 100644
+--- a/app/src/main/kotlin/ch/protonmail/android/App.kt
++++ b/app/src/main/kotlin/ch/protonmail/android/App.kt
+@@ -81,7 +81,7 @@ internal class App : Application() {
+ 
+         addLogsFileHandlerObserver()
+         addDatabaseObserver()
+-        addFirebaseTokenLifecycleObserver()
++        // MailPush privacy build: never initialize/register an FCM token.
+         addEventLoopObserver()
+         addAppOpenLifecycleObserver()
+ 
+diff --git a/app/src/main/kotlin/ch/protonmail/android/initializer/MainInitializer.kt b/app/src/main/kotlin/ch/protonmail/android/initializer/MainInitializer.kt
+index bf029c7..938f1e1 100644
+--- a/app/src/main/kotlin/ch/protonmail/android/initializer/MainInitializer.kt
++++ b/app/src/main/kotlin/ch/protonmail/android/initializer/MainInitializer.kt
+@@ -30,7 +30,8 @@ import me.proton.android.core.humanverification.presentation.ChallengeInitialize
+ class MainInitializer : Initializer<Unit> {
+ 
+     override fun create(context: Context) {
+-        // No-op needed
++        // Existing startup order guarantees Rust, WorkManager and mail dependencies are ready.
++        ch.protonmail.android.mailpush.MailPushInitializer.install(context)
+     }
+ 
+     override fun dependencies() = mailDependencies()
+diff --git a/build.gradle.kts b/build.gradle.kts
+index 9c5c2f8..9a68758 100644
+--- a/build.gradle.kts
++++ b/build.gradle.kts
+@@ -27,7 +27,6 @@ buildscript {
+         classpath(libs.kotlin.gradle)
+         classpath(libs.hilt.android.gradle)
+         classpath(libs.google.services)
+-        classpath(libs.sentry.gradle)
+         classpath(libs.paparazzi.plugin)
+     }
+ }
+diff --git a/mail-settings/presentation/build.gradle.kts b/mail-settings/presentation/build.gradle.kts
+index b3455ed..1bb4d2f 100644
+--- a/mail-settings/presentation/build.gradle.kts
++++ b/mail-settings/presentation/build.gradle.kts
+@@ -63,6 +63,7 @@ android {
+ }
+ 
+ dependencies {
++    implementation(project(":mailpush"))
+     kapt(libs.bundles.app.annotationProcessors)
+     debugImplementation(libs.bundles.compose.debug)
+ 
+diff --git a/mail-settings/presentation/src/main/kotlin/ch/protonmail/android/mailsettings/presentation/appsettings/AppSettingsScreen.kt b/mail-settings/presentation/src/main/kotlin/ch/protonmail/android/mailsettings/presentation/appsettings/AppSettingsScreen.kt
+index af195df..491dfe7 100644
+--- a/mail-settings/presentation/src/main/kotlin/ch/protonmail/android/mailsettings/presentation/appsettings/AppSettingsScreen.kt
++++ b/mail-settings/presentation/src/main/kotlin/ch/protonmail/android/mailsettings/presentation/appsettings/AppSettingsScreen.kt
+@@ -123,6 +123,16 @@ private fun AppSettingsScreenContent(
+                     onNotificationClick = { launchNotificationSettingsIntent(context) }
+                 )
+ 
++                Spacer(modifier = Modifier.height(ProtonDimens.Spacing.Standard))
++                ProtonAppSettingsItemNorm(
++                    name = "Encrypted push (UnifiedPush)",
++                    hint = "End-to-end encrypted alerts",
++                    icon = {},
++                    onClick = {
++                        context.startActivity(Intent(context, app.mailpush.companion.MainActivity::class.java))
++                    }
++                )
++
+                 Spacer(modifier = Modifier.height(ProtonDimens.Spacing.ExtraLarge))
+ 
+                 LanguageSettingsItem(
+diff --git a/settings.gradle.kts b/settings.gradle.kts
+index 63b12dd..de1039e 100644
+--- a/settings.gradle.kts
++++ b/settings.gradle.kts
+@@ -82,6 +82,8 @@ include(":shared:core:payment-google:presentation")
+ 
+ includeBuild("build-plugin")
+ include(":app")
++include(":mailpush")
++project(":mailpush").projectDir = file("mailpush-module")
+ include(":benchmark")
+ include(":coverage")
+ include(":detekt-rules")

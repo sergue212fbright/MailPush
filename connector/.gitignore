@@ -1,0 +1,10 @@
+.venv/
+state/
+secrets/
+config.toml
+deploy/config/
+dist/
+build/
+*.egg-info/
+__pycache__/
+*.pyc

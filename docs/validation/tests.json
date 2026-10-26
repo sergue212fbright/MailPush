@@ -1,0 +1,126 @@
+{
+  "schema": 1,
+  "release": "0.3.0-alpha.2",
+  "version_code": 1000002,
+  "scope": "Current alpha.2 release-policy tests, Android module JVM/lint/build, full production build, signed and unsigned manifest audits, signature and alignment checks passed. Current eleven device tests compiled but are unverified after three emulator infrastructure failures before any test method started. Prior unchanged connector/workflow receipts are explicitly identified.",
+  "python": {
+    "connector": {
+      "tests": 47,
+      "seconds": 17.931,
+      "status": "prior_passed",
+      "release_tested": "0.3.0-alpha.1",
+      "runtime_python_sources_unchanged": true,
+      "receipt": "alpha1/connector-tests.log"
+    },
+    "release": {
+      "tests": 31,
+      "seconds": 0.041,
+      "status": "passed",
+      "receipt": "release-tests.log"
+    }
+  },
+  "android_module": {
+    "build": {
+      "exit_code": 0,
+      "seconds": 18,
+      "scope": "Current alpha.2 release AAR, release JVM tests, release lint and debug instrumentation APK build",
+      "release": "0.3.0-alpha.2",
+      "jvm_tests": 40,
+      "lint_errors": 0,
+      "lint_warnings": 5
+    },
+    "jvm": {
+      "tests": 40,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": [
+        {
+          "name": "app.mailpush.companion.HostBoundaryTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "timestamp": "2026-10-26T22:06:24.366Z",
+          "time": "0.005"
+        },
+        {
+          "name": "app.mailpush.companion.NotificationPreviewTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "timestamp": "2026-10-26T22:06:24.373Z",
+          "time": "0.007"
+        },
+        {
+          "name": "app.mailpush.companion.SecurityTest",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "timestamp": "2026-10-26T22:06:24.384Z",
+          "time": "0.085"
+        }
+      ]
+    },
+    "lint": {
+      "errors": 0,
+      "warnings": 5,
+      "summary": "lint-summary.json",
+      "report": "lint-results-release.txt"
+    },
+    "instrumentation": {
+      "status": "infrastructure_unavailable",
+      "expected_tests": 11,
+      "tests_run": 0,
+      "test_methods_started": 0,
+      "failures": null,
+      "errors": null,
+      "skipped": null,
+      "android_api": 35,
+      "environment": "Disposable AOSP x86_64 software emulator; no KVM or real account",
+      "test_class": "app.mailpush.companion.DeviceSecurityTest",
+      "synthetic_data_only": true,
+      "attempts": 3,
+      "receipt": "device-tests-result.json",
+      "compilation_status": "passed",
+      "compilation_receipt": "instrumentation-build-result.json",
+      "prior_release_receipt": "alpha1/device-tests-result.json",
+      "interpretation": "All eleven current device checks remain unverified; no test method reported starting. Prior alpha.1 passing tests are historical evidence."
+    }
+  },
+  "workflow_syntax": {
+    "status": "prior_passed",
+    "workflow_source_unchanged": true,
+    "actionlint": "1.7.12",
+    "exit_code": 0,
+    "receipt": "alpha1/actionlint-validation.json"
+  },
+  "overlay_reproduction_status": "passed",
+  "overlay_reproduction_receipt": "patch-reproducibility.json",
+  "manual_generic_delivery_receipt": "manual-delivery.json",
+  "not_established_by_these_receipts": [
+    "Execution of the current eleven Android device security and notification-preview checks",
+    "Automatic cold-start timing after a TrueNAS Apps restart",
+    "Owner GitHub workflow activation",
+    "Complete native Rust telemetry audit"
+  ],
+  "sanitization": "Local absolute workspace paths shortened. JVM XML build-container hostname omitted; test outcomes and timestamps preserved. Prior alpha.1 evidence remains under alpha1/.",
+  "full_application": {
+    "build_status": "passed",
+    "build_receipt": "full-build-result.json",
+    "unsigned_manifest_audit_status": "passed",
+    "unsigned_manifest_audit_receipt": "apk-audit-unsigned.json",
+    "signed_manifest_audit_status": "passed",
+    "signed_manifest_audit_receipt": "apk-audit-signed.json",
+    "signature_verification_status": "passed",
+    "alignment_verification_status": "passed",
+    "signed_apk_receipt": "signed-apk.json"
+  },
+  "owner_reported_preview_delivery": {
+    "status": "owner_reported_working",
+    "receipt": "manual-delivery.json",
+    "independent_security_validation": false
+  }
+}

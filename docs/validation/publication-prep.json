@@ -1,0 +1,17 @@
+{
+  "schema": 1,
+  "scope": "Public-repository preparation, not a new Android APK build",
+  "release_and_device_parser_tests": 46,
+  "status": "passed",
+  "actionlint_status": "passed",
+  "documentation_shell_blocks_syntax_checked": 37,
+  "local_documentation_links": "passed",
+  "production_app_source_changed": false,
+  "android_device_live_github_run": "not yet executed",
+  "owner_preview_observation": "Working sender/subject previews reported on GrapheneOS",
+  "github_repository": "sergue212fbright/MailPush",
+  "fork_parent": "ProtonMail/android-mail",
+  "preserved_proton_branch": "proton-upstream",
+  "source_pin": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+  "remaining_activation": "First live complete GitHub validation; main-restricted environments and owner signing secrets; first signed release test"
+}

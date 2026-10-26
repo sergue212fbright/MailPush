@@ -1,0 +1,27 @@
+[Unit]
+Description=MailPush encrypted IMAP notification connector
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=mailpush
+Group=mailpush
+Environment=MAILPUSH_STATE_DIR=/var/lib/mailpush
+ExecStart=/opt/mailpush/venv/bin/mailpush run --config /etc/mailpush/config.toml
+Restart=on-failure
+RestartSec=10
+TimeoutStopSec=60
+StateDirectory=mailpush
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+LockPersonality=true
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,64 @@
+--- a/mail-telemetry/data/src/main/kotlin/ch/protonmail/android/mailtelemetry/data/local/UpsellingTelemetryDataSourceImpl.kt
++++ b/mail-telemetry/data/src/main/kotlin/ch/protonmail/android/mailtelemetry/data/local/UpsellingTelemetryDataSourceImpl.kt
+@@ -35,11 +35,7 @@
+         general: LocalGeneralDimensions,
+         planSpecific: LocalPlanSpecificDimensions
+     ) {
+-        recordUpgradeAttempt(
+-            userSession = mailUserSession.getRustUserSession(),
+-            general = general,
+-            planSpecific = planSpecific
+-        )
++        // MailPush privacy build: do not record or submit purchase/upsell analytics.
+     }
+ 
+     override suspend fun recordUpgradeCancelledByUser(
+@@ -47,11 +43,7 @@
+         general: LocalGeneralDimensions,
+         planSpecific: LocalPlanSpecificDimensions
+     ) {
+-        recordUpgradeCancelledByUser(
+-            userSession = mailUserSession.getRustUserSession(),
+-            general = general,
+-            planSpecific = planSpecific
+-        )
++        // MailPush privacy build: do not record or submit purchase/upsell analytics.
+     }
+ 
+     override suspend fun recordUpgradeError(
+@@ -59,11 +51,7 @@
+         general: LocalGeneralDimensions,
+         planSpecific: LocalPlanSpecificDimensions
+     ) {
+-        recordUpgradeError(
+-            userSession = mailUserSession.getRustUserSession(),
+-            general = general,
+-            planSpecific = planSpecific
+-        )
++        // MailPush privacy build: do not record or submit purchase/upsell analytics.
+     }
+ 
+     override suspend fun recordUpgradeSuccess(
+@@ -71,20 +59,13 @@
+         general: LocalGeneralDimensions,
+         planSpecific: LocalPlanSpecificDimensions
+     ) {
+-        recordUpgradeSuccess(
+-            userSession = mailUserSession.getRustUserSession(),
+-            general = general,
+-            planSpecific = planSpecific
+-        )
++        // MailPush privacy build: do not record or submit purchase/upsell analytics.
+     }
+ 
+     override suspend fun recordUpsellButtonTapped(
+         mailUserSession: MailUserSessionWrapper,
+         general: LocalGeneralDimensions
+     ) {
+-        recordUpsellButtonTapped(
+-            userSession = mailUserSession.getRustUserSession(),
+-            general = general
+-        )
++        // MailPush privacy build: do not record or submit purchase/upsell analytics.
+     }
+ }

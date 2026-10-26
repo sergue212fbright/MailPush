@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="app.mailpush.companion.HostBoundaryTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-10-26T22:06:24.366Z" time="0.005">
+  <properties />
+  <testcase name="hostFailureIsClosed" classname="app.mailpush.companion.HostBoundaryTest" time="0.004" />
+  <testcase name="missingAccountBindingRejected" classname="app.mailpush.companion.HostBoundaryTest" time="0.0" />
+  <testcase name="differentAccountRejected" classname="app.mailpush.companion.HostBoundaryTest" time="0.0" />
+  <testcase name="readyAccountAccepted" classname="app.mailpush.companion.HostBoundaryTest" time="0.0" />
+  <testcase name="signedOutAccountRejected" classname="app.mailpush.companion.HostBoundaryTest" time="0.0" />
+  <system-out />
+  <system-err />
+</testsuite>

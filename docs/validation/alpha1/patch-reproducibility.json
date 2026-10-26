@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "pristine_overlay_apply": "passed",
+  "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+  "prepared": {
+    "schema": 1,
+    "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+    "application_id": "ch.protonmail.android.mailpush",
+    "version_code": 1000001,
+    "integration_sha256": "1a1f3d77eeb6b211808fca9adf2129b99f3b601d3c0ad6b6c0c7913ac1f80f6e"
+  },
+  "source_compared_files": 6053,
+  "changed": [
+    ".mailpush-prepared.json",
+    "config/detekt/config.yml"
+  ],
+  "missing_from_build": [],
+  "extra_in_build": [
+    ".kotlin/sessions/kotlin-compiler-3115896896627557957.salive",
+    ".kotlin/sessions/kotlin-compiler-4215229103785928723.salive",
+    ".kotlin/sessions/kotlin-compiler-7822779442560865097.salive"
+  ],
+  "scratch_destination": "<workspace>/buildenv/mailpush-repro-mv21qqnx/proton",
+  "actual_provenance": {
+    "schema": 1,
+    "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+    "application_id": "ch.protonmail.android.mailpush",
+    "version_code": 1000001,
+    "integration_sha256": "b31d7e719176a209c0528c1cd32162ca9bf81a60ebc369349c2d97030e21db0c"
+  },
+  "reconciliation": {
+    "original_observations_preserved": true,
+    "provenance": {
+      "change": "Refreshed only the prepared metadata integration_sha256 after regenerating the integration patch.",
+      "current_integration_sha256": "1a1f3d77eeb6b211808fca9adf2129b99f3b601d3c0ad6b6c0c7913ac1f80f6e",
+      "matches_maintained_patch": true
+    },
+    "detekt_config": {
+      "observed_difference": "The build inserted one timestamp comment as the first line. Removing that comment produces an exact match with config/detekt-proton-core.yml.",
+      "rules_changed": false
+    },
+    "kotlin_sessions": {
+      "disposition": "The corresponding-source bundler excludes the entire .kotlin directory; compiler session markers are build state, not maintained source."
+    },
+    "limits": "This receipt records source overlay application and file comparison; it does not establish reproducible APK bytes."
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "exit_code": 0,
+  "seconds": 18,
+  "scope": "Current alpha.2 module release build, JVM tests, lint and 11-case debug instrumentation APK compilation",
+  "release": "0.3.0-alpha.2",
+  "expected_instrumentation_tests": 11,
+  "task": ":mailpush:assembleDebugAndroidTest",
+  "device_execution_receipt": "device-tests-result.json"
+}

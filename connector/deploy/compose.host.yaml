@@ -1,0 +1,20 @@
+# Linux only; for an already-running Bridge on the Docker host.
+services:
+  connector:
+    build:
+      context: ..
+    image: mailpush-connector:0.3.0a1
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - ./config:/config:ro
+      - connector-data:/data
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    stop_grace_period: 60s
+volumes:
+  connector-data:

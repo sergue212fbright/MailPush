@@ -1,0 +1,85 @@
+{
+  "schema": 1,
+  "validation_release": "0.3.0-alpha.2",
+  "pristine_overlay_apply": "passed",
+  "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+  "prepared": {
+    "schema": 1,
+    "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+    "application_id": "ch.protonmail.android.mailpush",
+    "version_code": 1000002,
+    "integration_sha256": "1a1f3d77eeb6b211808fca9adf2129b99f3b601d3c0ad6b6c0c7913ac1f80f6e"
+  },
+  "source_compared_files": 6030,
+  "changed": [
+    "config/detekt/config.yml"
+  ],
+  "missing_from_build": [],
+  "extra_in_build": [],
+  "scratch_destination": "<workspace>/buildenv/mailpush-repro-alpha2-cgb1rkfc/proton",
+  "actual_provenance": {
+    "schema": 1,
+    "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+    "application_id": "ch.protonmail.android.mailpush",
+    "version_code": 1000002,
+    "integration_sha256": "1a1f3d77eeb6b211808fca9adf2129b99f3b601d3c0ad6b6c0c7913ac1f80f6e"
+  },
+  "module_comparison": {
+    "compared_files": 30,
+    "excluded_directories": [
+      ".gradle",
+      "__pycache__",
+      "build"
+    ],
+    "changed": [],
+    "missing_from_build": [],
+    "extra_in_build": [],
+    "result": "passed"
+  },
+  "adapter_comparison": {
+    "compared_files": 1,
+    "changed": [],
+    "missing_from_build": [],
+    "extra_in_build": [],
+    "result": "passed"
+  },
+  "minimal_patches": {
+    "patches/integration.patch": {
+      "sha256": "1a1f3d77eeb6b211808fca9adf2129b99f3b601d3c0ad6b6c0c7913ac1f80f6e",
+      "unchanged_from_alpha1": true
+    },
+    "patches/privacy.patch": {
+      "sha256": "27d35ec2779ab57e325bc87eeac3cd0cb1d5acce8cc33e006a3f2e0fa9a868a4",
+      "unchanged_from_alpha1": true
+    }
+  },
+  "version_code_checks": {
+    "prepare_script_default": 1000002,
+    "upstream_base_version_code": 1000002,
+    "actual_prepared_version_code": 1000002,
+    "app_configuration_version_code": 1000002,
+    "fresh_prepared_version_code": 1000002
+  },
+  "reconciliation": {
+    "source_differences": {
+      "config/detekt/config.yml": {
+        "kind": "leading_generated_comment",
+        "rules_changed": false,
+        "comment_removed_for_comparison": true
+      }
+    },
+    "result": "passed",
+    "build_state_excluded": [
+      ".cxx",
+      ".git",
+      ".gradle",
+      ".idea",
+      ".kotlin",
+      "__pycache__",
+      "build",
+      "keystore",
+      "secrets"
+    ],
+    "limits": "This receipt records a fresh strict overlay application and source-file comparison. It does not establish reproducible APK bytes or execute Gradle, device tests, or signing."
+  }
+}

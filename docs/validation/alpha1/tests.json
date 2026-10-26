@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "scope": "Local connector/release policy tests, Android module JVM tests/lint and AOSP instrumentation, full production build, unsigned/signed manifest audit, release signature/alignment verification, workflow syntax, and overlay reproduction receipts.",
+  "python": {
+    "connector": {
+      "tests": 47,
+      "seconds": 17.931,
+      "status": "passed",
+      "receipt": "connector-tests.log"
+    },
+    "release": {
+      "tests": 31,
+      "seconds": 0.031,
+      "status": "passed",
+      "receipt": "release-tests.log"
+    }
+  },
+  "android_module": {
+    "build": {
+      "exit_code": 0,
+      "seconds": 97
+    },
+    "jvm": {
+      "tests": 29,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suites": [
+        {
+          "name": "app.mailpush.companion.HostBoundaryTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "timestamp": "2026-10-26T18:03:11.636Z",
+          "time": "0.006"
+        },
+        {
+          "name": "app.mailpush.companion.SecurityTest",
+          "tests": 24,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "timestamp": "2026-10-26T18:03:11.647Z",
+          "time": "0.104"
+        }
+      ]
+    },
+    "lint": {
+      "errors": 0,
+      "warnings": 4,
+      "summary": "lint-summary.json",
+      "report": "lint-results-release.txt"
+    },
+    "instrumentation": {
+      "status": "passed",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "android_api": 35,
+      "environment": "Disposable AOSP x86_64 software emulator; no KVM or real account",
+      "test_class": "app.mailpush.companion.DeviceSecurityTest",
+      "adb_test_exit": 0,
+      "synthetic_data_only": true,
+      "receipt": "device-tests-result.json",
+      "transcript": "device-tests-instrumentation.txt",
+      "build_receipt": "instrumentation-build-result.json",
+      "production_code_changed_for_fixture_fix": false
+    }
+  },
+  "workflow_syntax": {
+    "actionlint": "1.7.12",
+    "workflow": "mailpush/.github/workflows/build.yml",
+    "exit_code": 0,
+    "findings": ""
+  },
+  "overlay_reproduction_receipt": "patch-reproducibility.json",
+  "not_established_by_these_receipts": [
+    "Real Proton Bridge / ntfy / GrapheneOS end-to-end delivery",
+    "Docker deployment execution",
+    "Owner GitHub workflow activation",
+    "Complete native Rust telemetry audit"
+  ],
+  "sanitization": "Local absolute workspace paths shortened. JVM XML build-container hostname omitted; test outcomes and timestamps preserved. Device receipt includes only synthetic-test statuses and bounded emulator setup diagnostics; framework logs omitted.",
+  "full_application": {
+    "build_status": "passed",
+    "build_receipt": "full-build-result.json",
+    "unsigned_manifest_audit_status": "passed",
+    "unsigned_manifest_audit_receipt": "apk-audit-unsigned.json",
+    "signed_manifest_audit_status": "passed",
+    "signed_manifest_audit_receipt": "apk-audit-signed.json",
+    "signature_verification_status": "passed",
+    "alignment_verification_status": "passed",
+    "signed_apk_receipt": "signed-apk.json"
+  }
+}

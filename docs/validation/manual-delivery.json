@@ -1,0 +1,30 @@
+{
+  "schema": 2,
+  "evidence_type": "owner-reported observations in the setup conversation",
+  "environment": [
+    "TrueNAS Docker Apps",
+    "Proton Mail Bridge",
+    "ntfy UnifiedPush",
+    "GrapheneOS"
+  ],
+  "observations": [
+    {
+      "release_tested": "0.3.0-alpha.1",
+      "user_reported_date": "2026-10-26",
+      "generic_notification_received": true,
+      "confirmation": "Owner confirmed receiving the new-mail notification on the phone after IMAP and deployment troubleshooting."
+    },
+    {
+      "release_tested": "0.3.0-alpha.2",
+      "user_reported_date": "2026-10-26",
+      "sender_subject_previews_working": true,
+      "confirmation": "Owner reported that the updated APK and preview configuration work beautifully after receiving the enable-preview and restart/update instructions."
+    }
+  ],
+  "limits": [
+    "Owner reports are functional observations, not an independent security audit.",
+    "No automated phone acknowledgement exists.",
+    "The 11 current Android device security test methods remain unexecuted after emulator infrastructure failures.",
+    "Screen-off, reboot, cold-start timing, multi-account isolation, app-lock/redaction scenarios and hardware-backed key storage were not separately measured."
+  ]
+}

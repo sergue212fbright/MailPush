@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "application_id": "ch.protonmail.android.mailpush",
+  "version_code": 1000001,
+  "apk_bytes": 168694857,
+  "apk_sha256": "531d8eda21fead82fe351de9e0beced90bc4d8a4dac6b9edd7980efbfc145223",
+  "manifest_policy": "passed",
+  "alias": "mailpush",
+  "certificate_sha256": "bf65bf147b85f377575579d8569cfa6dda715d309ec0aabdfd7b42800f52e79e",
+  "key_algorithm": "RSA-3072",
+  "signature_verification": "passed",
+  "signature_check": "apksigner verify --verbose --print-certs; exact expected SHA-256 certificate matched",
+  "alignment_verification": "passed",
+  "alignment_check": "zipalign -c -P 16 4",
+  "signing_identity_generated_after_builds": true
+}

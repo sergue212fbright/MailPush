@@ -1,0 +1,10 @@
+.venv
+state
+secrets
+dist
+build
+*.egg-info
+**/__pycache__
+.git
+tests
+tools

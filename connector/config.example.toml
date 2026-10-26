@@ -1,0 +1,45 @@
+schema = 1
+
+[service]
+state_dir = "state"
+ttl_seconds = 43200
+request_timeout = 15
+max_queue = 10000
+# Development receiver on this host only. Keep false for real deployments.
+allow_http_loopback = false
+
+[[devices]]
+id = "phone"
+# Installed by `mailpush pair` from the Android companion. It contains endpoint + public key +
+# shared authentication material, but never the phone's private key.
+subscription_file = "secrets/phone-subscription.json"
+# Optional, for a push server with a private certificate authority:
+# ca_file = "secrets/push-ca.pem"
+# Optional access control for a compatible server:
+# bearer_token_file = "secrets/push-token"
+# Alternatively use VAPID if required by your selected provider:
+# vapid_key_file = "secrets/vapid-private.pem"
+# vapid_subject = "mailto:operator@example.com"
+
+[[mailboxes]]
+id = "personal"
+host = "127.0.0.1"
+port = 1143
+username = "your-address@proton.me"
+password_file = "secrets/bridge-password"
+# Or remove password_file and set password_env = "BRIDGE_IMAP_PASSWORD".
+folder = "INBOX"
+# Verify Bridge's certificate before sending the generated IMAP password.
+tls = "starttls"
+# Set this to the owner's verified certificate SHA-256 fingerprint:
+# tls_pin_sha256 = "64_hex_characters"
+# Alternatively trust Bridge's exported certificate/CA:
+# ca_file = "secrets/bridge-ca.pem"
+# Plaintext is an explicit opt-in limited to loopback: tls = "none".
+devices = ["phone"]
+preview = false
+skip_seen = true
+use_idle = true
+poll_seconds = 60
+reconcile_seconds = 300
+max_age_seconds = 86400

@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-  <string name="sending_notification_channel_name">Invio dei messaggi</string>
-  <string name="sending_notification_title">Invio del messaggio in corso</string>
-</resources>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="app.mailpush.companion.SecurityTest" tests="24" skipped="0" failures="0" errors="0" timestamp="2026-10-26T22:06:24.384Z" time="0.085">
+  <properties />
+  <testcase name="unpairedRejected" classname="app.mailpush.companion.SecurityTest" time="0.005" />
+  <testcase name="calendarAndUnknownEventsRejected" classname="app.mailpush.companion.SecurityTest" time="0.001" />
+  <testcase name="floatVersionRejected" classname="app.mailpush.companion.SecurityTest" time="0.002" />
+  <testcase name="expiredPairingRejected" classname="app.mailpush.companion.SecurityTest" time="0.002" />
+  <testcase name="validBoundEventAccepted" classname="app.mailpush.companion.SecurityTest" time="0.0" />
+  <testcase name="unknownMailboxRejected" classname="app.mailpush.companion.SecurityTest" time="0.0" />
+  <testcase name="tamperedCiphertextRejectedByTink" classname="app.mailpush.companion.SecurityTest" time="0.054" />
+  <testcase name="oversizedPreviewRejected" classname="app.mailpush.companion.SecurityTest" time="0.002" />
+  <testcase name="wrongBindingRejected" classname="app.mailpush.companion.SecurityTest" time="0.001" />
+  <testcase name="pythonReceiptVerified" classname="app.mailpush.companion.SecurityTest" time="0.001" />
+  <testcase name="pythonCiphertextDecryptedByTink" classname="app.mailpush.companion.SecurityTest" time="0.006" />
+  <testcase name="invalidUtf8Rejected" classname="app.mailpush.companion.SecurityTest" time="0.001" />
+  <testcase name="controlBidiAndUnicodeLineCharactersStripped" classname="app.mailpush.companion.SecurityTest" time="0.0" />
+  <testcase name="wrongReceiptKeyRejected" classname="app.mailpush.companion.SecurityTest" time="0.001" />
+  <testcase name="stringTimeRejected" classname="app.mailpush.companion.SecurityTest" time="0.0" />
+  <testcase name="futureEventRejected" classname="app.mailpush.companion.SecurityTest" time="0.001" />
+  <testcase name="expiredRejected" classname="app.mailpush.companion.SecurityTest" time="0.0" />
+  <testcase name="excessiveLifetimeRejected" classname="app.mailpush.companion.SecurityTest" time="0.001" />
+  <testcase name="canonicalFingerprintMatchesPython" classname="app.mailpush.companion.SecurityTest" time="0.0" />
+  <testcase name="plaintextRejected" classname="app.mailpush.companion.SecurityTest" time="0.0" />
+  <testcase name="generateJavaPairingRequestForPythonVerification" classname="app.mailpush.companion.SecurityTest" time="0.002" />
+  <testcase name="oversizedPacketRejected" classname="app.mailpush.companion.SecurityTest" time="0.0" />
+  <testcase name="receiptCannotChangeBinding" classname="app.mailpush.companion.SecurityTest" time="0.001" />
+  <testcase name="wrongSourceRejected" classname="app.mailpush.companion.SecurityTest" time="0.001" />
+  <system-out />
+  <system-err />
+</testsuite>

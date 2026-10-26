@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mailpush-connector"
+version = "0.3.0a1"
+description = "Standalone IMAP to encrypted UnifiedPush notification connector"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = ["IMAPClient==4.1.0", "pywebpush==2.5.0"]
+
+[project.scripts]
+mailpush = "mailpush.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
