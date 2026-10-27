@@ -17,6 +17,12 @@ GitHub run creates a downloadable APK. Keep the same Android package and signing
 certificate when installing an update. Releases are prereleases while this is
 alpha software; an independent updater must include prereleases if used.
 
+The optional [custom F-Droid feed](F_DROID.md) distributes the same signed APKs
+from GitHub Pages. Its publishing workflow is called after a successful release
+and refreshes catalog timestamps weekly. It does not build or re-sign the APK.
+F-Droid client permissions/settings govern installation on the phone; the
+repository index has a separate signing identity from the app.
+
 ## Start with one complete unsigned run
 
 1. Use `main` as the repository's default branch. Read the repository layout in

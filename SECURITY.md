@@ -162,6 +162,23 @@ secrets through this workflow.
 Do not add `pull_request_target`, shared untrusted build caches or self-hosted
 runners that retain release secrets without a fresh security review.
 
+### Custom F-Droid distribution
+
+The GitHub-hosted feed is a binary repository maintained by this project; it is
+not a review or endorsement by the F-Droid project. The APK retains its existing
+signing certificate. A different key signs the repository index, and its public
+certificate/fingerprint is pinned in `fdroid/config.json` and the add-repository
+link. Keep both private signing backups, with their distinct purposes.
+
+Repository preparation verifies release provenance, checksums, package,
+versionCode and the expected APK certificate before indexing. Only public APKs,
+corresponding source, icons and bounded index files enter its artifact; caches
+and tool configuration stay outside the deployed site. Index signing and Pages
+deployment use separate jobs and main-branch-restricted environments. The
+index-signing job has no APK-signing key or Proton/Bridge credentials. GitHub
+can observe repository-update and download requests, including IPs and timing;
+no mail content or phone notification keys belong in this feed.
+
 For the initial alpha.1, the fork signing identity was generated after all
 local build/test jobs stopped. Alpha.2 reuses that identity for in-place updates. The APK's signature, exact expected certificate,
 16 KB page alignment and post-sign manifest policy were verified. Its private

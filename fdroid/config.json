@@ -1,0 +1,10 @@
+{
+  "schema": 1,
+  "repository": "sergue212fbright/MailPush",
+  "application_id": "ch.protonmail.android.mailpush",
+  "apk_certificate_sha256": "bf65bf147b85f377575579d8569cfa6dda715d309ec0aabdfd7b42800f52e79e",
+  "repo_certificate_sha256": "e3b363f72b7048233f0f6dd8f7848e7e1b192a3b40c802ccb4ebbc3875c64176",
+  "repo_url": "https://sergue212fbright.github.io/MailPush/fdroid/repo",
+  "repo_name": "MailPush",
+  "repo_description": "Unofficial Proton Mail Android fork with encrypted UnifiedPush notifications. Alpha releases signed by the MailPush maintainer."
+}

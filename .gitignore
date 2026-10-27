@@ -28,3 +28,8 @@ pairing/
 *.sqlite
 *.sqlite-*
 password.txt
+
+# Private F-Droid index identity is separate from the public policy/certificate.
+fdroid/private/
+fdroid/config.yml
+*-PRIVATE-*.zip

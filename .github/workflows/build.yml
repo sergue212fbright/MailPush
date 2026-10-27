@@ -239,8 +239,19 @@ jobs:
           RELEASE_TAG: ${{ needs.select.outputs.tag }}
         run: python3 scripts/publish_release.py .work/signed --upstream "$UPSTREAM_SHA" --module-sha256 "$MODULE_SHA256" --tag "$RELEASE_TAG"
 
+  fdroid-repository:
+    needs: publish
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && needs.publish.result == 'success'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    # The called workflow gets its index key only from its restricted environment.
+    # No APK/SMTP signing secrets are inherited from this release workflow.
+    uses: ./.github/workflows/fdroid.yml
+
   failure-email:
-    needs: [select, checks, device, build, sign, publish]
+    needs: [select, checks, device, build, sign, publish, fdroid-repository]
     if: always() && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' && vars.FAILURE_EMAIL_ENABLED == 'true' && contains(needs.*.result, 'failure')
     environment: mailpush-notifications
     runs-on: ubuntu-24.04

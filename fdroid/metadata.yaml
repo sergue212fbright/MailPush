@@ -1,0 +1,25 @@
+Categories:
+  - Internet
+License: GPL-3.0-or-later
+Name: MailPush for Proton Mail
+Summary: Unofficial Proton Mail fork with encrypted UnifiedPush alerts
+Description: |-
+  An unofficial alpha fork of Proton Mail for Android with an embedded
+  UnifiedPush receiver. A separate connector watches an unmodified Proton
+  Mail Bridge and encrypts notification content for the paired phone.
+
+  Generic notifications are the default. Sender and subject previews require
+  explicit choices on both the connector and the phone. Previews share the
+  decrypted details with Android notifications; lock-screen settings apply.
+
+  Requires a Proton Mail account, Bridge access and a compatible UnifiedPush
+  distributor. This custom binary repository is maintained by MailPush and
+  is not an endorsement or security audit by Proton or the F-Droid project.
+  See the repository security and validation notes for the precise limits.
+WebSite: https://github.com/sergue212fbright/MailPush
+SourceCode: https://github.com/sergue212fbright/MailPush
+IssueTracker: https://github.com/sergue212fbright/MailPush/issues
+Changelog: https://github.com/sergue212fbright/MailPush/releases
+AntiFeatures:
+  NonFreeNet:
+    en-US: Requires Proton Mail's hosted service; this repository does not provide a self-hosted mail service.
