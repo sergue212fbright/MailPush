@@ -5,6 +5,13 @@ our small patches, run the tests, build an APK and publish a signed alpha releas
 An upstream change that breaks a patch or check stops publication. It does not
 make an AI repair. Bridge and the connector remain separate installations.
 
+For `sergue212fbright/MailPush`, the signing environment is configured for `main`
+only, signing/publication are enabled, and the first GitHub-signed prerelease
+passed its build, device, signing and publication gates. The existing APK signing
+identity was reused. See the [release receipt](validation/github-release.json).
+The setup instructions below remain useful for someone maintaining their own
+fork; they are not a request to replace an already configured signing key.
+
 **Automatic builds are separate from installation on the phone.** A successful
 GitHub run creates a downloadable APK. Keep the same Android package and signing
 certificate when installing an update. Releases are prereleases while this is

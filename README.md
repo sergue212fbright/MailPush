@@ -10,11 +10,13 @@ passed **all eleven Android security tests on GitHub, with zero skips**, alongsi
 connector, release-policy, JVM and interoperability checks. See the
 [GitHub validation checkpoint](docs/validation/github-ci.json),
 [latest workflow status](https://github.com/sergue212fbright/MailPush/actions) and
-[validation limits](VALIDATION.md). Automatic signed publication still requires
-the full workflow and deliberate owner signing-key setup. This is not an
-independent security audit.
+[validation limits](VALIDATION.md). The production build, protected-environment
+signing and automatic publication have also passed. Upstream checks run every
+six hours; compatible changes publish signed alpha APKs after the gates pass.
+See the [signed release receipt](docs/validation/github-release.json).
+This is not an independent security audit.
 
-**[Download the initial signed alpha APK and exact source](https://github.com/sergue212fbright/MailPush/releases/tag/v0.3.0-alpha.2).**
+**[Download signed APKs and exact corresponding source](https://github.com/sergue212fbright/MailPush/releases).**
 
 ## Start here
 

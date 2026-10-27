@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "checkpoint": "initial_github_validation_in_progress",
-  "observed_at_utc": "2026-10-27T00:11:11.550497+00:00",
+  "checkpoint": "initial_github_unsigned_validation_passed",
+  "observed_at_utc": "2026-10-27T00:29:31.256575+00:00",
   "repository": "sergue212fbright/MailPush",
   "workflow": ".github/workflows/build.yml",
   "run_id": 40423151153,
@@ -64,20 +64,47 @@
     "transcript_sha256": "208ef114aaa406affb4311808653c514ccfdebe215841cc1b3e84e16e8993756"
   },
   "full_production_build": {
-    "status": "in_progress",
+    "status": "passed",
     "job_id": 121922298660,
     "job_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40423151153/job/121922298660",
-    "current_step": "Build unsigned production APK",
-    "unsigned_manifest_audit": "pending",
-    "corresponding_source_staging": "pending"
+    "task": ":app:assembleProdRelease",
+    "gradle_elapsed_seconds": 1477,
+    "gradle_log_summary": "BUILD SUCCESSFUL in 24m 37s",
+    "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+    "integration_sha256": "1a1f3d77eeb6b211808fca9adf2129b99f3b601d3c0ad6b6c0c7913ac1f80f6e",
+    "unsigned_manifest_audit": "passed",
+    "unsigned_apk": {
+      "schema": 1,
+      "application_id": "ch.protonmail.android.mailpush",
+      "version_code": 1000003,
+      "apk_bytes": 168498182,
+      "apk_sha256": "adad842c9c9f99c3d10cebd7094b6010c8e6d239b702193bece6b0368dce1a55",
+      "manifest_policy": "passed",
+      "signed": false
+    },
+    "corresponding_source_staging": "passed",
+    "artifact_upload": "passed",
+    "artifact": {
+      "id": 12699966120,
+      "name": "unsigned-build",
+      "zip_bytes": 72199301,
+      "zip_sha256": "a2fc7c3723f0be7f41f450fb32c04130e8e908a12bd9dc4f5ec1657f239fe5b4",
+      "url": "https://github.com/sergue212fbright/MailPush/actions/runs/40423151153/artifacts/12699966120",
+      "created_at_utc": "2026-10-27T00:22:29Z",
+      "expires_at_utc": "2026-11-03T00:22:23Z",
+      "head_sha": "8a09136dc638354bbdcec9a21db1850178c72c17"
+    },
+    "evidence_scope": "Primary GitHub build-job logs, completed successful job-step summaries and unsigned-build artifact API metadata. This receipt does not claim a separate local download/re-audit of the unsigned archive or an APK signature."
   },
   "signing": {
     "status": "disabled_not_configured",
-    "private_signing_credentials_supplied": false
+    "private_signing_credentials_supplied": false,
+    "scope": "Initial validation run: signing was disabled without supplied credentials; configuring later protected-environment signing is a separate step."
   },
   "publication": {
     "status": "disabled_not_configured",
-    "automatic_signed_release_verified": false
+    "automatic_signed_release_verified": false,
+    "scope": "No signed release was published by this initial validation run."
   },
   "failure_email": {
     "github_actions_account_preference": "email_failed_workflows_only_observed",
@@ -85,9 +112,11 @@
     "live_delivery_verified": false
   },
   "scope_limits": [
-    "This is an intermediate run checkpoint, not an all-jobs-success or signed-release receipt.",
+    "The initial GitHub checks, device gate, production build, unsigned manifest audit and source/artifact staging passed. This is an unsigned-validation receipt, not a completed automatic signing/publication receipt.",
     "The eleven device cases use the standalone synthetic module fixture, not a real Proton account.",
     "Earlier local software-emulator failures remain historical receipts and are not relabeled as passes.",
     "The manually delivered alpha.2 APK hash, versionCode and certificate are recorded separately and remain unchanged."
-  ]
+  ],
+  "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+  "run_attempt": 1
 }

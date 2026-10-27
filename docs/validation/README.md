@@ -5,6 +5,15 @@ not an independent security audit, a hardware-backed Keystore attestation or
 proof of every phone delivery scenario. `tests.json` keeps the earlier manually
 signed alpha.2 results separate from the later GitHub validation run.
 
+## First GitHub-signed public release
+
+`github-release.json` records the later protected signing and public publication
+attempts for VersionCode `1000003`, including independent verification of the
+downloaded APK, corresponding source and release checksums. The original signing
+certificate was reused. Those results are separate from attempt 1's unsigned
+validation below; they do not imply a physical-phone upgrade test or delivered
+SMTP email.
+
 ## Initial GitHub validation checkpoint
 
 Run [40423151153](https://github.com/sergue212fbright/MailPush/actions/runs/40423151153)
@@ -22,14 +31,20 @@ checked out maintenance commit
   emulator. The whole device gate took 2.4 seconds; the Android runner reported
   `OK (11 tests)` and its successful final result. The gate checks named methods,
   not ADB's exit status alone.
-* The **full production APK build is still in progress** at this recorded
-  checkpoint. Its compiled-manifest audit and source staging have not yet
-  completed. This is not an all-jobs-success receipt.
-* GitHub signing and publication remain disabled without owner signing secrets.
-  No new GitHub-signed release or live failure-email delivery is established.
+* The **full unsigned production APK build passed**: `:app:assembleProdRelease`
+  completed in 24 minutes 37 seconds. The compiled-manifest audit, corresponding
+  source staging and artifact upload also passed. CI's unsigned VersionCode
+  `1000003` APK is `168498182` bytes; SHA-256
+  `adad842c9c9f99c3d10cebd7094b6010c8e6d239b702193bece6b0368dce1a55`.
+  It is a signing input, not a signed installable release.
+* Signing and publication were disabled for this initial validation run. Its
+  receipts do not establish a GitHub-signed release or live failure-email
+  delivery; later protected-environment setup and releases need their own record.
 
-`github-ci.json` identifies the run, source SHA, job links, completed checks and
-pending work. `github-device-result.json` and
+`github-ci.json` identifies the run, maintenance and Proton source SHAs, job
+links, completed unsigned validation and remaining signing/publication work. It
+also records the uploaded `unsigned-build` artifact's separate ZIP digest; that
+ZIP digest is not the unsigned APK's digest. `github-device-result.json` and
 `github-device-instrumentation.txt` retain the actual successful device evidence.
 These tests exercise the standalone module's Android fixture; they do not log
 into a real Proton account or attest physical hardware-backed key storage.
@@ -70,9 +85,9 @@ The original local packaging checkpoint recorded:
 
 ## Receipt interpretation
 
-* `github-ci.json`: the initial GitHub run's intermediate checkpoint. Consult
-  its job links for subsequent results; this record explicitly leaves the full
-  CI production build and release setup unfinished.
+* `github-ci.json`: the initial GitHub run's completed unsigned validation,
+  including its full production build, compiled-manifest audit, corresponding
+  source and uploaded artifact metadata. Signing/release setup remains separate.
 * `github-device-result.json` and `github-device-instrumentation.txt`: the later
   successful **11-method** Android run, including actual notification redaction,
   resumed-settings authorization and profile-scoped opt-out cancellation.
@@ -115,7 +130,7 @@ previews remain default-off; opting in shares decrypted details with Android's
 notification system and its authorized listeners. Android lock-screen settings
 still govern display.
 
-Screen-off/reboot/cold-start reliability, a complete native Rust telemetry audit,
-completion of the initial GitHub full production build, GitHub signing/release
-publication and live failure-email delivery require their own results. Keep
-these claims unverified until those results are recorded.
+Screen-off/reboot/cold-start reliability, a physical-phone upgrade to the CI APK,
+a complete native Rust telemetry audit, long-term scheduled operation and live
+failure-email delivery still require their own results. Successful CI signing
+and publication are established separately in `github-release.json`.

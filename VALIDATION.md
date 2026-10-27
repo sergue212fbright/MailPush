@@ -1,6 +1,16 @@
-# Validation record — 0.3.0-alpha.2
+# Validation record — manual alpha.2 and GitHub releases
 
-## Current release checkpoint
+## GitHub signed release
+
+The first GitHub-signed/published APK has VersionCode `1000003` and reuses the
+original alpha.1/alpha.2 certificate. Its signature, expected signer, 16 KB
+alignment, compiled manifest, release checksums and module/adapter source match
+were independently verified after downloading the signed artifact. See
+[github-release.json](docs/validation/github-release.json) for exact hashes,
+workflow attempts and public release details. No physical-phone in-place upgrade
+or live failure-email delivery is claimed by that receipt.
+
+## Manual alpha.2 checkpoint
 
 The complete production Proton fork with optional sender/subject previews built
 successfully from official Proton commit
@@ -54,11 +64,12 @@ CI XML was not retained separately, so that count is not represented as a new
 XML receipt. See `docs/validation/github-ci.json`, `github-device-result.json`
 and its transcript for the exact source, count basis and scope.
 
-The production CI build was still running at this checkpoint. Signing and
-publication were disabled pending owner secret setup. The run link is the source
-of truth for its subsequent status. The signed APK described above remains the
-previously delivered manual VersionCode `1000002` artifact; it was not rebuilt or
-re-signed when it was published as the initial GitHub alpha release.
+The full unsigned production build, compiled-manifest audit, source packaging
+and artifact upload subsequently passed. The initial run's unsigned APK has
+VersionCode `1000003`. After deliberate owner setup, later attempts signed and
+published it using the original certificate; their separate receipt is linked
+above. The manual VersionCode `1000002` APK recorded above remains its own
+historical artifact and was not re-signed when its initial alpha was published.
 
 Earlier alpha.1 receipts are preserved under `docs/validation/alpha1/`. Their
 VersionCode `1000001`, signed hash and eight-test device result describe alpha.1,
@@ -166,14 +177,16 @@ against a warmed Bridge is not proof of unattended cold-start behavior.
 
 ## Not yet established
 
-* Completed automatic signing/publication and real failure-email delivery in
-  the owner repository; the initial GitHub run validates code without release secrets.
+* A physical-phone in-place upgrade and real mail delivery using the new CI APK;
+  the manual alpha.2 deployment has its own owner-reported evidence.
+* Actual failure-email delivery. GitHub's failed-workflow email preference is
+  enabled; optional SMTP delivery has not been configured or tested.
 * Independent Docker execution in this build workspace; Docker is unavailable
   here. The owner's deployment observation has the separate scope stated above.
-* Unattended scheduled release operation over time. The public repository and
-  six-hour workflow now exist, but owner signing credentials and live failure
-  email have not been configured or tested. The initial published alpha is the
-  previously signed manual APK, not a successful automatic signing run.
+* Unattended scheduled release operation over time. The six-hour workflow and
+  protected signing/publication are configured, and the first signed CI release
+  passed. Later upstream changes and long-term scheduled operation still need
+  their own execution results.
 * A complete telemetry/traffic audit of Proton's native Rust SDK.
 * Bit-for-bit APK reproducibility. Source overlay checks and successful builds
   alone do not establish identical APK bytes.

@@ -2,7 +2,7 @@
   "schema": 1,
   "release": "0.3.0-alpha.2",
   "version_code": 1000002,
-  "scope": "Historical manually signed alpha.2 local build/test/signature receipts are preserved. Later GitHub checks and eleven-device-test success at a distinct source commit are recorded separately under github_validation; the first GitHub production build remains in progress at this checkpoint.",
+  "scope": "Historical manual alpha.2 receipts remain separate from later GitHub unsigned validation (github_validation) and successful protected signing/publication (github_signed_release). Each artifact retains its original versionCode and hashes.",
   "python": {
     "connector": {
       "tests": 47,
@@ -104,7 +104,6 @@
   "overlay_reproduction_receipt": "patch-reproducibility.json",
   "manual_generic_delivery_receipt": "manual-delivery.json",
   "not_established_by_these_receipts": [
-    "Completion of the initial GitHub full production APK build and unsigned manifest audit",
     "GitHub signing, signed release publication and live failure email delivery",
     "Automatic cold-start timing after a TrueNAS Apps restart",
     "Complete native Rust telemetry audit"
@@ -144,9 +143,25 @@
       "receipt": "github-device-result.json",
       "transcript": "github-device-instrumentation.txt"
     },
-    "full_production_build_status": "in_progress",
+    "full_production_build_status": "passed",
     "signing_status": "disabled_not_configured",
     "publication_status": "disabled_not_configured",
-    "interpretation": "The initial GitHub checks and actual Android security gate passed. This intermediate checkpoint is not proof that the full CI build, signing or automatic release pipeline completed."
+    "interpretation": "The initial GitHub checks, actual eleven-method Android gate, full unsigned production build, manifest audit and source/artifact staging passed. Signing was disabled for this initial run; no automatic signed release is established by these receipts.",
+    "unsigned_manifest_audit_status": "passed",
+    "corresponding_source_staging_status": "passed",
+    "unsigned_artifact_upload_status": "passed",
+    "unsigned_version_code": 1000003,
+    "unsigned_apk_sha256": "adad842c9c9f99c3d10cebd7094b6010c8e6d239b702193bece6b0368dce1a55",
+    "run_attempt": 1
+  },
+  "github_signed_release": {
+    "receipt": "github-release.json",
+    "run_id": 40423151153,
+    "signing_attempt": 2,
+    "publication_attempt": 3,
+    "version_code": 1000003,
+    "status": "passed",
+    "physical_phone_upgrade": "not_reported_for_this_ci_apk",
+    "live_failure_email_delivery_verified": false
   }
 }

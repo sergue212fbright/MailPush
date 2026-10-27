@@ -1,0 +1,129 @@
+{
+  "schema": 1,
+  "checkpoint": "signed_prerelease_published_and_assets_verified",
+  "observed_at_utc": "2026-10-27T00:36:17.780170+00:00",
+  "repository": "sergue212fbright/MailPush",
+  "run_id": 40423151153,
+  "run_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40423151153",
+  "maintenance_source_commit": "8a09136dc638354bbdcec9a21db1850178c72c17",
+  "prerequisite_validation": {
+    "status": "passed",
+    "run_attempt": 1,
+    "receipt": "github-ci.json"
+  },
+  "signing": {
+    "status": "passed",
+    "run_attempt": 2,
+    "job_id": 121935248409,
+    "job_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40423151153/job/121935248409",
+    "environment": "mailpush-signing",
+    "certificate_sha256": "bf65bf147b85f377575579d8569cfa6dda715d309ec0aabdfd7b42800f52e79e",
+    "signature_verification": "passed",
+    "alignment_verification": "passed",
+    "signed_artifact": {
+      "id": 12700082460,
+      "name": "signed-release",
+      "zip_bytes": 72393111,
+      "zip_sha256": "0a3049495159edaea8550f64e55e3fa051fb12f3ae3d66e5831c8b019ba4d209"
+    }
+  },
+  "asset_verification": {
+    "status": "passed",
+    "scope": "Independent local verification of the downloaded signing artifact and comparison with public release digests; no private key access during artifact verification",
+    "signature_check": "Independent local apksigner verify --verbose --print-certs; exact one expected signer",
+    "alignment_check": "Independent local zipalign -c -P 16 4",
+    "compiled_manifest_audit": "passed",
+    "release_checksums": "passed for exact APK, source and release.json assets",
+    "source_prepared_metadata": {
+      "schema": 1,
+      "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+      "application_id": "ch.protonmail.android.mailpush",
+      "version_code": 1000003,
+      "integration_sha256": "1a1f3d77eeb6b211808fca9adf2129b99f3b601d3c0ad6b6c0c7913ac1f80f6e"
+    },
+    "module_files_compared": 30,
+    "adapter_files_compared": 1,
+    "module_and_adapter_source_comparison": "byte-for-byte match with maintained source"
+  },
+  "release_metadata": {
+    "schema": 1,
+    "application_id": "ch.protonmail.android.mailpush",
+    "version_code": 1000003,
+    "apk_bytes": 168694857,
+    "apk_sha256": "418949367ead9bcb7333713e5035e926f0ca8001c91afd1703b6dc321377bd00",
+    "manifest_policy": "passed",
+    "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+    "module_sha256": "ea120668756ee688f0277088c86d3ba8f6318a43f5c80275f24aeb53290608df",
+    "release_tag": "mailpush-17fe04fd0f8b-ea120668756e",
+    "validation": "Automated gates passed; see VALIDATION.md for manual-device limits."
+  },
+  "assets": {
+    "MailPush.apk": {
+      "bytes": 168694857,
+      "sha256": "418949367ead9bcb7333713e5035e926f0ca8001c91afd1703b6dc321377bd00",
+      "published_asset_id": 679956544,
+      "download_url": "https://github.com/sergue212fbright/MailPush/releases/download/mailpush-17fe04fd0f8b-ea120668756e/MailPush.apk",
+      "github_reported_digest": "sha256:418949367ead9bcb7333713e5035e926f0ca8001c91afd1703b6dc321377bd00"
+    },
+    "source.tar.gz": {
+      "bytes": 5077574,
+      "sha256": "fb2d0e4c4ec4d165a7f450e3070d2667365c2982ecff125fe029ed437e5c5d85",
+      "published_asset_id": 679956753,
+      "download_url": "https://github.com/sergue212fbright/MailPush/releases/download/mailpush-17fe04fd0f8b-ea120668756e/source.tar.gz",
+      "github_reported_digest": "sha256:fb2d0e4c4ec4d165a7f450e3070d2667365c2982ecff125fe029ed437e5c5d85"
+    },
+    "release.json": {
+      "bytes": 534,
+      "sha256": "2a48045a3ce43a34fe83f89dac10e67edfb911dece20f4101212b34a4aeab0e1",
+      "published_asset_id": 679956737,
+      "download_url": "https://github.com/sergue212fbright/MailPush/releases/download/mailpush-17fe04fd0f8b-ea120668756e/release.json",
+      "github_reported_digest": "sha256:2a48045a3ce43a34fe83f89dac10e67edfb911dece20f4101212b34a4aeab0e1"
+    },
+    "SHA256SUMS": {
+      "bytes": 238,
+      "sha256": "41ae1e749d5e79382a26c76d27f1dc816d55b9c3e45d2a75bb30e00a09cabb8c",
+      "published_asset_id": 679956717,
+      "download_url": "https://github.com/sergue212fbright/MailPush/releases/download/mailpush-17fe04fd0f8b-ea120668756e/SHA256SUMS",
+      "github_reported_digest": "sha256:41ae1e749d5e79382a26c76d27f1dc816d55b9c3e45d2a75bb30e00a09cabb8c"
+    }
+  },
+  "publication": {
+    "status": "passed",
+    "run_attempt": 3,
+    "job_id": 121936189216,
+    "job_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40423151153/job/121936189216",
+    "rerun_requested_from_job_id": 121935369297,
+    "release_id": 424914116,
+    "release_tag": "mailpush-17fe04fd0f8b-ea120668756e",
+    "release_url": "https://github.com/sergue212fbright/MailPush/releases/tag/mailpush-17fe04fd0f8b-ea120668756e",
+    "published_at_utc": "2026-10-27T00:35:10Z",
+    "draft": false,
+    "prerelease": true,
+    "github_immutable": false,
+    "remote_assets_match_verified_downloads": true,
+    "verification": "All four uploaded public release assets have GitHub-reported SHA-256 digests and byte sizes matching the independently verified signed CI artifact files."
+  },
+  "physical_phone_upgrade": {
+    "status": "not_reported_for_this_ci_apk"
+  },
+  "failure_email": {
+    "github_account_preference": "email_failed_workflows_only_observed",
+    "smtp": "not_configured",
+    "live_delivery_verified": false
+  },
+  "scope_limits": [
+    "The first signed CI prerelease was published and all four public asset sizes/digests match the independently verified signing artifact. GitHub's immutable-release flag is false; the publisher itself refuses to overwrite an existing release tag.",
+    "The device suite used a synthetic Android module fixture; no physical-phone upgrade or new end-to-end mail delivery is claimed for this CI APK.",
+    "The owner previously reported working manually delivered alpha.2 previews; those observations have a separate artifact identity.",
+    "No SMTP delivery test or failure-email delivery acknowledgement is established."
+  ],
+  "configuration": {
+    "signing_enabled": true,
+    "automatic_publication_enabled": true,
+    "signing_environment_allowed_branches": [
+      "main"
+    ],
+    "schedule_utc": "23 */6 * * *",
+    "temporary_local_signing_copies_removed": true
+  }
+}

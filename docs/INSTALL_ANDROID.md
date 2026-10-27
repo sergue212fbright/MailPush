@@ -45,11 +45,13 @@ or connector subscription file into it.
 
 ## 1. Install the signed mail APK
 
-Obtain the APK from this project's verified release channel or your own
-consistently signed build. Check the release's checksum/signature information
-and [validation notes](../VALIDATION.md). If no release has been published yet,
-complete the maintainer's build/release setup first; a source-code ZIP is not an
-installable APK.
+Open this project's [releases](https://github.com/sergue212fbright/MailPush/releases)
+and download **`MailPush.apk`** from the newest automated build's Assets. The
+initial manual alpha instead uses a filename beginning `MailPush-ProtonMail-`.
+Check that release's `SHA256SUMS`, signature information and
+[validation notes](../VALIDATION.md). A source-code ZIP or `source.tar.gz` is
+source for rebuilding, not an installable APK. Maintainers may use their own
+consistently signed build instead.
 
 The application ID is `ch.protonmail.android.mailpush`. It can coexist with
 official Proton Mail, but updates for this fork must use this fork's signing
