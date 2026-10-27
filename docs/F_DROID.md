@@ -6,12 +6,13 @@ an F-Droid-compatible Android client. It is separate from the official
 endorses this application. MailPush remains an unofficial Proton Mail fork and
 **public alpha software**.
 
-**Setup in progress:** the address below is proposed, not yet verified live.
-The repository signing identity is pinned below, but the first deployed index
-and its QR/link still need verification before following the phone steps.
-Until then, use the signed APKs on
-[GitHub Releases](https://github.com/sergue212fbright/MailPush/releases) and the
-[Android installation guide](INSTALL_ANDROID.md).
+**Live and verified on 2026-10-27:** open the
+[MailPush update repository](https://sergue212fbright.github.io/MailPush/fdroid/repo/)
+on your phone and tap **Add this repository to F-Droid**, or follow the manual
+steps below. Both signed index formats, the APK signing identity and the APK/source
+download hashes were independently checked against the published files. A physical
+phone installation through an F-Droid client has not been tested; see the
+[publication receipt](validation/fdroid.json) for the scope of verification.
 
 ## Already using MailPush?
 
@@ -36,14 +37,16 @@ First install an F-Droid-compatible client from a source you trust. Exact menu
 names vary between clients; the usual route in F-Droid is **Settings →
 Repositories → Add**.
 
-The address will be confirmed after the first signed repository is deployed.
-The repository fingerprint is already pinned in the project's public policy:
+Paste this complete address into **Add repository**. It includes the public
+repository fingerprint so a compatible client can check the expected identity:
 
 ```text
-Proposed repository URL — NOT YET VERIFIED:
-https://sergue212fbright.github.io/MailPush/fdroid/repo
+https://sergue212fbright.github.io/MailPush/fdroid/repo/?fingerprint=e3b363f72b7048233f0f6dd8f7848e7e1b192a3b40c802ccb4ebbc3875c64176
+```
 
 Repository signing certificate SHA-256:
+
+```text
 e3b363f72b7048233f0f6dd8f7848e7e1b192a3b40c802ccb4ebbc3875c64176
 ```
 
@@ -51,15 +54,13 @@ e3b363f72b7048233f0f6dd8f7848e7e1b192a3b40c802ccb4ebbc3875c64176
    URL into the client's **Add repository** screen.
 2. Check the **repository signing fingerprint** against the fingerprint published
    on this page. It authenticates the repository index, not the APK. Stop if it
-   differs or the repository is still marked as awaiting deployment verification.
+   differs.
 3. Confirm and enable the repository, then refresh its contents.
 4. Find **MailPush** and confirm the application ID above before installing.
 
-**QR alternative:** once published, scan the repository's QR code from another
-screen and open it with your F-Droid client. It must encode the verified HTTPS
-repository URL with its fingerprint. Review the imported address and fingerprint
-before enabling it. The live QR code has not yet been verified; a QR scanner is
-not needed for the manual route.
+The live page's **Add this repository to F-Droid** link opens a compatible client
+with the address and fingerprint. If your browser does not recognize that link,
+use the manual paste route above.
 
 Adding the repository does not install the mail app or change its server
 configuration. You do not enter a Proton password, Bridge password, ntfy endpoint,
@@ -125,7 +126,7 @@ change with the maintainer before accepting it.
 
 | Symptom | What to check |
 | --- | --- |
-| Repository missing, empty or HTTP 404 | The proposed address is not usable until publication is verified. Afterwards, use the complete `/fdroid/repo/` URL, enable the repository and refresh. A GitHub project homepage or release page is not the repository index. |
+| Repository missing, empty or HTTP 404 | Use the complete `/fdroid/repo/` URL above, enable the repository and refresh. A GitHub project homepage or release page is not the repository index. Check the most recent repository-publication workflow if the address fails. |
 | Latest APK not shown yet | Compare GitHub Releases with the repository's last successful publication. Refresh the enabled source; GitHub Pages and client caches can delay visibility. Check whether the installed versionCode is already as new, and whether the client filters alpha versions. |
 | Repository fingerprint or index signature error | Stop. Confirm the URL and fingerprint from this project's trusted documentation. Do not disable signature checking or accept a new key merely to clear the error. Report the error without private files. |
 | Android says update is incompatible | Confirm the app ID and APK certificate above. A differently signed build or official Proton Mail cannot be updated by this APK. Keep the existing app installed while investigating. |
@@ -154,8 +155,8 @@ can be started manually, and refreshes weekly even without a new APK.
 | Signed repository index | Public metadata listing the APK and its hash, authenticated with the repository key. |
 | `mailpush-fdroid` | Protected GitHub Actions environment for repository-index signing. Restrict deployments to the reviewed `main` branch. |
 | `github-pages` | Separate deployment environment, also restricted to `main`; its runner publishes public files and receives no index-signing key. |
-| Repository-index secret | Private key/password material held only in `mailpush-fdroid`, with an encrypted offline backup. Base64 is encoding, not encryption. |
-| Repository fingerprint | Public SHA-256 fingerprint of the index-signing certificate, published with the repository URL and QR code. |
+| Repository-index secret | Private key/password material held in `mailpush-fdroid`, with an offline backup that must be protected as a secret. Base64 is encoding, not encryption. |
+| Repository fingerprint | Public SHA-256 fingerprint of the index-signing certificate, published with the repository URL and add link. |
 | Existing APK signing identity | The Android signing key already configured in `mailpush-signing`; preserve it when distributing existing MailPush APKs. |
 
 Configure these values through GitHub's private settings. Never paste their
@@ -191,16 +192,16 @@ For a separate maintained fork:
    `FDROID_READY=true` and manually run the workflow to sign and deploy the
    repository containing the verified release APK and corresponding source.
 6. Independently check the live HTTPS URL, index signature and fingerprint, APK
-   certificate/hash and versionCode. Test an in-place upgrade with an F-Droid
-   client before advertising the repository as ready.
-7. Publish the verified URL, fingerprint and matching QR code together. Preserve
+   certificate/hash and versionCode. Test an in-place upgrade with your chosen
+   F-Droid client before relying on unattended phone updates.
+7. Publish the verified URL, fingerprint and matching add link together. Preserve
    the index key across updates; treat a key change as a trust migration rather
    than quietly replacing it.
 
-The public policy for `sergue212fbright/MailPush` already pins its repository
-certificate. That is not a request to regenerate its key. The live address and
-first deployment remain unverified until the status at the top of this guide
-is updated after a successful publication check.
+The public policy for `sergue212fbright/MailPush` pins its established repository
+certificate. Preserve that key. The first signed deployment and live file checks
+are recorded separately from the earlier keyless preparation checkpoint in the
+[publication receipt](validation/fdroid.json).
 
 Official F-Droid references: [adding a repository](https://f-droid.org/en/tutorials/add-repo/),
 [setting up a repository](https://f-droid.org/en/docs/Setup_an_F-Droid_App_Repo/),

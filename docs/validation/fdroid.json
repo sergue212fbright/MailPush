@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "status": "READY_AWAITING_REPOSITORY_KEY_CONFIGURATION",
-  "observed_at_utc": "2026-10-27T01:22:44.508168+00:00",
+  "status": "LIVE_VERIFIED_CUSTOM_FDROID_REPOSITORY",
+  "observed_at_utc": "2026-10-27T01:32:25.364192+00:00",
   "repository": "sergue212fbright/MailPush",
   "expected_repository_url": "https://sergue212fbright.github.io/MailPush/fdroid/repo",
   "repository_certificate_sha256": "e3b363f72b7048233f0f6dd8f7848e7e1b192a3b40c802ccb4ebbc3875c64176",
@@ -103,15 +103,72 @@
     "pages_source": "GitHub Actions configured",
     "index_signing_environment": "mailpush-fdroid",
     "deployment_environment": "github-pages",
-    "environment_branch_restrictions": "main only, verified in repository settings"
+    "environment_branch_restrictions": "main only",
+    "source_of_configuration_observation": "Repository settings and successful GitHub Actions job observations."
   },
   "production_activation": {
-    "status": "awaiting_owner_configuration",
-    "repository_signing_key_uploaded_to_github": false,
-    "FDROID_READY": false,
-    "index_signed_with_production_key": false,
-    "pages_feed_deployed": false,
-    "live_repository_verified": false
+    "status": "passed_and_independently_live_verified",
+    "repository_signing_key_uploaded_to_github": true,
+    "FDROID_READY": true,
+    "index_signed_with_production_key": true,
+    "pages_feed_deployed": true,
+    "live_repository_verified": true,
+    "configuration_observation_source": "Repository settings enabled FDROID_READY and the main-only protected mailpush-fdroid signing environment before the successful production Actions run.",
+    "run_id": 40432694639,
+    "run_attempt": 1,
+    "run_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40432694639",
+    "source_commit": "e446d8d4538a50a80e3ad689219b2f78827d8b2a",
+    "fresh_timestamp_generation": true,
+    "prepare": {
+      "status": "passed",
+      "job_id": 121953949049,
+      "job_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40432694639/job/121953949049",
+      "feed_boundary_tests": 52,
+      "test_seconds": 0.245,
+      "versions": 1,
+      "site_bytes": 173780426,
+      "keyless_native_isolation_preflight": "passed",
+      "preflight_artifact": {
+        "id": 12702123147,
+        "name": "fdroid-preflight",
+        "zip_bytes": 1212,
+        "zip_sha256": "58d78005dc5a5a1e1535d0b1dde8e7ec8b69abb9e4d5f376a564999dbcf602c1"
+      },
+      "prepared_artifact": {
+        "id": 12702617469,
+        "name": "fdroid-prepared",
+        "zip_bytes": 72398050,
+        "zip_sha256": "11ac8f98b411e707d10df058d5305df9e05a22331de1d554d94bce8e0621ef2e"
+      }
+    },
+    "signing": {
+      "status": "passed",
+      "job_id": 121954236281,
+      "job_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40432694639/job/121954236281",
+      "primary_log_summary": "F-Droid v1/v2 signatures and pinned certificate verified; APK bytes unchanged.",
+      "expected_repository_certificate_sha256": "e3b363f72b7048233f0f6dd8f7848e7e1b192a3b40c802ccb4ebbc3875c64176",
+      "verification_artifact": {
+        "id": 12702832009,
+        "name": "fdroid-verification",
+        "zip_bytes": 1409,
+        "zip_sha256": "799187f1e21fc244ace241ba3e27a1ccbca0709eec7548379895cc0aae7a8c90"
+      },
+      "pages_artifact": {
+        "id": 12703255437,
+        "name": "github-pages",
+        "zip_bytes": 72398959,
+        "zip_sha256": "6808512a5321cdc64fe24e13a5bbcc36fab88341386b98423a6203c6fe86babb"
+      }
+    },
+    "deployment": {
+      "status": "passed",
+      "job_id": 121954508708,
+      "job_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40432694639/job/121954508708",
+      "page_url": "https://sergue212fbright.github.io/MailPush/",
+      "deployment_id": "e446d8d4538a50a80e3ad689219b2f78827d8b2a",
+      "reported_success_at_utc": "2026-10-27T01:29:40.9871419Z"
+    },
+    "live_verified_at_utc": "2026-10-27T01:31:38+00:00"
   },
   "physical_phone_validation": {
     "fdroid_repository_added": "not_reported",
@@ -122,10 +179,77 @@
     "live_delivery_verified": false
   },
   "scope_limits": [
-    "The expected repository URL is configuration, not a claim that a live signed F-Droid feed is already available.",
-    "No production index key was uploaded, no production index was signed, and no Pages feed was deployed for this bootstrap run.",
+    "The custom F-Droid feed is deployed and its live v1/v2 signatures, repository fingerprint, v2 hash chain, actual APK and corresponding source downloads were independently verified.",
+    "The original keyless bootstrap remains historical. A separate production activation run signed and deployed the feed; private index-key material is excluded from these public receipts.",
     "The index key is separate from the existing APK signing identity; no APK rebuild or re-signing is needed for this feed.",
     "This is a custom binary repository, not inclusion or an audit by fdroid.org.",
     "No physical F-Droid installation/upgrade, screen-off delivery, or SMTP email-delivery acknowledgement is established by this receipt."
-  ]
+  ],
+  "repository_url": "https://sergue212fbright.github.io/MailPush/fdroid/repo",
+  "add_repository_url": "https://sergue212fbright.github.io/MailPush/fdroid/repo?fingerprint=E3B363F72B7048233F0F6DD8F7848E7E1B192A3B40C802CCB4EBBC3875C64176",
+  "live_verification": {
+    "schema": 1,
+    "status": "passed",
+    "workflow_run_id": "40432694639",
+    "verified_at_unix": 1793064698,
+    "repository_url": "https://sergue212fbright.github.io/MailPush/fdroid/repo",
+    "repository_certificate_sha256": "e3b363f72b7048233f0f6dd8f7848e7e1b192a3b40c802ccb4ebbc3875c64176",
+    "application_id": "ch.protonmail.android.mailpush",
+    "version_code": 1000003,
+    "apk_sha256": "418949367ead9bcb7333713e5035e926f0ca8001c91afd1703b6dc321377bd00",
+    "apk_bytes": 168694857,
+    "apk_certificate_sha256": "bf65bf147b85f377575579d8569cfa6dda715d309ec0aabdfd7b42800f52e79e",
+    "source_sha256": "fb2d0e4c4ec4d165a7f450e3070d2667365c2982ecff125fe029ed437e5c5d85",
+    "source_bytes": 5077574,
+    "source_prepared_metadata": {
+      "schema": 1,
+      "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+      "application_id": "ch.protonmail.android.mailpush",
+      "version_code": 1000003,
+      "integration_sha256": "1a1f3d77eeb6b211808fca9adf2129b99f3b601d3c0ad6b6c0c7913ac1f80f6e"
+    },
+    "v1_signed_index_and_fingerprint": "passed",
+    "v2_entry_signature_and_fingerprint": "passed",
+    "v2_index_hash_chain": "passed",
+    "live_apk_signature": "passed",
+    "live_source_binding": "passed",
+    "public_downloads": [
+      {
+        "url": "https://sergue212fbright.github.io/MailPush/fdroid/repo/index-v1.jar",
+        "bytes": 3817,
+        "sha256": "2a873da1669daf54d418b4cf80777939b7756093662464d835d4a94e71b41f34",
+        "reused_same_run_live_download": true
+      },
+      {
+        "url": "https://sergue212fbright.github.io/MailPush/fdroid/repo/entry.jar",
+        "bytes": 2380,
+        "sha256": "bbffa650f4a2c215d09686fd53e4c36c66b0711a7271efd90a07ee07fb65046e",
+        "reused_same_run_live_download": true
+      },
+      {
+        "url": "https://sergue212fbright.github.io/MailPush/fdroid/repo/index-v2.json",
+        "bytes": 3628,
+        "sha256": "bdf1d2d3ee8b9113e0b026614c305cc723736f2cb4fe09744352e51806d12e31",
+        "reused_same_run_live_download": true
+      },
+      {
+        "url": "https://sergue212fbright.github.io/MailPush/fdroid/repo/ch.protonmail.android.mailpush_1000003.apk",
+        "bytes": 168694857,
+        "sha256": "418949367ead9bcb7333713e5035e926f0ca8001c91afd1703b6dc321377bd00",
+        "reused_same_run_live_download": true
+      },
+      {
+        "url": "https://sergue212fbright.github.io/MailPush/fdroid/repo/ch.protonmail.android.mailpush_1000003_src.tar.gz",
+        "bytes": 5077574,
+        "sha256": "fb2d0e4c4ec4d165a7f450e3070d2667365c2982ecff125fe029ed437e5c5d85",
+        "reused_same_run_live_download": true
+      }
+    ],
+    "private_key_access": false,
+    "github_writes": false,
+    "physical_fdroid_client_tested": false,
+    "verification_folder": "<workspace>/fdroid-tooling/live-feed-verification-cad80bc772f8",
+    "receipt": "<workspace>/fdroid-tooling/live-feed-verification.json",
+    "scope": "Independent public HTTPS downloads and F-Droid helper verification after successful Pages deployment; no physical F-Droid client installation and no private-key access."
+  }
 }

@@ -15,7 +15,7 @@ fork; they are not a request to replace an already configured signing key.
 **Automatic builds are separate from installation on the phone.** A successful
 GitHub run creates a downloadable APK. Keep the same Android package and signing
 certificate when installing an update. Releases are prereleases while this is
-alpha software; an independent updater must include prereleases if used.
+alpha software; a GitHub-release updater must include prereleases if used.
 
 The optional [custom F-Droid feed](F_DROID.md) distributes the same signed APKs
 from GitHub Pages. Its publishing workflow is called after a successful release
