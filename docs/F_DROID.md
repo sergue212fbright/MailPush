@@ -175,6 +175,9 @@ For a separate maintained fork:
    signed APK. Keep any existing APK identity for an already installed fork.
 2. Review the repository-publication workflow and use your own GitHub Pages
    address. Do not publish another maintainer's address or fingerprint as yours.
+   The signer deliberately pins the expected repository, URL and APK certificate
+   in `scripts/sign_fdroid.py`; a separately maintained fork must review/update
+   those constants together with `fdroid/config.json` and its public certificate.
 3. Keep `FDROID_READY=false`, run **Actions → Publish MailPush F-Droid repository**
    on `main`, and require the preparation job to pass. It checks release metadata,
    source/APK hashes, the APK certificate and the unsigned repository without

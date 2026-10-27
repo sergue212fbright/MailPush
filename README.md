@@ -29,7 +29,7 @@ shell-managed Compose project are different installation paths.
 | Install using ordinary **Docker Compose** | **[Docker Compose installation](connector/deploy/DOCKER.md)** |
 | Install without Docker, alongside an existing Bridge | [Native installation](connector/deploy/NATIVE.md) |
 | Install and pair the **Android app** | **[Android setup](docs/INSTALL_ANDROID.md)** |
-| Get phone updates through our GitHub-hosted F-Droid feed | [Custom update repository](docs/F_DROID.md) |
+| Configure the GitHub-hosted F-Droid feed (setup in progress) | [Custom update repository](docs/F_DROID.md) |
 | Update an already working installation | **[Upgrading without resetting setup](docs/UPGRADING.md)** |
 | Fix an error or a silent phone | **[Troubleshooting](docs/TROUBLESHOOTING.md)** |
 | Enable optional sender/subject previews | [Notification previews](docs/NOTIFICATION_PREVIEWS.md) |

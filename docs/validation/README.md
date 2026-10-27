@@ -5,6 +5,14 @@ not an independent security audit, a hardware-backed Keystore attestation or
 proof of every phone delivery scenario. `tests.json` keeps the earlier manually
 signed alpha.2 results separate from the later GitHub validation run.
 
+## Custom F-Droid repository preparation
+
+`fdroid.json` records the separate distribution workflow: 52 feed boundary tests,
+real APK/source download and unsigned catalog generation, and the GitHub runner's
+keyless process-isolation/identity checks passed. Production index signing and
+deployment remain disabled while the new repository key is configured. This
+checkpoint does not establish a live feed or a phone installation through F-Droid.
+
 ## First GitHub-signed public release
 
 `github-release.json` records the later protected signing and public publication
