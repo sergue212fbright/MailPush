@@ -84,6 +84,11 @@ Inside the **fork's** Proton Mail settings, open:
 
 **Settings → App customization → Encrypted push**
 
+Example module screens: [dark appearance](images/push-settings-dark.png) and
+[light appearance](images/push-settings-light.png). These small-viewport Android
+test renders use synthetic account data and no installed distributor; your
+selected push service appears in that card after setup.
+
 Unlock through Proton Mail's normal app authorization if requested. Then:
 
 1. Tap **Choose push service** and select your distributor. If one is already
@@ -243,9 +248,10 @@ follow the server guide's explicit `--replace` procedure and import the new
 receipt. Removing a profile deletes its local pairing/notification keys. Revoke
 the device on the connector as well when it should no longer receive alerts.
 
-The push screen follows Android's system light/dark appearance. Its styling is
-owned by the push module, so Proton Mail's separate app-only appearance override
-does not control this screen.
+The push screen uses Android's light/dark resource configuration. Its styling is
+owned by the push module; it does not read Proton Mail's separate app-only
+appearance preference. Use the system appearance setting if the two screens
+differ.
 
 ## Current validation scope
 

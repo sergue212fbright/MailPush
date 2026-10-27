@@ -11,8 +11,15 @@ signed alpha.2 results separate from the later GitHub validation run.
 receipts. Module-owned Android framework styling and guided pairing replace the
 previous settings screen; the existing host entry uses the adjacent settings'
 card style. The module still compiles without Proton's source or design libraries.
-The receipt distinguishes local checks from the pending Android device and full
-release gates. Synthetic light/dark visual fixtures keep `FLAG_SECURE` enabled
+The receipt distinguishes local checks, the successful 13-test Android device
+gate and the successful production build, signing, release and custom F-Droid
+publication. VersionCode `1000024` was independently downloaded from the live
+feed: both index pins/signatures, the signed hash chain, existing APK signature,
+compiled privacy manifest, new compiled UI resources and exact module source
+files passed verification. A physical GrapheneOS update was not performed.
+Reviewed synthetic
+[light](../images/push-settings-light.png) and
+[dark](../images/push-settings-dark.png) visual fixtures keep `FLAG_SECURE` enabled
 and contain no real mail, account or pairing data.
 
 ## Automatic publishing and dependency maintenance repair

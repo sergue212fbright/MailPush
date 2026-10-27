@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "LOCAL_VALIDATION_AWAITING_GITHUB_DEVICE_AND_RELEASE",
+  "status": "SIGNED_RELEASE_AND_CUSTOM_FEED_LIVE_VERIFIED",
   "base_commit": "d92d1e924937f113fe640abebb43df2e80141432",
-  "observed_at_utc": "2026-10-27T13:14:40.937825+00:00",
+  "observed_at_utc": "2026-10-27T13:46:15.672976+00:00",
   "module_sha256": "2479f3f03ef0819122c404d9f94d25b644b0298721cac5f305e3b3edf670abf9",
   "scope": "Independent push settings presentation and the existing host settings entry; no profile schema, crypto, transport, adapter or Host API changes.",
   "boundaries": {
@@ -37,22 +37,272 @@
   },
   "android_ui_gate": {
     "expected_tests": 13,
-    "execution": "pending GitHub accelerated API35 emulator",
+    "execution": "passed on GitHub accelerated API35 emulator",
     "new_checks": [
       "Paired screen keeps re-pairing secondary; preview opt-in defaults/persistence across Activity recreation; secure window retained; real system light/dark resources",
       "Unpaired request/receipt steps appear in order and do not enable previews",
       "Paused settings hide all account UI"
     ],
-    "visual_receipts": "Synthetic fixture View.draw only; FLAG_SECURE remains set; no real mail/accounts/endpoints captured"
+    "visual_receipts": "Synthetic fixture View.draw only; FLAG_SECURE remains set; no real mail/accounts/endpoints captured",
+    "passed": 13,
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "job_id": 122210637710,
+    "artifact_id": 12737271122,
+    "artifact_zip_sha256": "0d67629903a24f6c9f56942d388826711e56fc6fe21af4f6c8322a1aff9f4c18",
+    "instrumentation_transcript_independently_evaluated": true,
+    "visual_review": {
+      "status": "passed",
+      "viewport": "320x568 Android framework view render",
+      "findings": [
+        "Light and dark palettes differ correctly, with readable text and consistent lavender controls.",
+        "Toolbar, status badge, account label and preview toggle align and are not cut off horizontally.",
+        "Text wraps naturally; the screen scrolls for options below the viewport.",
+        "No private data is present; the test fixture has no installed distributor, so its service card intentionally shows No service selected."
+      ],
+      "scope_limit": "These are synthetic module view renders, not a physical GrapheneOS or signed production UI interaction."
+    },
+    "images": [
+      {
+        "file": "paired-light.png",
+        "sha256": "826a4b9b87510a730328c3992e957e237c0b4a723f48c2c98f6dc1df259168ea",
+        "bytes": 32823,
+        "synthetic_data_only": true,
+        "repository_path": "docs/images/push-settings-light.png"
+      },
+      {
+        "file": "paired-dark.png",
+        "sha256": "b99ec45b85702c58e71efd15522f166559211e46034e57eddb38baf593f96fc3",
+        "bytes": 34204,
+        "synthetic_data_only": true,
+        "repository_path": "docs/images/push-settings-dark.png"
+      }
+    ]
   },
   "production_release": {
-    "status": "not_yet_started",
-    "new_apk_verified": false,
-    "new_fdroid_feed_verified": false
+    "status": "published_and_independently_live_verified",
+    "new_apk_verified": true,
+    "new_fdroid_feed_verified": true,
+    "version_code": 1000024,
+    "application_id": "ch.protonmail.android.mailpush",
+    "release_id": 425510655,
+    "release_tag": "mailpush-17fe04fd0f8b-2479f3f03ef0",
+    "release_url": "https://github.com/sergue212fbright/MailPush/releases/tag/mailpush-17fe04fd0f8b-2479f3f03ef0",
+    "repository_url": "https://sergue212fbright.github.io/MailPush/fdroid/repo",
+    "apk_certificate_sha256": "bf65bf147b85f377575579d8569cfa6dda715d309ec0aabdfd7b42800f52e79e",
+    "repository_certificate_sha256": "e3b363f72b7048233f0f6dd8f7848e7e1b192a3b40c802ccb4ebbc3875c64176",
+    "apk_sha256": "222f8fff4638484bdbcddc3f9d27b60357c9f80385b7df284102eff929eb665f",
+    "apk_bytes": 168739969,
+    "source_sha256": "70ac8bd21a80f8bfc3a1c5c8322f53e06a8cb625c30ce855b0d335ae139a1b1d",
+    "source_bytes": 5083166,
+    "independent_live_checks": {
+      "v1_signature_and_pin": "passed",
+      "v2_entry_signature_and_pin": "passed",
+      "signed_v2_hash_chain": "passed",
+      "apk_signature": "passed",
+      "compiled_apk_manifest": "passed",
+      "source_binding": "passed",
+      "integration_patch_match": "passed"
+    },
+    "source_prepared_metadata": {
+      "schema": 1,
+      "upstream_commit": "17fe04fd0f8b9b7dc45c188d4d5e2d55033128c0",
+      "application_id": "ch.protonmail.android.mailpush",
+      "version_code": 1000024,
+      "integration_sha256": "40babb4b37980295ec251337935815ca14b5b375422711874e49e55d74690210"
+    },
+    "maintained_module_main_files_match": [
+      "src/main/AndroidManifest.xml",
+      "src/main/java/app/mailpush/companion/BootReceiver.java",
+      "src/main/java/app/mailpush/companion/EncryptedAlertWorker.java",
+      "src/main/java/app/mailpush/companion/EventPolicy.java",
+      "src/main/java/app/mailpush/companion/Ledger.java",
+      "src/main/java/app/mailpush/companion/MailPushIntegration.java",
+      "src/main/java/app/mailpush/companion/MailPushService.java",
+      "src/main/java/app/mailpush/companion/MainActivity.java",
+      "src/main/java/app/mailpush/companion/NotificationPreview.java",
+      "src/main/java/app/mailpush/companion/OpenMailActivity.java",
+      "src/main/java/app/mailpush/companion/PairingCrypto.java",
+      "src/main/java/app/mailpush/companion/SettingsUi.java",
+      "src/main/java/app/mailpush/companion/Vault.java",
+      "src/main/res/drawable/ic_mailpush.xml",
+      "src/main/res/drawable/ic_notification.xml",
+      "src/main/res/drawable/mailpush_ic_back.xml",
+      "src/main/res/values/colors.xml",
+      "src/main/res/values/strings.xml",
+      "src/main/res/values/styles.xml",
+      "src/main/res/values-night/colors.xml",
+      "src/main/res/values-night/styles.xml",
+      "src/main/res/xml/mailpush_backup_rules.xml",
+      "src/main/res/xml/mailpush_extraction_rules.xml"
+    ],
+    "compiled_ui_resources": {
+      "status": "passed",
+      "marker_names": [
+        "mailpush_account_options",
+        "mailpush_pairing_begin",
+        "mailpush_background"
+      ],
+      "background_configurations": [
+        {
+          "configuration": "(default)",
+          "value": "0xfff5f5fa"
+        },
+        {
+          "configuration": "night",
+          "value": "0xff222231"
+        }
+      ]
+    },
+    "public_downloads": [
+      {
+        "url": "https://github.com/sergue212fbright/MailPush/releases/download/mailpush-17fe04fd0f8b-2479f3f03ef0/release.json",
+        "file": "release.json",
+        "bytes": 534,
+        "sha256": "67e735b4d25b880135417d2105efff8f955aacd1e66434d50aaba7ac15ae508a"
+      },
+      {
+        "url": "https://github.com/sergue212fbright/MailPush/releases/download/mailpush-17fe04fd0f8b-2479f3f03ef0/SHA256SUMS",
+        "file": "SHA256SUMS",
+        "bytes": 238,
+        "sha256": "ba61c6c97c22c13ef1fcd1ac3a75c3ff9436a5dc5fb813c973f9c4441114ff54"
+      },
+      {
+        "url": "https://sergue212fbright.github.io/MailPush/fdroid/repo/index-v1.jar",
+        "file": "index-v1.jar",
+        "bytes": 3994,
+        "sha256": "15205f011f205329329c25bac09074e02feef8f6479d8ec0e3f72b4a65d2abbc"
+      },
+      {
+        "url": "https://sergue212fbright.github.io/MailPush/fdroid/repo/entry.jar",
+        "file": "entry.jar",
+        "bytes": 2382,
+        "sha256": "a88cc385aaa05a855444c2e191752ea2a3808f08b3a748a183f9364ebc89333b"
+      },
+      {
+        "url": "https://sergue212fbright.github.io/MailPush/fdroid/repo/index-v2.json",
+        "file": "index-v2.json",
+        "bytes": 7008,
+        "sha256": "75c9bbe08741456b68c8477e7280b53191a1963098bca09329818542ed1868cd"
+      },
+      {
+        "url": "https://sergue212fbright.github.io/MailPush/fdroid/repo/ch.protonmail.android.mailpush_1000024.apk",
+        "file": "ch.protonmail.android.mailpush_1000024.apk",
+        "bytes": 168739969,
+        "sha256": "222f8fff4638484bdbcddc3f9d27b60357c9f80385b7df284102eff929eb665f"
+      },
+      {
+        "url": "https://sergue212fbright.github.io/MailPush/fdroid/repo/ch.protonmail.android.mailpush_1000024_src.tar.gz",
+        "file": "ch.protonmail.android.mailpush_1000024_src.tar.gz",
+        "bytes": 5083166,
+        "sha256": "70ac8bd21a80f8bfc3a1c5c8322f53e06a8cb625c30ce855b0d335ae139a1b1d"
+      }
+    ],
+    "physical_phone_update_tested": false,
+    "independent_verifier_private_key_access": false
   },
   "scope_limits": [
-    "Local tooling has no accelerated emulator; this checkpoint does not claim Android device execution or a new production APK.",
-    "The visual approximation is owned locally and does not read Proton's app-only appearance override.",
+    "Local compilation and the separate GitHub API35 emulator/device gate passed. The signed production APK and custom repository were independently downloaded and checked; no physical GrapheneOS install/upgrade was performed.",
+    "The module owns its Android light/dark resource configuration and does not read Proton's app-only appearance preference.",
+    "Synthetic views prove these module layouts, not a real Proton account login or live notification delivery on the owner's phone.",
     "This is a public alpha implementation check, not an independent security audit."
-  ]
+  ],
+  "source_commit": "e0c88a1f7b52d3c2a8b5e552876a0b05d6b35715",
+  "github": {
+    "run_id": 40510425600,
+    "run_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40510425600",
+    "selected_version_code": 1000024,
+    "select": "passed",
+    "checks": "passed",
+    "device": "passed",
+    "production_build": "passed",
+    "signing": "passed",
+    "release_publication": "passed",
+    "fdroid_preparation": "passed",
+    "fdroid_signing": "passed",
+    "pages_deployment": "passed",
+    "jobs": [
+      {
+        "id": 122210560462,
+        "name": "select",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-27T13:15:23Z",
+        "completed_at": "2026-10-27T13:15:30Z"
+      },
+      {
+        "id": 122210637710,
+        "name": "device",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-27T13:15:32Z",
+        "completed_at": "2026-10-27T13:18:07Z"
+      },
+      {
+        "id": 122210637837,
+        "name": "build",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-27T13:15:33Z",
+        "completed_at": "2026-10-27T13:38:01Z"
+      },
+      {
+        "id": 122210638023,
+        "name": "checks",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-27T13:15:32Z",
+        "completed_at": "2026-10-27T13:17:25Z"
+      },
+      {
+        "id": 122222117795,
+        "name": "sign",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-27T13:38:05Z",
+        "completed_at": "2026-10-27T13:38:30Z"
+      },
+      {
+        "id": 122222384676,
+        "name": "publish",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-27T13:38:33Z",
+        "completed_at": "2026-10-27T13:38:55Z"
+      },
+      {
+        "id": 122222609687,
+        "name": "fdroid-repository / prepare",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-27T13:38:58Z",
+        "completed_at": "2026-10-27T13:40:44Z"
+      },
+      {
+        "id": 122223579791,
+        "name": "fdroid-repository / sign",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-27T13:40:48Z",
+        "completed_at": "2026-10-27T13:41:56Z"
+      },
+      {
+        "id": 122224210140,
+        "name": "fdroid-repository / deploy",
+        "status": "completed",
+        "conclusion": "success",
+        "started_at": "2026-10-27T13:42:00Z",
+        "completed_at": "2026-10-27T13:42:21Z"
+      },
+      {
+        "id": 122224448412,
+        "name": "failure-email",
+        "status": "completed",
+        "conclusion": "skipped",
+        "started_at": "2026-10-27T13:42:23Z",
+        "completed_at": "2026-10-27T13:42:22Z"
+      }
+    ]
+  }
 }
