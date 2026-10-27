@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Installation and troubleshooting guides
+    url: https://github.com/sergue212fbright/MailPush#start-here
+    about: Choose the Android, TrueNAS Apps, Docker Compose, or native installation guide.
+  - name: Report a security vulnerability privately
+    url: https://github.com/sergue212fbright/MailPush/security/advisories/new
+    about: Use private reporting for security findings; never post secrets or decrypted mail in a public issue.

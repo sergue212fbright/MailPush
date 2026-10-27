@@ -1,0 +1,56 @@
+name: Bug report
+description: Report an installation, notification, or update problem.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **This report will be public.** Do not include passwords, one-time pairing keys, subscription files, push endpoint URLs, email contents, private keys, or signing backups.
+        For a security vulnerability, use [private vulnerability reporting](https://github.com/sergue212fbright/MailPush/security/advisories/new) instead.
+        For setup help, first check the [installation guides](https://github.com/sergue212fbright/MailPush#start-here) and [troubleshooting](https://github.com/sergue212fbright/MailPush/blob/main/docs/TROUBLESHOOTING.md).
+  - type: dropdown
+    id: deployment
+    attributes:
+      label: Which part or deployment are you using?
+      options:
+        - Android app
+        - TrueNAS Apps manager
+        - Docker Compose
+        - Native Python connector
+        - Other or unsure
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Relevant versions
+      description: Include the app/release and OS or server versions you can find. Unknown is fine; do not include account details.
+      placeholder: "For example: APK 1000002; connector 0.3.0a1; TrueNAS 25.10; GrapheneOS"
+    validations:
+      required: true
+  - type: input
+    id: step
+    attributes:
+      label: Which step or action failed?
+      description: Name the guide and step, or the action you were taking.
+      placeholder: "For example: TrueNAS guide, pairing import; or updating an existing APK"
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+      description: Briefly describe what should have happened, what happened instead, and how to reproduce it.
+      placeholder: |
+        Expected:
+        Actual:
+        Steps to reproduce:
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Minimal redacted error output (optional)
+      description: A few relevant error-code lines are enough. Review them first; do not paste full configs, subscription endpoints, credentials, pairing keys, or mail contents.
+      render: text
+      placeholder: "mailbox=personal code=imap_LoginError"
