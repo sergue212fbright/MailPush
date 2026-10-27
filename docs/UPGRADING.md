@@ -25,7 +25,7 @@ needs both opt-ins:
 1. Edit the **actual host file mounted as `/config/config.toml`**. In the existing
    mailbox section, set `preview = true`.
 2. Restart only the connector so it reloads the configuration.
-3. On the phone, open **Settings → Encrypted push (UnifiedPush)**, find the
+3. On the phone, open **Settings → App customization → Encrypted push**, find the
    paired profile and enable **Show sender and subject**.
 4. Send a new unread email. Synthetic test alerts stay generic.
 

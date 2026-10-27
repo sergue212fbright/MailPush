@@ -1,0 +1,15 @@
+<resources>
+    <!-- Local presentation tokens. Never inherit the host's private resource IDs. -->
+    <color name="mailpush_background">#F5F5FA</color>
+    <color name="mailpush_surface">#FFFFFF</color>
+    <color name="mailpush_accent">#6D4AFF</color>
+    <color name="mailpush_accent_soft">#EDE8FF</color>
+    <color name="mailpush_on_accent">#FFFFFF</color>
+    <color name="mailpush_text">#232334</color>
+    <color name="mailpush_muted">#646476</color>
+    <color name="mailpush_border">#DFDFE9</color>
+    <color name="mailpush_danger">#B3263A</color>
+    <color name="mailpush_disabled">#E5E5ED</color>
+    <color name="mailpush_disabled_text">#77778A</color>
+    <color name="mailpush_ripple">#286D4AFF</color>
+</resources>

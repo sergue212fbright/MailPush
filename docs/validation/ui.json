@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "status": "LOCAL_VALIDATION_AWAITING_GITHUB_DEVICE_AND_RELEASE",
+  "base_commit": "d92d1e924937f113fe640abebb43df2e80141432",
+  "observed_at_utc": "2026-10-27T13:14:40.937825+00:00",
+  "module_sha256": "2479f3f03ef0819122c404d9f94d25b644b0298721cac5f305e3b3edf670abf9",
+  "scope": "Independent push settings presentation and the existing host settings entry; no profile schema, crypto, transport, adapter or Host API changes.",
+  "boundaries": {
+    "new_runtime_dependencies": false,
+    "new_host_callbacks": false,
+    "new_module_imports_from_proton": false,
+    "adapter_changed": false,
+    "saved_pairing_migration_required": false,
+    "theme_source": "Module-owned framework styles/colors, selected by Android system day/night mode"
+  },
+  "local": {
+    "maintenance_tests": {
+      "passed": 101
+    },
+    "module_release_compile": "passed",
+    "jvm_tests": {
+      "passed": 40,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "lint": {
+      "status": "passed",
+      "errors": 0,
+      "warnings": 2,
+      "warning_scope": "Display formatting: protocol mailbox default and selectable key/fingerprint text"
+    },
+    "android_instrumentation_apk_compile": "passed",
+    "android_instrumentation_apk_packaging": "passed",
+    "strict_existing_settings_hook_patch_check": "passed against pinned official source",
+    "instrumentation_apk_sha256": "fa11b263ea8eade1bb2cbe4083864ee409d73c9d493db7d94c38c65116f0a2fd"
+  },
+  "android_ui_gate": {
+    "expected_tests": 13,
+    "execution": "pending GitHub accelerated API35 emulator",
+    "new_checks": [
+      "Paired screen keeps re-pairing secondary; preview opt-in defaults/persistence across Activity recreation; secure window retained; real system light/dark resources",
+      "Unpaired request/receipt steps appear in order and do not enable previews",
+      "Paused settings hide all account UI"
+    ],
+    "visual_receipts": "Synthetic fixture View.draw only; FLAG_SECURE remains set; no real mail/accounts/endpoints captured"
+  },
+  "production_release": {
+    "status": "not_yet_started",
+    "new_apk_verified": false,
+    "new_fdroid_feed_verified": false
+  },
+  "scope_limits": [
+    "Local tooling has no accelerated emulator; this checkpoint does not claim Android device execution or a new production APK.",
+    "The visual approximation is owned locally and does not read Proton's app-only appearance override.",
+    "This is a public alpha implementation check, not an independent security audit."
+  ]
+}

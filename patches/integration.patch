@@ -160,22 +160,37 @@ index b3455ed..1bb4d2f 100644
      debugImplementation(libs.bundles.compose.debug)
  
 diff --git a/mail-settings/presentation/src/main/kotlin/ch/protonmail/android/mailsettings/presentation/appsettings/AppSettingsScreen.kt b/mail-settings/presentation/src/main/kotlin/ch/protonmail/android/mailsettings/presentation/appsettings/AppSettingsScreen.kt
-index af195df..491dfe7 100644
+index af195df..6ec312c 100644
 --- a/mail-settings/presentation/src/main/kotlin/ch/protonmail/android/mailsettings/presentation/appsettings/AppSettingsScreen.kt
 +++ b/mail-settings/presentation/src/main/kotlin/ch/protonmail/android/mailsettings/presentation/appsettings/AppSettingsScreen.kt
-@@ -123,6 +123,16 @@ private fun AppSettingsScreenContent(
+@@ -123,6 +123,31 @@ private fun AppSettingsScreenContent(
                      onNotificationClick = { launchNotificationSettingsIntent(context) }
                  )
  
-+                Spacer(modifier = Modifier.height(ProtonDimens.Spacing.Standard))
-+                ProtonAppSettingsItemNorm(
-+                    name = "Encrypted push (UnifiedPush)",
-+                    hint = "End-to-end encrypted alerts",
-+                    icon = {},
-+                    onClick = {
-+                        context.startActivity(Intent(context, app.mailpush.companion.MainActivity::class.java))
-+                    }
-+                )
++                Spacer(modifier = Modifier.height(ProtonDimens.Spacing.ExtraLarge))
++                Card(
++                    modifier = Modifier.fillMaxWidth(),
++                    shape = ProtonTheme.shapes.extraLarge,
++                    elevation = CardDefaults.cardElevation(),
++                    colors = CardDefaults.cardColors().copy(
++                        containerColor = ProtonTheme.colors.backgroundInvertedSecondary
++                    )
++                ) {
++                    ProtonAppSettingsItemInvert(
++                        name = context.getString(app.mailpush.companion.R.string.mailpush_settings_title),
++                        hint = context.getString(app.mailpush.companion.R.string.mailpush_settings_summary),
++                        icon = {
++                            ProtonMainSettingsIcon(
++                                iconRes = R.drawable.ic_proton_chevron_right,
++                                contentDescription = "",
++                                tint = ProtonTheme.colors.iconHint
++                            )
++                        },
++                        onClick = {
++                            context.startActivity(Intent(context, app.mailpush.companion.MainActivity::class.java))
++                        }
++                    )
++                }
 +
                  Spacer(modifier = Modifier.height(ProtonDimens.Spacing.ExtraLarge))
  

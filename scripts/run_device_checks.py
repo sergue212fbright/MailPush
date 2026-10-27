@@ -163,6 +163,22 @@ def main() -> int:
         output, code = capture("instrumentation", prefix + ["shell", "am", "instrument", "-w", "-r",
                                "-e", "class", TEST_CLASS, RUNNER], 600, check=False)
         result.update(evaluate_instrumentation(output, expected, code))
+        if result["status"] == "passed":
+            # The UI test draws only its synthetic account fixture into these
+            # exact files. Never collect screenshots of a real mail app/window,
+            # disable FLAG_SECURE, or pull arbitrary device directories.
+            previews = []
+            for appearance in ("light", "dark"):
+                name = "paired-" + appearance + ".png"
+                path = out / name
+                capture("ui-preview-" + appearance, prefix + ["pull",
+                        "/sdcard/Android/data/" + TEST_PACKAGE + "/files/ui-preview/" + name,
+                        str(path)], 30)
+                with path.open("rb") as stream:
+                    digest = hashlib.file_digest(stream, "sha256").hexdigest()
+                previews.append({"file": name, "sha256": digest, "bytes": path.stat().st_size,
+                                 "synthetic_data_only": True})
+            result["ui_previews"] = previews
     except (DeviceCheckError, OSError, ValueError) as error:
         # Preserve partial method results on timeout without turning them into
         # passes. The transcript is synthetic test output, never a real inbox.

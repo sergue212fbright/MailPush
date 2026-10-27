@@ -6,6 +6,35 @@ assemble a complete Android app from an exact official commit plus our additions
 `module-check` alone builds a library, not an installable Proton Mail app. Do not
 run the official reference branch's build and assume it contains MailPush.
 
+## Keep the settings UI independent
+
+The receiver's settings screen uses Android framework views and module-owned
+resources. It deliberately does not import Proton's Compose theme, design
+components or internal settings repositories:
+
+| File | Responsibility |
+| --- | --- |
+| `modules/mailpush/src/main/java/app/mailpush/companion/MainActivity.java` | Authorized settings flow, account cards, pairing document actions and preview preference. |
+| `modules/mailpush/src/main/java/app/mailpush/companion/SettingsUi.java` | Presentation helpers for spacing, cards, text, buttons and fields; no account, key or transport logic. |
+| `modules/mailpush/src/main/res/values/` and `values-night/` | Module-prefixed UI strings, palette and framework light/dark themes. |
+| `patches/integration.patch` | The existing host settings entry launches the module activity; its card uses the host's existing settings components. |
+| `adapter/` | Proton-specific account/authorization/navigation implementation behind the existing `MailPushIntegration.Host` contract. |
+
+Appearance follows Android's system light/dark setting. Following Proton's own
+app-only appearance override would require another upstream dependency, so this
+screen does not read that preference. Routine styling changes should stay within
+the module's presentation files, without expanding the host contract, changing
+transport code or adding a UI dependency. The standalone module checks below
+compile this screen without Proton's source on its classpath.
+
+Keep account data behind the host authorization callback, hide it when the
+activity pauses, dismiss private dialogs, and retain `FLAG_SECURE`. Pairing
+document results must still wait for authorization after returning from a file
+picker. UI changes must preserve the synchronized preview opt-out and alert
+cancellation path.
+
+## Build prerequisites
+
 Prerequisites: Python 3.11+ (CI uses 3.12), git, JDK 17, Android SDK command-line
 tools and enough RAM/disk for a full Proton release/R8 build. Run from repo root.
 `ANDROID_HOME` must name your SDK. Do not expose signing/SMTP secrets to Gradle.

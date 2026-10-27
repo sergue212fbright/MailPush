@@ -27,9 +27,11 @@ no connector or Bridge image rebuild is required.
    For a normal Compose deployment, run `docker compose restart connector` from
    that same Compose project. Bridge can keep running; its account loading need
    not restart with this configuration change.
-4. On the phone, open **Settings → Encrypted push**, find the paired profile and
-   enable **Show sender and subject**. The setup screen requires the host's normal
-   authorization. No new pairing is needed for this preference.
+4. On the phone, open **Settings → App customization → Encrypted push**, find
+   the paired account's card and enable **Show sender and subject**. Tap **About
+   notification previews** for the privacy explanation. The setup screen requires
+   the host's normal authorization. No new pairing is needed for this preference;
+   **Pair again** under **Account options** is a separate repair action.
 5. Send a new email and leave it unread while testing. Previously processed
    events and synthetic test alerts do not become email previews.
 

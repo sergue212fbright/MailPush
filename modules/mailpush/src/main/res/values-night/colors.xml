@@ -1,0 +1,14 @@
+<resources>
+    <color name="mailpush_background">#222231</color>
+    <color name="mailpush_surface">#2B2B38</color>
+    <color name="mailpush_accent">#A49EFF</color>
+    <color name="mailpush_accent_soft">#39344F</color>
+    <color name="mailpush_on_accent">#211B41</color>
+    <color name="mailpush_text">#E8E8EC</color>
+    <color name="mailpush_muted">#B9B9C4</color>
+    <color name="mailpush_border">#41414F</color>
+    <color name="mailpush_danger">#FFADB5</color>
+    <color name="mailpush_disabled">#3B3B49</color>
+    <color name="mailpush_disabled_text">#A4A4B5</color>
+    <color name="mailpush_ripple">#38A49EFF</color>
+</resources>

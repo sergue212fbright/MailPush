@@ -5,6 +5,16 @@ not an independent security audit, a hardware-backed Keystore attestation or
 proof of every phone delivery scenario. `tests.json` keeps the earlier manually
 signed alpha.2 results separate from the later GitHub validation run.
 
+## Independent push settings UI
+
+[`ui.json`](ui.json) records the settings cleanup separately from older release
+receipts. Module-owned Android framework styling and guided pairing replace the
+previous settings screen; the existing host entry uses the adjacent settings'
+card style. The module still compiles without Proton's source or design libraries.
+The receipt distinguishes local checks from the pending Android device and full
+release gates. Synthetic light/dark visual fixtures keep `FLAG_SECURE` enabled
+and contain no real mail, account or pairing data.
+
 ## Automatic publishing and dependency maintenance repair
 
 [`actions-repair.json`](actions-repair.json) records the repair of the missing

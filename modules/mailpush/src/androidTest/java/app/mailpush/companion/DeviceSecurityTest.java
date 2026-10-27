@@ -4,16 +4,26 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.UiModeManager;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.os.Build;
 import android.os.SystemClock;
 import android.text.Spanned;
+import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.ScrollView;
 import androidx.lifecycle.Lifecycle;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -267,6 +277,9 @@ public class DeviceSecurityTest {
             scenario.moveToState(Lifecycle.State.STARTED);
             scenario.onActivity(activity -> {
                 try {
+                    ViewGroup content = activity.findViewById(android.R.id.content);
+                    assertEquals("Paused settings must hide the entire account UI",
+                        View.INVISIBLE, content.getChildAt(0).getVisibility());
                     assertFalse("A stale setup callback must not enable previews after pause",
                         activity.setPreviewsEnabled(instance, true));
                     assertFalse(NotificationPreview.enabled(new Vault(context).get(instance)));
@@ -274,6 +287,130 @@ public class DeviceSecurityTest {
             });
         } finally {
             hostField.set(null, previous);
+        }
+    }
+
+    @Test public void pairedSettingsKeepRepairToolsSecondaryAndPersistPreviewChoice() throws Exception {
+        Field hostField = MailPushIntegration.class.getDeclaredField("host");
+        hostField.setAccessible(true);
+        MailPushIntegration.Host previous = (MailPushIntegration.Host) hostField.get(null);
+        installPreviewTestHost();
+        UiModeManager mode = context.getSystemService(UiModeManager.class);
+        try {
+            // These are actual module views on Android, using synthetic account
+            // data only. Switching this disposable test app's appearance never
+            // changes a real user's system theme or a Proton host preference.
+            for (boolean dark : new boolean[]{false, true}) {
+                if (Build.VERSION.SDK_INT >= 31) {
+                    mode.setApplicationNightMode(dark ? UiModeManager.MODE_NIGHT_YES : UiModeManager.MODE_NIGHT_NO);
+                }
+                String instance = UUID.randomUUID().toString();
+                Vault vault = new Vault(context);
+                vault.put(previewProfile(instance).put("label", "alex@example.test")
+                    .put("subscription", new JSONObject().put("endpoint", "https://push.example.test/synthetic"))
+                    .put("last_alert", 1793059200L));
+                try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+                    InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+                    scenario.onActivity(activity -> {
+                        if (Build.VERSION.SDK_INT >= 31) {
+                            int actual = activity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+                            assertEquals(dark ? Configuration.UI_MODE_NIGHT_YES : Configuration.UI_MODE_NIGHT_NO, actual);
+                        }
+                        assertNotEquals("The refreshed UI must retain screenshot protection", 0,
+                            activity.getWindow().getAttributes().flags & WindowManager.LayoutParams.FLAG_SECURE);
+                        assertNotNull(activity.findViewById(android.R.id.content).findViewWithTag("mailpush.back"));
+                        CompoundButton previews = activity.findViewById(android.R.id.content)
+                            .findViewWithTag("mailpush.preview." + instance);
+                        assertNotNull("Preview choice must be a native accessible toggle", previews);
+                        assertFalse("Pairing must not opt the user into mail previews", previews.isChecked());
+                        View export = activity.findViewById(android.R.id.content)
+                            .findViewWithTag("mailpush.export." + instance);
+                        assertTrue("A paired account must not present re-pairing as its primary action",
+                            export == null || !export.isShown());
+                        captureSyntheticSettings(activity, dark ? "paired-dark.png" : "paired-light.png");
+                        previews.performClick();
+                        assertTrue(previews.isChecked());
+                        View options = activity.findViewById(android.R.id.content)
+                            .findViewWithTag("mailpush.options." + instance);
+                        assertNotNull(options);
+                        options.performClick();
+                        View repair = activity.findViewById(android.R.id.content)
+                            .findViewWithTag("mailpush.export." + instance);
+                        assertNotNull("Re-pairing must still be available under account options", repair);
+                        assertTrue(repair.isShown());
+                    });
+                    scenario.recreate();
+                    scenario.onActivity(activity -> {
+                        CompoundButton previews = activity.findViewById(android.R.id.content)
+                            .findViewWithTag("mailpush.preview." + instance);
+                        assertTrue("The actual UI choice must survive Activity recreation", previews.isChecked());
+                    });
+                    assertTrue(NotificationPreview.enabled(new Vault(context).get(instance)));
+                } finally {
+                    vault.remove(instance);
+                }
+            }
+        } finally {
+            if (Build.VERSION.SDK_INT >= 31) mode.setApplicationNightMode(UiModeManager.MODE_NIGHT_AUTO);
+            hostField.set(null, previous);
+        }
+    }
+
+    @Test public void unpairedSettingsShowTheNextPairingStepWithoutEnablingPreviews() throws Exception {
+        Field hostField = MailPushIntegration.class.getDeclaredField("host");
+        hostField.setAccessible(true);
+        MailPushIntegration.Host previous = (MailPushIntegration.Host) hostField.get(null);
+        installPreviewTestHost();
+        String instance = UUID.randomUUID().toString();
+        Vault vault = new Vault(context);
+        JSONObject profile = previewProfile(instance).put("paired", false)
+            .put("subscription", new JSONObject().put("endpoint", "https://push.example.test/synthetic"));
+        vault.put(profile);
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                View content = activity.findViewById(android.R.id.content);
+                View export = content.findViewWithTag("mailpush.export." + instance);
+                assertNotNull(export);
+                assertTrue("The first step must offer a request before asking for a receipt", export.isShown());
+                assertNull(content.findViewWithTag("mailpush.import." + instance));
+                assertNull(content.findViewWithTag("mailpush.key." + instance));
+            });
+            // Model a completed request export without opening a real document
+            // provider or creating transport keys: crypto has its own tests.
+            profile.put("pending_key", "SYNTHETIC-ONE-TIME-KEY");
+            vault.put(profile);
+            scenario.recreate();
+            scenario.onActivity(activity -> {
+                View content = activity.findViewById(android.R.id.content);
+                assertTrue(content.findViewWithTag("mailpush.import." + instance).isShown());
+                assertTrue(content.findViewWithTag("mailpush.key." + instance).isShown());
+                CompoundButton previews = content.findViewWithTag("mailpush.preview." + instance);
+                assertFalse(previews.isChecked());
+            });
+            assertFalse(NotificationPreview.enabled(new Vault(context).get(instance)));
+        } finally {
+            vault.remove(instance);
+            hostField.set(null, previous);
+        }
+    }
+
+    private void captureSyntheticSettings(Activity activity, String name) {
+        // View.draw renders the synthetic test fixture, not a screenshot of a
+        // private window. FLAG_SECURE remains enabled throughout this test.
+        View view = activity.findViewById(android.R.id.content);
+        assertTrue("A visual receipt requires measured Android views", view.getWidth() > 0 && view.getHeight() > 0);
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        try {
+            view.draw(new Canvas(bitmap));
+            File directory = new File(context.getExternalFilesDir(null), "ui-preview");
+            assertTrue(directory.isDirectory() || directory.mkdirs());
+            try (FileOutputStream output = new FileOutputStream(new File(directory, name))) {
+                assertTrue(bitmap.compress(Bitmap.CompressFormat.PNG, 100, output));
+            }
+        } catch (java.io.IOException error) {
+            throw new AssertionError("Could not retain synthetic UI receipt", error);
+        } finally {
+            bitmap.recycle();
         }
     }
 

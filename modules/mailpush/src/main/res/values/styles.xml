@@ -1,10 +1,15 @@
 <resources>
-    <style name="MailPushTheme" parent="android:style/Theme.Material.NoActionBar">
+    <!-- Framework widgets keep this screen independent of Proton's Compose theme. -->
+    <style name="MailPushTheme" parent="android:style/Theme.Material.Light.NoActionBar">
         <item name="android:fontFamily">sans</item>
-        <item name="android:colorAccent">#3DD6C3</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowBackground">#0F1726</item>
-        <item name="android:navigationBarColor">#0F1726</item>
-        <item name="android:statusBarColor">#0F1726</item>
+        <item name="android:colorAccent">@color/mailpush_accent</item>
+        <item name="android:colorControlNormal">@color/mailpush_muted</item>
+        <item name="android:textColorPrimary">@color/mailpush_text</item>
+        <item name="android:textColorSecondary">@color/mailpush_muted</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowBackground">@color/mailpush_background</item>
+        <item name="android:navigationBarColor">@color/mailpush_background</item>
+        <item name="android:statusBarColor">@color/mailpush_background</item>
     </style>
 </resources>
