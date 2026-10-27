@@ -42,7 +42,7 @@ jobs:
           else
             python3 scripts/upstream_check.py
           fi
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: selection
           path: .work/selection.json
@@ -114,7 +114,7 @@ jobs:
             python3 ../scripts/run_device_checks.py
       - name: Retain Android security gate receipts
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: android-device-checks
           path: .work/device-checks/
@@ -170,7 +170,7 @@ jobs:
           PY
           python3 scripts/audit_apk.py .work/unsigned/unsigned.apk --aapt "$ANDROID_HOME/build-tools/36.0.0/aapt" --version-code "$VERSION_CODE"
           python3 scripts/bundle_sources.py .work/proton --output .work/unsigned/source.tar.gz
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: unsigned-build
           path: .work/unsigned/*
@@ -209,7 +209,7 @@ jobs:
         run: |
           python3 scripts/sign_apk.py .work/unsigned/unsigned.apk --output .work/signed/MailPush.apk --build-tools "$ANDROID_HOME/build-tools/36.0.0" --version-code "$VERSION_CODE"
           python3 scripts/stage_release.py --input .work/unsigned --output .work/signed --build-tools "$ANDROID_HOME/build-tools/36.0.0" --version-code "$VERSION_CODE"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: signed-release
           path: .work/signed/*

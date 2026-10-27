@@ -67,14 +67,14 @@ jobs:
         # production key is supplied, including during bootstrap validation.
         run: python scripts/sign_fdroid.py --verify-only --input .work/fdroid-prepared --output .work/fdroid-preflight --build-tools "$ANDROID_HOME/build-tools/36.0.0"
       - name: Retain keyless verification receipt
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: fdroid-preflight
           path: .work/fdroid-preflight/manifest.json
           include-hidden-files: false
           if-no-files-found: error
           retention-days: 14
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: fdroid-prepared
           path: .work/fdroid-prepared/
@@ -139,7 +139,7 @@ jobs:
           path: .work/fdroid-signed/site
           retention-days: 3
       - name: Retain repository verification receipt
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: fdroid-verification
           path: .work/fdroid-signed/manifest.json
