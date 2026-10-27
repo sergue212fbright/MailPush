@@ -475,8 +475,18 @@ print(json.dumps({"v1_signature_and_pin": "passed", "v2_entry_signature_and_pin"
 
 def signing_material() -> tuple[bytes, str]:
     # This is intentionally called only after complete artifact/APK checks.
-    key = base64.b64decode(os.environ["FDROID_KEYSTORE_BASE64"], validate=True)
-    password = os.environ["FDROID_KEYSTORE_PASSWORD"]
+    encoded = os.environ.get("FDROID_KEYSTORE_BASE64", "")
+    password = os.environ.get("FDROID_KEYSTORE_PASSWORD", "")
+    if not encoded or not password:
+        raise SigningError(
+            "Missing repository signing secrets: configure both FDROID_KEYSTORE_BASE64 "
+            "and FDROID_KEYSTORE_PASSWORD in mailpush-fdroid and explicitly pass both "
+            "names when calling the reusable workflow"
+        )
+    try:
+        key = base64.b64decode(encoded, validate=True)
+    except (ValueError, UnicodeError):
+        raise SigningError("Invalid repository signing configuration") from None
     if not 128 <= len(key) <= 100_000 or not password or any(c in password for c in "\r\n\0"):
         raise SigningError("Invalid repository signing configuration")
     return key, password

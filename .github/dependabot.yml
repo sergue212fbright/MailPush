@@ -4,14 +4,39 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 1
+    groups:
+      workflow-actions:
+        patterns: ['*']
   - package-ecosystem: gradle
     directory: /module-check
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 2
+    groups:
+      android-libraries:
+        patterns: ['*']
+        exclude-patterns: ['gradle-wrapper', 'com.android.library', 'com.android.tools.build:gradle']
+      android-build-tools:
+        patterns: ['gradle-wrapper', 'com.android.library', 'com.android.tools.build:gradle']
+    # Toolchain major upgrades require a coordinated Android/Gradle migration.
+    ignore:
+      - dependency-name: gradle-wrapper
+        update-types: ['version-update:semver-major']
+      - dependency-name: com.android.library
+        update-types: ['version-update:semver-major']
+      - dependency-name: com.android.tools.build:gradle
+        update-types: ['version-update:semver-major']
   - package-ecosystem: pip
     directory: /fdroid
     schedule:
       interval: monthly
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 1
+    groups:
+      fdroid-tooling:
+        patterns: ['*']
+    # fdroidserver 2.4.5 requires ruamel.yaml >=0.15,<0.17.22.
+    # Revisit this constraint together with an fdroidserver upgrade.
+    ignore:
+      - dependency-name: ruamel-yaml
+        versions: ['>=0.17.22']

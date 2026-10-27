@@ -37,6 +37,51 @@ def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+class SigningConfigurationTests(unittest.TestCase):
+    def test_missing_or_empty_secret_reports_the_workflow_handoff(self):
+        complete = {
+            "FDROID_KEYSTORE_BASE64": base64.b64encode(b"SYNTHETIC KEY" * 20).decode(),
+            "FDROID_KEYSTORE_PASSWORD": "SYNTHETIC PASSWORD",
+        }
+        for name in complete:
+            for value in (None, ""):
+                env = dict(complete)
+                if value is None:
+                    env.pop(name)
+                else:
+                    env[name] = value
+                with self.subTest(name=name, value=value), mock.patch.dict(os.environ, env, clear=True):
+                    with self.assertRaises(signer.SigningError) as caught:
+                        signer.signing_material()
+                    self.assertIn("Missing repository signing secrets", str(caught.exception))
+                    self.assertIn("reusable workflow", str(caught.exception))
+                    for secret in complete.values():
+                        self.assertNotIn(secret, str(caught.exception))
+
+    def test_malformed_key_is_rejected_without_echoing_it(self):
+        for encoded in ("SYNTHETIC INVALID KEY", "SYNTHETIC-KEY-\u2603"):
+            with self.subTest(encoded=encoded), mock.patch.dict(os.environ, {
+                "FDROID_KEYSTORE_BASE64": encoded,
+                "FDROID_KEYSTORE_PASSWORD": "SYNTHETIC PASSWORD",
+            }, clear=True):
+                with self.assertRaises(signer.SigningError) as caught:
+                    signer.signing_material()
+                self.assertNotIn(encoded, str(caught.exception))
+
+    def test_valid_material_is_returned_but_invalid_passwords_are_rejected(self):
+        key = b"SYNTHETIC KEY" * 20
+        for password in ("SYNTHETIC PASSWORD", "SYNTHETIC\nPASSWORD", "SYNTHETIC\rPASSWORD"):
+            with self.subTest(password=password), mock.patch.dict(os.environ, {
+                "FDROID_KEYSTORE_BASE64": base64.b64encode(key).decode(),
+                "FDROID_KEYSTORE_PASSWORD": password,
+            }, clear=True):
+                if password == "SYNTHETIC PASSWORD":
+                    self.assertEqual((key, password), signer.signing_material())
+                else:
+                    with self.assertRaises(signer.SigningError):
+                        signer.signing_material()
+
+
 class SigningFixture(unittest.TestCase):
     def setUp(self):
         self.temporary = tempfile.TemporaryDirectory()

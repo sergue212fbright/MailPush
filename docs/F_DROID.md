@@ -128,6 +128,7 @@ change with the maintainer before accepting it.
 | --- | --- |
 | Repository missing, empty or HTTP 404 | Use the complete `/fdroid/repo/` URL above, enable the repository and refresh. A GitHub project homepage or release page is not the repository index. Check the most recent repository-publication workflow if the address fails. |
 | Latest APK not shown yet | Compare GitHub Releases with the repository's last successful publication. Refresh the enabled source; GitHub Pages and client caches can delay visibility. Check whether the installed versionCode is already as new, and whether the client filters alpha versions. |
+| Automatic publication reports missing repository signing secrets | Maintainers: check both secrets in `mailpush-fdroid` and the explicit two-secret mapping from `build.yml` to `fdroid.yml`. A successful standalone manual run does not test that reusable-workflow handoff. |
 | Repository fingerprint or index signature error | Stop. Confirm the URL and fingerprint from this project's trusted documentation. Do not disable signature checking or accept a new key merely to clear the error. Report the error without private files. |
 | Android says update is incompatible | Confirm the app ID and APK certificate above. A differently signed build or official Proton Mail cannot be updated by this APK. Keep the existing app installed while investigating. |
 | Android asks for install permission | Allow app installation for your chosen F-Droid client, then retry the installation and approve Android's prompt. Menu names vary by Android version. |
@@ -161,6 +162,13 @@ can be started manually, and refreshes weekly even without a new APK.
 
 Configure these values through GitHub's private settings. Never paste their
 secret contents into an issue, terminal log or chat:
+
+The automatic release workflow explicitly passes only the two index-secret
+names declared by `fdroid.yml`'s `workflow_call`. GitHub requires that handoff
+even when their values are held in the called job's protected environment.
+The signing job still uses `mailpush-fdroid`; preparation and deployment do not
+receive the key in their process environment. Do not replace the mapping with
+`secrets: inherit`, which would unnecessarily forward other release secrets.
 
 | Setting | Location and purpose |
 | --- | --- |

@@ -18,6 +18,17 @@ cd .work/proton
 ./gradlew --no-daemon :app:assembleProdRelease
 ```
 
+CI gives the full Proton build a 6 GiB Gradle heap, limits it to two workers and
+disables parallel project execution. Proton's default 4 GiB heap exhausted Java
+memory when R8 and Kotlin lint ran together. On a machine with enough RAM, use
+the same bounded command as CI:
+
+```sh
+./gradlew --no-daemon --no-parallel --max-workers=2 \
+  '-Dorg.gradle.jvmargs=-Xmx6g -XX:MaxMetaspaceSize=1g -Dfile.encoding=UTF-8' \
+  '-Pkotlin.daemon.jvmargs=-Xmx1536m' :app:assembleProdRelease
+```
+
 `--revision` accepts a full 40-character commit from the fixed official repository.
 Preparation refuses an existing destination unless `--existing` is deliberate; it
 requires a clean selected checkout and refuses an existing receiver module. Use
@@ -81,3 +92,32 @@ and release metadata. Bit-for-bit reproducibility has not been demonstrated.
 
 The signed APK and a source archive are distinct artifacts. Never run build code
 from an extracted upstream archive on the runner that holds your signing key.
+
+## Dependency updates
+
+Dependabot groups workflow actions, Android libraries, Android build tools and
+F-Droid tooling into separate reviewable pull requests. It does not merge them.
+The module check currently uses the tested Gradle 8.13 / Android Gradle Plugin
+8.13.2 pair. Major toolchain migrations require manual compatibility review.
+F-Droid server 2.4.5 requires `ruamel.yaml>=0.15,<0.17.22`; upgrade the server and
+its complete lock together before relaxing that bound.
+
+Gradle verifies dependencies against `module-check/gradle/verification-metadata.xml`.
+A bot changing a version alone cannot approve the new artifacts. For a reviewed
+library update, resolve and test all affected configurations in an environment
+without production secrets:
+
+```sh
+cd module-check
+./gradlew --no-daemon --write-verification-metadata sha256 \
+  :mailpush:assembleRelease :mailpush:testReleaseUnitTest \
+  :mailpush:lintRelease :mailpush:assembleDebugAndroidTest
+```
+
+Inspect the metadata diff and independently compare new hashes with the exact
+artifacts from official Google Maven / Maven Central. Commit the verified hashes
+with the version change, then rerun those tasks without the write flag. Never
+disable dependency verification to make a pull request green. Runtime library
+changes also require the Android device gate and full Proton build before a
+signed release. Python F-Droid lock changes must retain `--require-hashes` and
+pass its complete installation and keyless repository preflight.
