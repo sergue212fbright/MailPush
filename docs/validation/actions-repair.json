@@ -1,0 +1,204 @@
+{
+  "schema": 1,
+  "status": "PASSED_AUTOMATIC_APK_AND_FDROID_PUBLICATION",
+  "repository": "sergue212fbright/MailPush",
+  "fix_commit": "b2a5c15b52cfcff15ea71848720a0cf54f11e1dd",
+  "run_id": 40491746791,
+  "run_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40491746791",
+  "repairs": {
+    "feed_secrets": "Explicit two-secret reusable-workflow contract; values remain in the protected mailpush-fdroid environment.",
+    "full_build_memory": {
+      "gradle_heap": "6 GiB",
+      "metaspace_cap": "1 GiB",
+      "kotlin_daemon_heap": "1536 MiB",
+      "workers": 2,
+      "parallel_projects": false
+    },
+    "dependency_updates": {
+      "work-runtime": "2.12.0",
+      "test_json": "20260814",
+      "test_tink": "1.24.0"
+    },
+    "dependency_verification": "Seven new artifacts independently downloaded from official Google Maven / Maven Central and compared with their published SHA-256 checksums; existing verification remains enabled.",
+    "dependabot": "Grouped proposals by component; Gradle/AGP major migrations need manual review; ruamel-yaml stays below 0.17.22 while fdroidserver 2.4.5 requires that range."
+  },
+  "local_validation": {
+    "release_feed_tests": 101,
+    "connector_tests": 47,
+    "actionlint": "1.7.12, zero findings",
+    "diff_check": "passed"
+  },
+  "official_artifact_checksums": [
+    {
+      "group": "androidx.work",
+      "name": "work-runtime",
+      "version": "2.12.0",
+      "file": "work-runtime-2.12.0.pom",
+      "sha256": "68544d4ed7062252edc5cbc2540b3e071a31ab045baea017c6684c150d357379",
+      "official_checksum": "sha256",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/work/work-runtime/2.12.0/work-runtime-2.12.0.pom"
+    },
+    {
+      "group": "androidx.work",
+      "name": "work-runtime",
+      "version": "2.12.0",
+      "file": "work-runtime-2.12.0.module",
+      "sha256": "94580b65309cc319020fc18bb4136b035aea2e0c20a448a3df7f7b258a90e296",
+      "official_checksum": "sha256",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/work/work-runtime/2.12.0/work-runtime-2.12.0.module"
+    },
+    {
+      "group": "androidx.work",
+      "name": "work-runtime",
+      "version": "2.12.0",
+      "file": "work-runtime-2.12.0.aar",
+      "sha256": "a967c776d2c2ff9a7a541679d2fb51cefdc78d4010fcf68f3fdd4c57c29e89dc",
+      "official_checksum": "sha256",
+      "url": "https://dl.google.com/dl/android/maven2/androidx/work/work-runtime/2.12.0/work-runtime-2.12.0.aar"
+    },
+    {
+      "group": "com.google.crypto.tink",
+      "name": "tink",
+      "version": "1.24.0",
+      "file": "tink-1.24.0.pom",
+      "sha256": "0b2bf071a1f09a8132d29396e22b6bb69a5064885cfcd14ab615d6a8bbd4eae0",
+      "official_checksum": "sha256",
+      "url": "https://repo.maven.apache.org/maven2/com/google/crypto/tink/tink/1.24.0/tink-1.24.0.pom"
+    },
+    {
+      "group": "com.google.crypto.tink",
+      "name": "tink",
+      "version": "1.24.0",
+      "file": "tink-1.24.0.jar",
+      "sha256": "463bb0cddc8131379c4f87d8185a0314f651286c28e52a8dea5df206d8a3e175",
+      "official_checksum": "sha256",
+      "url": "https://repo.maven.apache.org/maven2/com/google/crypto/tink/tink/1.24.0/tink-1.24.0.jar"
+    },
+    {
+      "group": "org.json",
+      "name": "json",
+      "version": "20260814",
+      "file": "json-20260814.pom",
+      "sha256": "61937e25d261f93d16e8d9f5ccdb1b700780ec1ccb4876444654736628c62095",
+      "official_checksum": "sha256",
+      "url": "https://repo.maven.apache.org/maven2/org/json/json/20260814/json-20260814.pom"
+    },
+    {
+      "group": "org.json",
+      "name": "json",
+      "version": "20260814",
+      "file": "json-20260814.jar",
+      "sha256": "7dd2de1533e766e2b6c07d8194da85145ad313a167a4760050f5c9b6839604fe",
+      "official_checksum": "sha256",
+      "url": "https://repo.maven.apache.org/maven2/org/json/json/20260814/json-20260814.jar"
+    }
+  ],
+  "github_validation": {
+    "module_assembly_unit_tests_lint_and_crypto_interop": "passed",
+    "device_gate": "passed; 11 required methods, zero skips",
+    "workflow_conclusion": "success",
+    "full_build": "passed; BUILD SUCCESSFUL in 16m 18s",
+    "jobs": [
+      {
+        "id": 122147117849,
+        "name": "select",
+        "conclusion": "success"
+      },
+      {
+        "id": 122147193207,
+        "name": "device",
+        "conclusion": "success"
+      },
+      {
+        "id": 122147193373,
+        "name": "build",
+        "conclusion": "success"
+      },
+      {
+        "id": 122147193622,
+        "name": "checks",
+        "conclusion": "success"
+      },
+      {
+        "id": 122154669125,
+        "name": "sign",
+        "conclusion": "success"
+      },
+      {
+        "id": 122154861231,
+        "name": "publish",
+        "conclusion": "success"
+      },
+      {
+        "id": 122155054487,
+        "name": "fdroid-repository / prepare",
+        "conclusion": "success"
+      },
+      {
+        "id": 122155532767,
+        "name": "fdroid-repository / sign",
+        "conclusion": "success"
+      },
+      {
+        "id": 122156047889,
+        "name": "fdroid-repository / deploy",
+        "conclusion": "success"
+      },
+      {
+        "id": 122156266512,
+        "name": "failure-email",
+        "conclusion": "skipped"
+      }
+    ],
+    "feed_signing": "F-Droid v1/v2 signatures and pinned certificate verified; APK bytes unchanged.",
+    "pages_deployment": "passed"
+  },
+  "live_feed_before": {
+    "status": "passed",
+    "repo_url": "https://sergue212fbright.github.io/MailPush/fdroid/repo/",
+    "version_code": 1000003,
+    "v2_entry_signature": "passed",
+    "repo_certificate_sha256": "e3b363f72b7048233f0f6dd8f7848e7e1b192a3b40c802ccb4ebbc3875c64176",
+    "v2_index_sha256_binding": "passed",
+    "apk_certificate_sha256": "bf65bf147b85f377575579d8569cfa6dda715d309ec0aabdfd7b42800f52e79e",
+    "apk_sha256": "418949367ead9bcb7333713e5035e926f0ca8001c91afd1703b6dc321377bd00",
+    "private_key_access": false
+  },
+  "private_key_access_by_local_verifier": false,
+  "observed_at_utc": "2026-10-27T11:14:15.171Z",
+  "github_release": {
+    "id": 425348893,
+    "tag": "mailpush-17fe04fd0f8b-acef6c3171da",
+    "url": "https://github.com/sergue212fbright/MailPush/releases/tag/mailpush-17fe04fd0f8b-acef6c3171da",
+    "version_code": 1000021,
+    "apk_sha256": "396937399fbd13c827c338dd2230987b44418038d6e8941993b94f6a2b7dc951",
+    "source_sha256": "132136047a82d0874d97452d45205552b8fbf944acb0bca467021b9e5ceb7091"
+  },
+  "live_feed_after": {
+    "status": "passed",
+    "repo_url": "https://sergue212fbright.github.io/MailPush/fdroid/repo/",
+    "version_code": 1000021,
+    "v2_entry_signature": "passed",
+    "repo_certificate_sha256": "e3b363f72b7048233f0f6dd8f7848e7e1b192a3b40c802ccb4ebbc3875c64176",
+    "v2_index_sha256_binding": "passed",
+    "apk_certificate_sha256": "bf65bf147b85f377575579d8569cfa6dda715d309ec0aabdfd7b42800f52e79e",
+    "apk_sha256": "396937399fbd13c827c338dd2230987b44418038d6e8941993b94f6a2b7dc951",
+    "private_key_access": false,
+    "live_apk_signature": "passed",
+    "live_apk_hash": "passed",
+    "apk_bytes": 168694857,
+    "compiled_application_id_and_version_code": "passed",
+    "source_hash": "passed",
+    "source_sha256": "132136047a82d0874d97452d45205552b8fbf944acb0bca467021b9e5ceb7091",
+    "source_bytes": 5077151
+  },
+  "dependabot": {
+    "original_prs": "All 11 original proposals closed: eight incorporated, three incompatible upgrades deferred by the documented constraints.",
+    "remaining_grouped_pr": 12,
+    "grouped_pr_url": "https://github.com/sergue212fbright/MailPush/pull/12",
+    "grouped_pr_checks": "passed",
+    "grouped_pr_run_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40491961717",
+    "grouped_pr_merged": false
+  },
+  "scope": "Observed GitHub build/device/signing/release/reusable-feed/deployment results and independent public v2 index signature/hash, APK signature/package/version/hash, source hash and GitHub release-digest agreement. No physical-phone installation or SMTP delivery test."
+}

@@ -5,6 +5,20 @@ not an independent security audit, a hardware-backed Keystore attestation or
 proof of every phone delivery scenario. `tests.json` keeps the earlier manually
 signed alpha.2 results separate from the later GitHub validation run.
 
+## Automatic publishing and dependency maintenance repair
+
+[`actions-repair.json`](actions-repair.json) records the repair of the missing
+F-Droid reusable-workflow secret handoff, bounded full-build memory/concurrency,
+reviewed dependency checksums and grouped Dependabot maintenance. Run
+[40491746791](https://github.com/sergue212fbright/MailPush/actions/runs/40491746791)
+passed the module/device gates, full APK build, signing, release publication and
+automatic feed signing/deployment for VersionCode `1000021`. Independent public
+downloads passed the modern v2 index signature/hash chain, actual APK
+signature/package/version/hash and corresponding-source hash checks; the APK and
+source digests also matched GitHub's published release assets. The existing APK
+and repository signing identities were preserved. Local checks passed 101
+release/feed tests, 47 connector tests and actionlint 1.7.12.
+
 ## Custom F-Droid repository publication
 
 `fdroid.json` records the separate distribution workflow: 52 feed boundary tests,
