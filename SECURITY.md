@@ -176,6 +176,6 @@ release-workflow changes merely because they compile.
 
 Do not commit a keystore, its password, subscription bundle, mailbox credentials,
 state directory, SMTP credentials or actual diagnostic mail content. Report
-security issues through GitHub private vulnerability reporting under the
-repository Security tab once the owner enables it. Confirm this channel exists
-before public launch; do not post credentials or decrypted mail in public issues.
+security issues through the enabled GitHub private vulnerability reporting
+channel under this repository's Security tab. Do not post credentials or
+decrypted mail in public issues.

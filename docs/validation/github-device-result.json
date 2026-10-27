@@ -1,0 +1,205 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "synthetic_data_only": true,
+  "test_class": "app.mailpush.companion.DeviceSecurityTest",
+  "commands": {
+    "devices": {
+      "exit_code": 0,
+      "limit_seconds": 20
+    },
+    "install": {
+      "exit_code": 0,
+      "limit_seconds": 180
+    },
+    "notification-permission": {
+      "exit_code": 0,
+      "limit_seconds": 30
+    },
+    "instrumentation": {
+      "exit_code": 0,
+      "limit_seconds": 600
+    }
+  },
+  "tests_run": 11,
+  "expected_tests": 11,
+  "expected_methods": [
+    "interruptedAtomicWriteRestoresExistingEncryptedBackup",
+    "optingOutCancelsExistingAlertsOnlyForThatProfile",
+    "previewChoiceRequiresCurrentAuthorizedResumedSettings",
+    "previewNotificationsAlwaysHaveAnIndependentGenericPublicVersion",
+    "queuedWorkIsEncryptedAndBoundToItsProfile",
+    "replayLedgerSurvivesReopenAndSeparatesProfiles",
+    "signOutDeletesProfileAndRecipientKeysWithoutDistributor",
+    "staleAuthorizationCannotRevealSettingsAfterAnotherResume",
+    "unifiedPushKeysSurviveManagerRecreationAndCanBeDeleted",
+    "vaultRoundtripUsesAndroidKeystoreAndHidesPlaintext",
+    "vaultTamperingFailsClosed"
+  ],
+  "emulator_serial": "emulator-5554",
+  "test_apk_sha256": "7b20add72fde8c5aae9e530e9552cc51e3b8ea6e7e2468188f18197a3634a22c",
+  "test_methods_started": 11,
+  "passed": 11,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "adb_test_exit": 0,
+  "test_statuses": [
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "1",
+      "numtests": "11",
+      "test": "previewChoiceRequiresCurrentAuthorizedResumedSettings",
+      "code": 1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "1",
+      "numtests": "11",
+      "test": "previewChoiceRequiresCurrentAuthorizedResumedSettings",
+      "code": 0
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "2",
+      "numtests": "11",
+      "test": "staleAuthorizationCannotRevealSettingsAfterAnotherResume",
+      "code": 1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "2",
+      "numtests": "11",
+      "test": "staleAuthorizationCannotRevealSettingsAfterAnotherResume",
+      "code": 0
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "3",
+      "numtests": "11",
+      "test": "replayLedgerSurvivesReopenAndSeparatesProfiles",
+      "code": 1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "3",
+      "numtests": "11",
+      "test": "replayLedgerSurvivesReopenAndSeparatesProfiles",
+      "code": 0
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "4",
+      "numtests": "11",
+      "test": "signOutDeletesProfileAndRecipientKeysWithoutDistributor",
+      "code": 1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "4",
+      "numtests": "11",
+      "test": "signOutDeletesProfileAndRecipientKeysWithoutDistributor",
+      "code": 0
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "5",
+      "numtests": "11",
+      "test": "interruptedAtomicWriteRestoresExistingEncryptedBackup",
+      "code": 1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "5",
+      "numtests": "11",
+      "test": "interruptedAtomicWriteRestoresExistingEncryptedBackup",
+      "code": 0
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "6",
+      "numtests": "11",
+      "test": "unifiedPushKeysSurviveManagerRecreationAndCanBeDeleted",
+      "code": 1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "6",
+      "numtests": "11",
+      "test": "unifiedPushKeysSurviveManagerRecreationAndCanBeDeleted",
+      "code": 0
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "7",
+      "numtests": "11",
+      "test": "previewNotificationsAlwaysHaveAnIndependentGenericPublicVersion",
+      "code": 1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "7",
+      "numtests": "11",
+      "test": "previewNotificationsAlwaysHaveAnIndependentGenericPublicVersion",
+      "code": 0
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "8",
+      "numtests": "11",
+      "test": "vaultTamperingFailsClosed",
+      "code": 1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "8",
+      "numtests": "11",
+      "test": "vaultTamperingFailsClosed",
+      "code": 0
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "9",
+      "numtests": "11",
+      "test": "vaultRoundtripUsesAndroidKeystoreAndHidesPlaintext",
+      "code": 1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "9",
+      "numtests": "11",
+      "test": "vaultRoundtripUsesAndroidKeystoreAndHidesPlaintext",
+      "code": 0
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "10",
+      "numtests": "11",
+      "test": "optingOutCancelsExistingAlertsOnlyForThatProfile",
+      "code": 1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "10",
+      "numtests": "11",
+      "test": "optingOutCancelsExistingAlertsOnlyForThatProfile",
+      "code": 0
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "11",
+      "numtests": "11",
+      "test": "queuedWorkIsEncryptedAndBoundToItsProfile",
+      "code": 1
+    },
+    {
+      "class": "app.mailpush.companion.DeviceSecurityTest",
+      "current": "11",
+      "numtests": "11",
+      "test": "queuedWorkIsEncryptedAndBoundToItsProfile",
+      "code": 0
+    }
+  ],
+  "validation_errors": [],
+  "elapsed_seconds": 2.4
+}

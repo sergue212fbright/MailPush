@@ -35,11 +35,30 @@ private key was restored only after all build/test jobs ended, used for signing,
 and removed again after verification. The owner's private backup remains
 separate from public source and must be retained for future in-place updates.
 
-**Current Android device execution is unavailable.** All three bounded
-software-emulator attempts failed in infrastructure before producing any
-completed MailPush test result. All 11 device methods remain unverified; passing
-build and signed-artifact checks do not mean every release-validation gate
-passed.
+The initial local software-emulator attempts could not execute the eleven
+Android methods. Their original receipts remain preserved below. Later, the
+unchanged notification module **passed all eleven methods on GitHub's API 35 KVM
+emulator, with zero failures, errors or skips**. This later result supersedes the
+initial lack of Android execution; it does not retroactively turn the failed
+local runs into passes.
+
+## Later GitHub validation checkpoint
+
+Source commit `8a09136dc638354bbdcec9a21db1850178c72c17` was validated in
+[workflow run 40423151153](https://github.com/sergue212fbright/MailPush/actions/runs/40423151153).
+The retained device receipt reports eleven passed methods, zero failures/errors/
+skips and 2.4 seconds for the strict runner. Checks also passed 47 connector and
+46 release/parser tests, module JVM/lint tasks and cross-language pairing
+interoperability. The module's checked-in suites contain 40 JVM methods; fresh
+CI XML was not retained separately, so that count is not represented as a new
+XML receipt. See `docs/validation/github-ci.json`, `github-device-result.json`
+and its transcript for the exact source, count basis and scope.
+
+The production CI build was still running at this checkpoint. Signing and
+publication were disabled pending owner secret setup. The run link is the source
+of truth for its subsequent status. The signed APK described above remains the
+previously delivered manual VersionCode `1000002` artifact; it was not rebuilt or
+re-signed when it was published as the initial GitHub alpha release.
 
 Earlier alpha.1 receipts are preserved under `docs/validation/alpha1/`. Their
 VersionCode `1000001`, signed hash and eight-test device result describe alpha.1,
@@ -101,7 +120,7 @@ delivery, durable retry/expiry, certificate pinning before login, pairing,
 revocation and secret permissions. It must not be described as a new alpha.2
 run unless the corresponding receipt is refreshed.
 
-## Android device execution — unavailable
+## Initial local Android execution — historical infrastructure failures
 
 The current suite has 11 `DeviceSecurityTest` methods. It retains the previous
 Keystore, encrypted-work, replay, account-removal and stale-authorization checks,
@@ -120,13 +139,14 @@ software emulator before producing any completed MailPush test result:
 * The third, reduced to one virtual CPU, lost NetworkStack/system_server and the
   package service before the instrumentation APK could be installed.
 
-Current execution is therefore **unavailable: all 11 device methods remain
-unverified**. These infrastructure failures are not MailPush method failures,
+At the original local checkpoint, execution was **unavailable and all eleven
+methods were unverified**. These infrastructure failures are not MailPush method failures,
 passed methods or substituted skips. Successful test-APK compilation and the
 historical alpha.1 eight-test run do not replace current framework execution.
-No claim of `OK (11 tests)`, complete release-gate success or hardware-backed
-Keystore behavior is made. Run the current suite on a stable emulator or
-physical test device before relying on its Android-specific assertions.
+Those local attempts made no claim of `OK (11 tests)`. The later GitHub run
+recorded above supplies the successful framework execution. It still does not
+establish hardware-backed key storage on a physical phone or a complete
+end-to-end release-system audit.
 
 ## Owner-reported deployment evidence
 
@@ -146,20 +166,21 @@ against a warmed Bridge is not proof of unattended cold-start behavior.
 
 ## Not yet established
 
-* Current execution of all 11 alpha.2 Android device tests; infrastructure
-  attempts were unavailable, not passed.
+* Completed automatic signing/publication and real failure-email delivery in
+  the owner repository; the initial GitHub run validates code without release secrets.
 * Independent Docker execution in this build workspace; Docker is unavailable
   here. The owner's deployment observation has the separate scope stated above.
-* Scheduled upstream builds, release publication and failure email in an owner's
-  GitHub repository. The workflow is prepared, but no MailPush destination
-  repository or SMTP/signing-secret setup has been verified.
+* Unattended scheduled release operation over time. The public repository and
+  six-hour workflow now exist, but owner signing credentials and live failure
+  email have not been configured or tested. The initial published alpha is the
+  previously signed manual APK, not a successful automatic signing run.
 * A complete telemetry/traffic audit of Proton's native Rust SDK.
 * Bit-for-bit APK reproducibility. Source overlay checks and successful builds
   alone do not establish identical APK bytes.
 
 ## Before relying on a release
 
-Complete the unavailable device checks. Verify the downloaded artifact against
+Check the current workflow and retained device receipt. Verify the downloaded artifact against
 the signed hash and expected certificate above, then test the in-place upgrade,
 opt-in/default-off behavior, real sender/subject
 delivery, Android lock-screen settings, app lock, screen-off delivery, reboot,

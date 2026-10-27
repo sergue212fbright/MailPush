@@ -2,7 +2,7 @@
   "schema": 1,
   "release": "0.3.0-alpha.2",
   "version_code": 1000002,
-  "scope": "Current alpha.2 release-policy tests, Android module JVM/lint/build, full production build, signed and unsigned manifest audits, signature and alignment checks passed. Current eleven device tests compiled but are unverified after three emulator infrastructure failures before any test method started. Prior unchanged connector/workflow receipts are explicitly identified.",
+  "scope": "Historical manually signed alpha.2 local build/test/signature receipts are preserved. Later GitHub checks and eleven-device-test success at a distinct source commit are recorded separately under github_validation; the first GitHub production build remains in progress at this checkpoint.",
   "python": {
     "connector": {
       "tests": 47,
@@ -87,23 +87,26 @@
       "compilation_status": "passed",
       "compilation_receipt": "instrumentation-build-result.json",
       "prior_release_receipt": "alpha1/device-tests-result.json",
-      "interpretation": "All eleven current device checks remain unverified; no test method reported starting. Prior alpha.1 passing tests are historical evidence."
+      "interpretation": "All eleven current device checks remain unverified; no test method reported starting. Prior alpha.1 passing tests are historical evidence.",
+      "scope": "Historical local software-emulator attempts during manual alpha.2 packaging; later successful GitHub execution has separate receipts.",
+      "later_github_execution_receipt": "github-device-result.json"
     }
   },
   "workflow_syntax": {
     "status": "prior_passed",
-    "workflow_source_unchanged": true,
+    "workflow_source_unchanged": false,
     "actionlint": "1.7.12",
     "exit_code": 0,
-    "receipt": "alpha1/actionlint-validation.json"
+    "receipt": "alpha1/actionlint-validation.json",
+    "scope": "Historical alpha.1 syntax receipt. The workflow subsequently changed to enforce exact device methods and branch-restricted secret environments."
   },
   "overlay_reproduction_status": "passed",
   "overlay_reproduction_receipt": "patch-reproducibility.json",
   "manual_generic_delivery_receipt": "manual-delivery.json",
   "not_established_by_these_receipts": [
-    "Execution of the current eleven Android device security and notification-preview checks",
+    "Completion of the initial GitHub full production APK build and unsigned manifest audit",
+    "GitHub signing, signed release publication and live failure email delivery",
     "Automatic cold-start timing after a TrueNAS Apps restart",
-    "Owner GitHub workflow activation",
     "Complete native Rust telemetry audit"
   ],
   "sanitization": "Local absolute workspace paths shortened. JVM XML build-container hostname omitted; test outcomes and timestamps preserved. Prior alpha.1 evidence remains under alpha1/.",
@@ -122,5 +125,28 @@
     "status": "owner_reported_working",
     "receipt": "manual-delivery.json",
     "independent_security_validation": false
+  },
+  "github_validation": {
+    "receipt": "github-ci.json",
+    "run_id": 40423151153,
+    "run_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40423151153",
+    "source_commit": "8a09136dc638354bbdcec9a21db1850178c72c17",
+    "checks_status": "passed",
+    "connector_tests": 47,
+    "release_and_device_gate_parser_tests": 46,
+    "android_jvm_tests": 40,
+    "android_device": {
+      "status": "passed",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "receipt": "github-device-result.json",
+      "transcript": "github-device-instrumentation.txt"
+    },
+    "full_production_build_status": "in_progress",
+    "signing_status": "disabled_not_configured",
+    "publication_status": "disabled_not_configured",
+    "interpretation": "The initial GitHub checks and actual Android security gate passed. This intermediate checkpoint is not proof that the full CI build, signing or automatic release pipeline completed."
   }
 }

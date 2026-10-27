@@ -1,5 +1,6 @@
 .work/
 .gradle/
+.venv/
 **/build/
 **/__pycache__/
 *.pyc

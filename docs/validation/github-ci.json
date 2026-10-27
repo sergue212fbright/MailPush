@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "checkpoint": "initial_github_validation_in_progress",
+  "observed_at_utc": "2026-10-27T00:11:11.550497+00:00",
+  "repository": "sergue212fbright/MailPush",
+  "workflow": ".github/workflows/build.yml",
+  "run_id": 40423151153,
+  "run_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40423151153",
+  "source_commit": "8a09136dc638354bbdcec9a21db1850178c72c17",
+  "source_url": "https://github.com/sergue212fbright/MailPush/commit/8a09136dc638354bbdcec9a21db1850178c72c17",
+  "checks": {
+    "status": "passed",
+    "job_id": 121922298715,
+    "job_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40423151153/job/121922298715",
+    "evidence": "Primary GitHub job logs and completed successful step summaries",
+    "connector": {
+      "tests": 47,
+      "status": "passed",
+      "seconds": 17.143
+    },
+    "release_and_device_gate_parser": {
+      "tests": 46,
+      "status": "passed",
+      "seconds": 0.098
+    },
+    "android_jvm": {
+      "tests": 40,
+      "status": "passed",
+      "suite_methods": {
+        "SecurityTest.java": 24,
+        "HostBoundaryTest.java": 5,
+        "NotificationPreviewTest.java": 11
+      },
+      "task": ":mailpush:testReleaseUnitTest",
+      "count_basis": "Forty checked-in test methods; CI log confirms the actual test task and successful module build. Fresh CI JUnit XML was not retained in this checkpoint."
+    },
+    "module_build_and_lint": {
+      "status": "passed",
+      "seconds": 87,
+      "lint_task": ":mailpush:lintRelease"
+    },
+    "cross_language_pairing_interop": {
+      "status": "passed",
+      "evidence": "Java AES-GCM pairing request verified by Python; binding and mailbox scope match."
+    }
+  },
+  "android_device": {
+    "status": "passed",
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "android_api": 35,
+    "environment": "GitHub-hosted Ubuntu 24.04 with accelerated disposable AOSP x86_64 emulator",
+    "synthetic_data_only": true,
+    "hardware_backed_keystore_established": false,
+    "gate_elapsed_seconds": 2.4,
+    "junit_elapsed_seconds": 1.79,
+    "test_apk_sha256": "7b20add72fde8c5aae9e530e9552cc51e3b8ea6e7e2468188f18197a3634a22c",
+    "receipt": "github-device-result.json",
+    "transcript": "github-device-instrumentation.txt",
+    "artifact": "android-device-checks",
+    "receipt_sha256": "cb073c2412a67fba975a4322ce6f94bf9b44a3792336f3b5516657923acffc9d",
+    "transcript_sha256": "208ef114aaa406affb4311808653c514ccfdebe215841cc1b3e84e16e8993756"
+  },
+  "full_production_build": {
+    "status": "in_progress",
+    "job_id": 121922298660,
+    "job_url": "https://github.com/sergue212fbright/MailPush/actions/runs/40423151153/job/121922298660",
+    "current_step": "Build unsigned production APK",
+    "unsigned_manifest_audit": "pending",
+    "corresponding_source_staging": "pending"
+  },
+  "signing": {
+    "status": "disabled_not_configured",
+    "private_signing_credentials_supplied": false
+  },
+  "publication": {
+    "status": "disabled_not_configured",
+    "automatic_signed_release_verified": false
+  },
+  "failure_email": {
+    "github_actions_account_preference": "email_failed_workflows_only_observed",
+    "smtp": "disabled_not_configured",
+    "live_delivery_verified": false
+  },
+  "scope_limits": [
+    "This is an intermediate run checkpoint, not an all-jobs-success or signed-release receipt.",
+    "The eleven device cases use the standalone synthetic module fixture, not a real Proton account.",
+    "Earlier local software-emulator failures remain historical receipts and are not relabeled as passes.",
+    "The manually delivered alpha.2 APK hash, versionCode and certificate are recorded separately and remain unchanged."
+  ]
+}

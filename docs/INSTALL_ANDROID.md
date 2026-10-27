@@ -224,7 +224,9 @@ the device on the connector as well when it should no longer receive alerts.
 
 The owner reported working generic alerts and sender/subject previews on
 GrapheneOS through TrueNAS, Bridge and ntfy. Those are functional observations,
-not an independent security audit. Alpha.2's 11 Android device security checks
-compiled but did not execute because the local software emulator failed during
-startup/services. The [validation record](../VALIDATION.md) distinguishes these
-limits from the passed build, JVM and signing checks.
+not an independent security audit. Initial local software-emulator failures
+remain in the historical receipts. Later, GitHub's accelerated API 35 emulator
+passed all 11 current Android device checks with zero skips. The
+[GitHub checkpoint](validation/github-ci.json) records that successful fixture
+run separately from the full production build and automatic signing/release
+setup. The [validation record](../VALIDATION.md) explains each result's scope.

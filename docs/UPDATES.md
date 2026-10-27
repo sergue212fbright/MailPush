@@ -26,9 +26,11 @@ alpha software; an independent updater must include prereleases if used.
    means maintenance is needed; do not bypass a failing gate to make a release.
 
 The existing APK was functionally tested by its owner on GrapheneOS, including
-sender/subject previews. Its eleven local automated Android checks could not run
-because the software emulator failed. The first live GitHub KVM device job is
-therefore a real remaining validation step, not an already-passed check.
+sender/subject previews. The initial local software emulator could not run the
+eleven Android methods; later, GitHub's KVM emulator passed all eleven without
+skips. See the [GitHub checkpoint](validation/github-ci.json) and the live run
+before enabling signing/publication; a passed device job alone is not a completed
+full production/release workflow.
 
 ## Reuse the existing signing identity
 
@@ -90,6 +92,38 @@ Download the `signed-release` artifact, verify its fingerprint and versionCode,
 and test an in-place phone upgrade. Only then enable `AUTO_PUBLISH=true` and run
 again to create the first public prerelease. No re-pairing is normally needed
 for an update with the same package/signing identity and compatible profile data.
+
+## Optional private setup from your own workstation
+
+If you already use the official GitHub CLI (`gh`), these Bash commands avoid
+printing signing material or putting its value into command-line arguments. Run
+on your trusted workstation with the existing backup, **not by installing extra
+packages into the TrueNAS host OS**. Otherwise use the GitHub web settings above.
+
+1. Authenticate the CLI to your own GitHub account with `gh auth login`.
+2. Extract the existing private backup into a directory readable only by you.
+   Keep its `mailpush-release.p12` and `password.txt` outside the source checkout.
+3. Change into that private directory, then run:
+
+```sh
+MAILPUSH_REPOSITORY=sergue212fbright/MailPush
+# The public certificate fingerprint is safe in an argument. The key/password
+# themselves are passed on stdin to GitHub CLI and are not echoed here.
+gh variable set SIGNING_ALIAS --repo "$MAILPUSH_REPOSITORY" --body mailpush
+gh variable set SIGNING_CERT_SHA256 --repo "$MAILPUSH_REPOSITORY" \
+  --body bf65bf147b85f377575579d8569cfa6dda715d309ec0aabdfd7b42800f52e79e
+gh variable set SIGNING_READY --repo "$MAILPUSH_REPOSITORY" --body false
+gh variable set AUTO_PUBLISH --repo "$MAILPUSH_REPOSITORY" --body false
+base64 -w0 mailpush-release.p12 | gh secret set SIGNING_KEY_BASE64 \
+  --repo "$MAILPUSH_REPOSITORY" --env mailpush-signing
+gh secret set SIGNING_PASSWORD --repo "$MAILPUSH_REPOSITORY" \
+  --env mailpush-signing < password.txt
+```
+
+The `base64 -w0` option is for GNU/Linux. On another system, use its equivalent
+single-line base64 encoder. Confirm every command succeeds. These commands leave
+signing/publication off; follow the signed-run check above before enabling them.
+Do not commit the extracted private files or paste their contents into chat.
 
 ## Failure notifications
 

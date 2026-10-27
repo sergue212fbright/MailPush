@@ -4,12 +4,17 @@ An **unofficial Proton Mail Android fork** with end-to-end encrypted
 UnifiedPush/ntfy notifications and a lightweight connector for Proton Mail Bridge.
 Mail only. No Google push service is required for this notification path.
 
-**Public alpha.** An owner has reported working new-mail alerts and sender/subject
-previews on GrapheneOS through TrueNAS, Bridge and ntfy. The APK build, manifest,
-signature and JVM checks passed; eleven local automated Android checks remain
-unverified after emulator infrastructure failures. The GitHub workflow must pass
-its full device gate before automatic signed publication. See
-[validation](VALIDATION.md) and [security](SECURITY.md).
+**Public alpha.** An owner reports working alerts and sender/subject previews on
+GrapheneOS through TrueNAS, Bridge and ntfy. The notification module has since
+passed **all eleven Android security tests on GitHub, with zero skips**, alongside
+connector, release-policy, JVM and interoperability checks. See the
+[GitHub validation checkpoint](docs/validation/github-ci.json),
+[latest workflow status](https://github.com/sergue212fbright/MailPush/actions) and
+[validation limits](VALIDATION.md). Automatic signed publication still requires
+the full workflow and deliberate owner signing-key setup. This is not an
+independent security audit.
+
+**[Download the initial signed alpha APK and exact source](https://github.com/sergue212fbright/MailPush/releases/tag/v0.3.0-alpha.2).**
 
 ## Start here
 
