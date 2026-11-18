@@ -51,7 +51,8 @@ def api(path: str) -> object:
 def main() -> None:
     p = argparse.ArgumentParser()
     p.add_argument("--output", type=Path, default=ROOT / ".work/selection.json")
-    p.add_argument("--pinned", action="store_true")
+    p.add_argument("--pinned", action="store_true",
+                   help="Validate the reviewed source offline, regardless of existing releases")
     a = p.parse_args()
     config = json.loads((ROOT / "upstream.json").read_text())
     branch = config["track"]
@@ -71,12 +72,16 @@ def main() -> None:
     if repository:
         if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repository):
             raise ValueError("Invalid repository")
-        try:
-            release = api("/repos/" + repository + "/releases/tags/" + tag)
-            needed = bool(release.get("draft"))
-        except urllib.error.HTTPError as e:
-            if e.code != 404:
-                raise
+        if not a.pinned:
+            # PR validation always checks the pinned source. It neither publishes
+            # nor needs to ask whether a release exists, and receives no token.
+            # Avoid shared anonymous quotas and never skip its build/device gate.
+            try:
+                release = api("/repos/" + repository + "/releases/tags/" + tag)
+                needed = bool(release.get("draft"))
+            except urllib.error.HTTPError as e:
+                if e.code != 404:
+                    raise
     run = int(os.environ.get("GITHUB_RUN_NUMBER", "1"))
     code = config["base_version_code"] + run
     if not 1 <= code <= 2100000000:

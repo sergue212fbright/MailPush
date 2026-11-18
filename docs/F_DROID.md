@@ -128,6 +128,7 @@ change with the maintainer before accepting it.
 | --- | --- |
 | Repository missing, empty or HTTP 404 | Use the complete `/fdroid/repo/` URL above, enable the repository and refresh. A GitHub project homepage or release page is not the repository index. Check the most recent repository-publication workflow if the address fails. |
 | Latest APK not shown yet | Compare GitHub Releases with the repository's last successful publication. Refresh the enabled source; GitHub Pages and client caches can delay visibility. Check whether the installed versionCode is already as new, and whether the client filters alpha versions. |
+| APK release succeeded but feed preparation failed | Check the F-Droid prepare job's fixed origin and HTTP status. The workflow supplies its automatic `contents: read` token for GitHub API requests; no personal token is needed. Temporary server errors and briefly missing newly published assets receive bounded retries. Rate limits and permanent access errors stop publication; retry after the reported service condition clears. |
 | Automatic publication reports missing repository signing secrets | Maintainers: check both secrets in `mailpush-fdroid` and the explicit two-secret mapping from `build.yml` to `fdroid.yml`. A successful standalone manual run does not test that reusable-workflow handoff. |
 | Repository fingerprint or index signature error | Stop. Confirm the URL and fingerprint from this project's trusted documentation. Do not disable signature checking or accept a new key merely to clear the error. Report the error without private files. |
 | Android says update is incompatible | Confirm the app ID and APK certificate above. A differently signed build or official Proton Mail cannot be updated by this APK. Keep the existing app installed while investigating. |
@@ -149,6 +150,13 @@ or a personal fork. Maintainers use the
 release files, signs the index on a separate runner, and deploys the allowlisted
 public site on a third runner. It runs after successful release publication,
 can be started manually, and refreshes weekly even without a new APK.
+
+The prepare step receives the automatic read-only GitHub token to avoid relying
+on a shared runner IP's anonymous API quota. It sends that token only to the
+configured repository API; redirects strip authentication and parser subprocesses
+receive a clean environment. Download failures report a fixed origin/status,
+never response bodies, authentication headers or signed CDN URLs. Retries keep
+the same URL allowlist, TLS, size/hash checks and time bounds.
 
 | Term | Meaning |
 | --- | --- |

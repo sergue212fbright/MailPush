@@ -77,6 +77,11 @@ isolated signer runs.
 
 ## Tests
 
+Pull-request source selection uses `upstream_check.py --pinned` entirely offline
+and always requires the build/device gates. It needs no GitHub API token and does
+not consult release existence. Scheduled production selection still checks the
+official upstream and skips a source/module pair already released.
+
 ```sh
 python3 -m venv .venv
 .venv/bin/pip install -r connector/requirements-lock.txt
