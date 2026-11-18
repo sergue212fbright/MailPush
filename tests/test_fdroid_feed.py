@@ -8,6 +8,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+import urllib.error
 import urllib.request
 from unittest.mock import patch
 
@@ -95,6 +96,86 @@ class FeedPolicyTests(unittest.TestCase):
 
 
 class DownloadBoundaryTests(unittest.TestCase):
+    def test_read_only_token_is_sent_only_to_the_repository_api(self):
+        download = GitHubDownloads(REPOSITORY)
+        with patch.dict(os.environ, {"GH_TOKEN": "synthetic-api-token"}, clear=True), \
+                patch.object(download.opener, "open", return_value=io.BytesIO(b"[]")) as opened:
+            download.response("https://api.github.com/repos/owner/MailPush/releases")
+            self.assertEqual("Bearer synthetic-api-token", opened.call_args.args[0].get_header("Authorization"))
+            download.response("https://github.com/owner/MailPush/releases/download/tag/release.json")
+            self.assertIsNone(opened.call_args.args[0].get_header("Authorization"))
+
+    def test_temporary_http_failure_retries_the_original_approved_url(self):
+        download = GitHubDownloads(REPOSITORY)
+        url = "https://api.github.com/repos/owner/MailPush/releases"
+        error = urllib.error.HTTPError(url, 503, "untrusted remote text", {}, io.BytesIO(b"private body"))
+        response = io.BytesIO(b"[]")
+        with patch.object(download.opener, "open", side_effect=[error, response]) as opened, \
+                patch("prepare_fdroid.time.sleep") as sleep:
+            self.assertIs(response, download.response(url))
+            self.assertEqual(2, opened.call_count)
+            self.assertTrue(all(call.args[0].full_url == url for call in opened.call_args_list))
+            sleep.assert_called_once_with(1)
+
+    def test_newly_published_asset_can_retry_but_api_not_found_is_permanent(self):
+        download = GitHubDownloads(REPOSITORY)
+        for api in (False, True):
+            url = ("https://api.github.com/repos/owner/MailPush/releases" if api else
+                   "https://github.com/owner/MailPush/releases/download/tag/release.json")
+            error = urllib.error.HTTPError(url, 404, "not found", {}, io.BytesIO())
+            with self.subTest(api=api), patch.object(download.opener, "open", side_effect=[error, io.BytesIO(b"ok")]) as opened, \
+                    patch("prepare_fdroid.time.sleep"):
+                if api:
+                    with self.assertRaisesRegex(FeedError, "GitHub API returned HTTP 404"):
+                        download.response(url)
+                    self.assertEqual(1, opened.call_count)
+                else:
+                    self.assertEqual(b"ok", download.response(url).read())
+                    self.assertEqual(2, opened.call_count)
+
+    def test_http_failures_do_not_disclose_signed_urls_headers_or_bodies(self):
+        download = GitHubDownloads(REPOSITORY)
+        url = "https://api.github.com/repos/owner/MailPush/releases"
+        error = urllib.error.HTTPError("https://release-assets.githubusercontent.com/file?secret=DO-NOT-LOG",
+            403, "DO-NOT-LOG", {"X-RateLimit-Remaining": "0", "Authorization": "DO-NOT-LOG"}, io.BytesIO(b"DO-NOT-LOG"))
+        with patch.object(download.opener, "open", side_effect=error) as opened:
+            with self.assertRaisesRegex(FeedError, "GitHub API returned HTTP 403 .*rate limited") as caught:
+                download.response(url)
+            self.assertNotIn("DO-NOT-LOG", str(caught.exception))
+            self.assertTrue(caught.exception.__suppress_context__)
+            self.assertEqual(1, opened.call_count)
+
+    def test_http_retry_count_and_requested_wait_are_bounded(self):
+        download = GitHubDownloads(REPOSITORY)
+        url = "https://api.github.com/repos/owner/MailPush/releases"
+        failures = [urllib.error.HTTPError(url, 502, "bad gateway", {}, io.BytesIO()) for _ in range(3)]
+        with patch.object(download.opener, "open", side_effect=failures) as opened, patch("prepare_fdroid.time.sleep") as sleep:
+            with self.assertRaisesRegex(FeedError, "HTTP 502"):
+                download.response(url)
+            self.assertEqual(3, opened.call_count)
+            self.assertEqual([1, 2], [call.args[0] for call in sleep.call_args_list])
+        for requested in ("31", "Wed, 18 Nov 2026 22:00:00 GMT", "untrusted"):
+            error = urllib.error.HTTPError(url, 503, "wait", {"Retry-After": requested}, io.BytesIO())
+            with self.subTest(requested=requested), patch.object(download.opener, "open", side_effect=error) as opened, \
+                    patch("prepare_fdroid.time.sleep") as sleep:
+                with self.assertRaises(FeedError):
+                    download.response(url)
+                self.assertEqual(1, opened.call_count)
+                sleep.assert_not_called()
+
+    def test_http_retry_honors_short_retry_after_and_global_deadline(self):
+        download = GitHubDownloads(REPOSITORY)
+        url = "https://api.github.com/repos/owner/MailPush/releases"
+        error = urllib.error.HTTPError(url, 503, "wait", {"Retry-After": "4"}, io.BytesIO())
+        with patch.object(download.opener, "open", side_effect=[error, io.BytesIO()]), patch("prepare_fdroid.time.sleep") as sleep:
+            download.response(url)
+            sleep.assert_called_once_with(4)
+        download.deadline = 10
+        with patch("prepare_fdroid.time.monotonic", return_value=10), patch.object(download.opener, "open") as opened:
+            with self.assertRaisesRegex(FeedError, "time budget exceeded"):
+                download.response(url)
+            opened.assert_not_called()
+
     def test_subprocess_environment_does_not_contain_ambient_credentials(self):
         with patch.dict(os.environ, {"GH_TOKEN": "synthetic", "CODEX_APPS_AUTHORIZATION": "synthetic",
                                      "FDROID_PASSWORD": "synthetic", "HTTPS_PROXY": "https://example.test"}):

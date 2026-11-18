@@ -68,6 +68,10 @@ jobs:
       - name: Prepare and verify unsigned repository data
         # No index-signing environment or private key is available on this runner.
         # Keep this job enabled with FDROID_READY=false for the bootstrap check.
+        # Avoid the shared runner IP's unauthenticated GitHub API quota. Parsers
+        # receive clean_environment(), and redirects never forward this token.
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python scripts/prepare_fdroid.py --output .work/fdroid-prepared --build-tools "$ANDROID_HOME/build-tools/36.0.0"
       - name: Verify index and isolated APK checks without a private key
         # Exercise the actual Ubuntu UID/PID/proc/network isolation before any

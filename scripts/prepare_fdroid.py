@@ -30,6 +30,8 @@ MAX_SITE_BYTES = 650_000_000
 MAX_RELEASES = 3
 MAX_API_BYTES = 5_000_000
 MAX_SOURCE_BYTES = 64_000_000
+MAX_HTTP_ATTEMPTS = 3
+MAX_HTTP_RETRY_DELAY = 30
 ASSETS = {"MailPush.apk", "source.tar.gz", "release.json", "SHA256SUMS"}
 INDEX_FILES = {"entry.json", "index-v1.json", "index-v2.json"}
 CDN_HOSTS = {"release-assets.githubusercontent.com", "objects.githubusercontent.com", "github-releases.githubusercontent.com"}
@@ -118,16 +120,45 @@ class GitHubDownloads:
 
     def response(self, url: str):
         validate_url(url, self.repository)
-        if time.monotonic() >= self.deadline:
-            raise FeedError("GitHub download time budget exceeded")
         headers = {"User-Agent": "MailPush-FDroid", "Accept": "application/octet-stream"}
-        if urllib.parse.urlsplit(url).hostname == "api.github.com":
+        api_request = urllib.parse.urlsplit(url).hostname == "api.github.com"
+        if api_request:
             headers["Accept"] = "application/vnd.github+json"
             headers["X-GitHub-Api-Version"] = "2022-11-28"
             token = os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN")
             if token:
                 headers["Authorization"] = "Bearer " + token
-        return self.opener.open(urllib.request.Request(url, headers=headers), timeout=30)
+        for attempt in range(MAX_HTTP_ATTEMPTS):
+            if time.monotonic() >= self.deadline:
+                raise FeedError("GitHub download time budget exceeded")
+            try:
+                return self.opener.open(urllib.request.Request(url, headers=headers), timeout=30)
+            except urllib.error.HTTPError as error:
+                status = int(error.code)
+                response_headers = error.headers or {}
+                exhausted = response_headers.get("X-RateLimit-Remaining") == "0"
+                retry_after = response_headers.get("Retry-After")
+                error.close()
+                # Retry only temporary HTTP failures before opening an output
+                # file. Newly published public assets can briefly return 404;
+                # an API 404 remains a permanent configuration/access error.
+                transient = status in {408, 500, 502, 503, 504} or (status == 404 and not api_request)
+                delay = 2 ** attempt
+                if retry_after is not None:
+                    # Never retry earlier than requested. A long or HTTP-date
+                    # delay is left for a later workflow run rather than guessed.
+                    delay = max(delay, int(retry_after)) if re.fullmatch(r"[0-9]{1,8}", retry_after) else None
+                if (transient and attempt + 1 < MAX_HTTP_ATTEMPTS and delay is not None
+                        and delay <= MAX_HTTP_RETRY_DELAY and time.monotonic() + delay < self.deadline):
+                    time.sleep(delay)
+                    continue
+                origin = "GitHub API" if api_request else "GitHub release asset"
+                message = origin + " returned HTTP " + str(status)
+                if status == 429 or (status == 403 and exhausted):
+                    message += " (rate limited; retry after GitHub resets its quota)"
+                # Error URLs/headers/bodies can contain CDN credentials. Report
+                # only a fixed origin/status, without chaining the unsafe error.
+                raise FeedError(message) from None
 
     def small(self, url: str, limit: int) -> bytes:
         deadline = min(self.deadline, time.monotonic() + 120)
