@@ -127,6 +127,16 @@ and release metadata. Bit-for-bit reproducibility has not been demonstrated.
 The signed APK and a source archive are distinct artifacts. Never run build code
 from an extracted upstream archive on the runner that holds your signing key.
 
+## Retrying a failed Actions run
+
+Read the failed step before retrying. A recent transient failure can be retried
+on its own while the required artifacts still exist. The `selection` and
+`unsigned-build` artifacts are retained for seven days; signed artifacts have
+their own retention period. If an input expired, restart the source-selection
+job and its dependent jobs, or start a fresh run, to regenerate the whole chain.
+For an old pull request, update its branch with the current CI fixes first.
+Do not substitute artifacts from another run or bypass signature/checksum gates.
+
 ## Dependency updates
 
 Dependabot groups workflow actions, Android libraries, Android build tools and

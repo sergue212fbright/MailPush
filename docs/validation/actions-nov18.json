@@ -1,0 +1,371 @@
+{
+  "schema": 1,
+  "repository": "sergue212fbright/MailPush",
+  "code_commits": [
+    "ff4df3894f882524acee8b94880d2fba11b87dc0",
+    "3c9b67a375f48880e28e11c024b4cff9ba829c19"
+  ],
+  "repairs": {
+    "fdroid_downloads": "Automatic contents:read GitHub token scoped to preparation; bounded transient HTTP retries; redacted HTTP status diagnostics; existing TLS, redirect allowlist, checksums, certificate pins and signing isolation retained.",
+    "pinned_pr_selection": "Reviewed source selected entirely offline; pinned PRs always require build and device gates. Production upstream polling and release deduplication remain enabled.",
+    "old_pr_recovery": "Refreshed PR #13 with current main's CI fixes. Existing Gradle update remains unmerged; one failed dependency-download build was retried after exact official POM URLs independently returned HTTP 200.",
+    "retry_documentation": "Expired selection/unsigned-build artifacts require regenerated inputs; do not substitute cross-run artifacts or bypass gates."
+  },
+  "original_failures": {
+    "production": {
+      "run_id": 44393608268,
+      "job_id": 135132152246,
+      "step": "F-Droid preparation",
+      "recorded_error": "HTTPError",
+      "http_status": "not recorded; cannot establish exact status from the original log",
+      "preceding_build_sign_publish": "success"
+    },
+    "old_pr": {
+      "run_id": 41725249382,
+      "original_job_id": 126228331608,
+      "recorded_error": "Gradle Plugin Portal read timeout",
+      "later_source_selection_error": "Confirmed HTTP403 anonymous GitHub API quota in --pinned mode"
+    }
+  },
+  "validation": {
+    "local_release_feed_selection_tests": 112,
+    "ci_connector_tests": 47,
+    "ci_release_feed_selection_tests": 112,
+    "module_build_unit_lint_interop": "passed",
+    "android_device_gate": "passed",
+    "feed_boundary_tests_included_in_release_total": 61,
+    "final_full_build_duration": "18m12s",
+    "original_feed_failure_step_now_passes": true
+  },
+  "limitations": [
+    "No physical GrapheneOS upgrade or live Proton-login test performed.",
+    "No independent security audit or bit-for-bit reproducible-build claim.",
+    "SMTP failure-email delivery not tested.",
+    "Historical red runs remain history; repaired fresh runs provide current evidence."
+  ],
+  "scope": "CI, source selection and recovery documentation only; connector runtime, Android notification code, pairing and signing identities unchanged.",
+  "status": "PASSED_REPAIRED_MAIN_PR_AND_LIVE_PUBLICATION",
+  "runs": [
+    {
+      "id": 44406466598,
+      "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44406466598",
+      "head_sha": "ff4df3894f882524acee8b94880d2fba11b87dc0",
+      "attempt": 1,
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 135162900673,
+          "name": "select",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44406466598/job/135162900673",
+          "started_at": "2026-11-18T21:55:42Z",
+          "completed_at": "2026-11-18T21:55:50Z"
+        },
+        {
+          "id": 135163002555,
+          "name": "checks",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44406466598/job/135163002555",
+          "started_at": "2026-11-18T21:55:52Z",
+          "completed_at": "2026-11-18T21:57:34Z"
+        },
+        {
+          "id": 135163002649,
+          "name": "device",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44406466598/job/135163002649",
+          "started_at": "2026-11-18T21:55:53Z",
+          "completed_at": "2026-11-18T21:58:26Z"
+        },
+        {
+          "id": 135163003086,
+          "name": "build",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44406466598/job/135163003086",
+          "started_at": "2026-11-18T21:55:52Z",
+          "completed_at": "2026-11-18T22:17:31Z"
+        },
+        {
+          "id": 135175758566,
+          "name": "sign",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44406466598/job/135175758566",
+          "started_at": "2026-11-18T22:17:35Z",
+          "completed_at": "2026-11-18T22:18:01Z"
+        },
+        {
+          "id": 135176039411,
+          "name": "publish",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44406466598/job/135176039411",
+          "started_at": "2026-11-18T22:18:03Z",
+          "completed_at": "2026-11-18T22:18:36Z"
+        },
+        {
+          "id": 135176385853,
+          "name": "fdroid-repository / prepare",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44406466598/job/135176385853",
+          "started_at": "2026-11-18T22:18:39Z",
+          "completed_at": "2026-11-18T22:20:01Z"
+        },
+        {
+          "id": 135177186352,
+          "name": "fdroid-repository / sign",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44406466598/job/135177186352",
+          "started_at": "2026-11-18T22:20:06Z",
+          "completed_at": "2026-11-18T22:21:07Z"
+        },
+        {
+          "id": 135177826362,
+          "name": "fdroid-repository / deploy",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44406466598/job/135177826362",
+          "started_at": "2026-11-18T22:21:11Z",
+          "completed_at": "2026-11-18T22:21:30Z"
+        },
+        {
+          "id": 135178050184,
+          "name": "failure-email",
+          "conclusion": "skipped",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44406466598/job/135178050184",
+          "started_at": "2026-11-18T22:21:31Z",
+          "completed_at": "2026-11-18T22:21:30Z"
+        }
+      ]
+    },
+    {
+      "id": 44407788089,
+      "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407788089",
+      "head_sha": "3c9b67a375f48880e28e11c024b4cff9ba829c19",
+      "attempt": 1,
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 135178051170,
+          "name": "select",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407788089/job/135178051170",
+          "started_at": "2026-11-18T22:21:33Z",
+          "completed_at": "2026-11-18T22:21:45Z"
+        },
+        {
+          "id": 135178184533,
+          "name": "device",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407788089/job/135178184533",
+          "started_at": "2026-11-18T22:21:47Z",
+          "completed_at": "2026-11-18T22:24:30Z"
+        },
+        {
+          "id": 135178184604,
+          "name": "checks",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407788089/job/135178184604",
+          "started_at": "2026-11-18T22:21:46Z",
+          "completed_at": "2026-11-18T22:23:38Z"
+        },
+        {
+          "id": 135178184709,
+          "name": "build",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407788089/job/135178184709",
+          "started_at": "2026-11-18T22:21:47Z",
+          "completed_at": "2026-11-18T22:41:20Z"
+        },
+        {
+          "id": 135189141067,
+          "name": "sign",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407788089/job/135189141067",
+          "started_at": "2026-11-18T22:41:24Z",
+          "completed_at": "2026-11-18T22:41:44Z"
+        },
+        {
+          "id": 135189366079,
+          "name": "publish",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407788089/job/135189366079",
+          "started_at": "2026-11-18T22:41:47Z",
+          "completed_at": "2026-11-18T22:42:12Z"
+        },
+        {
+          "id": 135189615491,
+          "name": "fdroid-repository / prepare",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407788089/job/135189615491",
+          "started_at": "2026-11-18T22:42:15Z",
+          "completed_at": "2026-11-18T22:43:41Z"
+        },
+        {
+          "id": 135190420084,
+          "name": "fdroid-repository / sign",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407788089/job/135190420084",
+          "started_at": "2026-11-18T22:43:46Z",
+          "completed_at": "2026-11-18T22:44:47Z"
+        },
+        {
+          "id": 135191008929,
+          "name": "fdroid-repository / deploy",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407788089/job/135191008929",
+          "started_at": "2026-11-18T22:44:52Z",
+          "completed_at": "2026-11-18T22:45:18Z"
+        },
+        {
+          "id": 135191298794,
+          "name": "failure-email",
+          "conclusion": "skipped",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407788089/job/135191298794",
+          "started_at": "2026-11-18T22:45:19Z",
+          "completed_at": "2026-11-18T22:45:19Z"
+        }
+      ]
+    },
+    {
+      "id": 44407994367,
+      "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407994367",
+      "head_sha": "9b11cc5ae436156c185e7b1ce0d61ed8a3e1732b",
+      "attempt": 2,
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 135171362787,
+          "name": "build",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407994367/job/135171362787",
+          "started_at": "2026-11-18T22:09:59Z",
+          "completed_at": "2026-11-18T22:25:43Z"
+        },
+        {
+          "id": 135171365665,
+          "name": "select",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407994367/job/135171365665",
+          "started_at": "2026-11-18T22:04:46Z",
+          "completed_at": "2026-11-18T22:04:57Z"
+        },
+        {
+          "id": 135171366949,
+          "name": "device",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407994367/job/135171366949",
+          "started_at": "2026-11-18T22:04:59Z",
+          "completed_at": "2026-11-18T22:08:07Z"
+        },
+        {
+          "id": 135171429837,
+          "name": "checks",
+          "conclusion": "success",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407994367/job/135171429837",
+          "started_at": "2026-11-18T22:05:00Z",
+          "completed_at": "2026-11-18T22:06:48Z"
+        },
+        {
+          "id": 135180451219,
+          "name": "publish",
+          "conclusion": "skipped",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407994367/job/135180451219",
+          "started_at": "2026-11-18T22:25:43Z",
+          "completed_at": "2026-11-18T22:25:43Z"
+        },
+        {
+          "id": 135180451248,
+          "name": "sign",
+          "conclusion": "skipped",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407994367/job/135180451248",
+          "started_at": "2026-11-18T22:25:43Z",
+          "completed_at": "2026-11-18T22:25:43Z"
+        },
+        {
+          "id": 135180452374,
+          "name": "fdroid-repository",
+          "conclusion": "skipped",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407994367/job/135180452374",
+          "started_at": "2026-11-18T22:25:43Z",
+          "completed_at": "2026-11-18T22:25:43Z"
+        },
+        {
+          "id": 135180454250,
+          "name": "failure-email",
+          "conclusion": "skipped",
+          "url": "https://github.com/sergue212fbright/MailPush/actions/runs/44407994367/job/135180454250",
+          "started_at": "2026-11-18T22:25:44Z",
+          "completed_at": "2026-11-18T22:25:43Z"
+        }
+      ]
+    }
+  ],
+  "verified_at_utc": "2026-11-18T22:47:01.899660+00:00",
+  "upstream_commit": "c2749edc1d24700f69a0ddb875bb2d2ae463cf6d",
+  "module_sha256": "6c1b68ef301424c1988f0539ee932b654455bef9f0bfe068864d961908703fa2",
+  "github_release": {
+    "id": 450646702,
+    "tag": "mailpush-c2749edc1d24-6c1b68ef3014",
+    "html_url": "https://github.com/sergue212fbright/MailPush/releases/tag/mailpush-c2749edc1d24-6c1b68ef3014",
+    "published_at": "2026-11-18T22:42:09Z",
+    "metadata_and_checksum_assets_verified": true
+  },
+  "live_repository": {
+    "checked_at_utc": "2026-11-18T22:45:52.061704+00:00",
+    "repo_url": "https://sergue212fbright.github.io/MailPush/fdroid/repo",
+    "version_code": 1000085,
+    "repo_certificate_sha256": "e3b363f72b7048233f0f6dd8f7848e7e1b192a3b40c802ccb4ebbc3875c64176",
+    "v1_certificate_sha256": "e3b363f72b7048233f0f6dd8f7848e7e1b192a3b40c802ccb4ebbc3875c64176",
+    "v1": {
+      "name": "index-v1.jar",
+      "size": 3979,
+      "sha256": "24ce892e46aadaad97ef82234fdff935c17dd6c3cc65f7b6603d95ef62fff42e"
+    },
+    "entry": {
+      "name": "entry.jar",
+      "size": 2381,
+      "sha256": "c2069f9becdf4a68c2eabaef24d41e504b64baca05da38a1fc56fb32c89382c0"
+    },
+    "v2": {
+      "name": "index-v2.json",
+      "size": 7008,
+      "sha256": "792d971d27014a9a0dc0d7ba8de43b8c2e64c5e2beea2c4cc6e328b7b7ab2134"
+    },
+    "index_verification": "passed",
+    "apk_manifest": {
+      "schema": 1,
+      "application_id": "ch.protonmail.android.mailpush",
+      "version_code": 1000085,
+      "apk_bytes": 171981170,
+      "apk_sha256": "3a709bbfbb165742a7dfb4b82c6c65672e1c380e0dcd61008019579c82e3e2f2",
+      "manifest_policy": "passed"
+    },
+    "apk": {
+      "name": "ch.protonmail.android.mailpush_1000085.apk",
+      "size": 171981170,
+      "sha256": "3a709bbfbb165742a7dfb4b82c6c65672e1c380e0dcd61008019579c82e3e2f2"
+    },
+    "apk_certificate_sha256": "bf65bf147b85f377575579d8569cfa6dda715d309ec0aabdfd7b42800f52e79e",
+    "apksigner": "Verifies\nVerified using v1 scheme (JAR signing): false\nVerified using v2 scheme (APK Signature Scheme v2): false\nVerified using v3 scheme (APK Signature Scheme v3): true\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: false\nNumber of signers: 1\nSigner #1 certificate DN: CN=MailPush Fork Release, OU=Unofficial MailPush\nSigner #1 certificate SHA-256 digest: bf65bf147b85f377575579d8569cfa6dda715d309ec0aabdfd7b42800f52e79e\nSigner #1 certificate SHA-1 digest: 3d8130f4ea26731349cf78ef8fa108a607b19afa\nSigner #1 certificate MD5 digest: ed0adfc2b8ac2acd559df1acddd9070c\nSigner #1 key algorithm: RSA\nSigner #1 key size (bits): 3072\nSigner #1 public key SHA-256 digest: f15dda25850907887556c19f032b6bfd8ecdbf15e4c942b2b4653b22451a2a37\nSigner #1 public key SHA-1 digest: 42bdbe3f876dbf0969486d85635601732633bdf1\nSigner #1 public key MD5 digest: 793625744c7b24acf7408afbb6c883b9\n",
+    "source_preparation": {
+      "schema": 1,
+      "upstream_commit": "c2749edc1d24700f69a0ddb875bb2d2ae463cf6d",
+      "application_id": "ch.protonmail.android.mailpush",
+      "version_code": 1000085,
+      "integration_sha256": "40babb4b37980295ec251337935815ca14b5b375422711874e49e55d74690210"
+    },
+    "source_module_files_matched": 36,
+    "source": {
+      "name": "ch.protonmail.android.mailpush_1000085_src.tar.gz",
+      "size": 5564944,
+      "sha256": "bbdeb34e410f0dd5204a23095846b2ffde6881dcf58c90001e116aff60f89191"
+    },
+    "artifact_verification": "passed",
+    "github_apk_and_source_asset_digests": "matched",
+    "verifier": "Official fdroidserver 2.4.5: legacy verifier for index-v1.jar; modern entry.jar verification and SHA-256-bound index-v2.json. Android Build Tools 36.0.0 apksigner and compiled-manifest audit."
+  },
+  "first_recovered_publication": {
+    "run_id": 44406466598,
+    "version_code": 1000084,
+    "independent_index_apk_source_checks": "passed",
+    "module_files_matched": 36
+  }
+}

@@ -5,6 +5,23 @@ not an independent security audit, a hardware-backed Keystore attestation or
 proof of every phone delivery scenario. `tests.json` keeps the earlier manually
 signed alpha.2 results separate from the later GitHub validation run.
 
+## November 18, 2026 Actions recovery
+
+[`actions-nov18.json`](actions-nov18.json) records the separate recovery of
+F-Droid publication and the older Gradle dependency pull request. Feed preparation
+now uses the automatic read-only GitHub token, bounded HTTP retries and redacted
+status diagnostics. The original feed log recorded only `HTTPError`; its exact
+HTTP status cannot be recovered from that log. Pinned PR source selection now
+runs offline and always requires build/device validation, avoiding the confirmed
+anonymous-API quota failure without supplying a token to PRs.
+
+The receipt identifies the successful repair runs and the independently checked
+live catalog, APK and corresponding source. Existing signing identities and
+release gates remain in place. The Gradle dependency update stays in its pull
+request; it was not merged into the release branch. Historical failed runs are
+retained separately from these successful fresh runs. This is workflow recovery
+evidence, not a physical GrapheneOS upgrade test or a reproducible-build claim.
+
 ## Independent push settings UI
 
 [`ui.json`](ui.json) records the settings cleanup separately from older release
